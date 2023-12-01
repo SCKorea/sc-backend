@@ -1,4 +1,4 @@
-package kr.galaxyhub.galaxyhub
+package kr.galaxyhub
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
