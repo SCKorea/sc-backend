@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class GalaxyhubApplication
 
 fun main(args: Array<String>) {
-	runApplication<GalaxyhubApplication>(*args)
+    runApplication<GalaxyhubApplication>(*args)
 }
