@@ -1,4 +1,4 @@
-package kr.galaxyhub
+package kr.galaxyhub.sc
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

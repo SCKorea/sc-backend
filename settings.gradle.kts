@@ -1,1 +1,1 @@
-rootProject.name = "galaxyhub"
+rootProject.name = "galaxyhub-sc"
