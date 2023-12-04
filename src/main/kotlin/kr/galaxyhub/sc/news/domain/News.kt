@@ -55,9 +55,6 @@ class News(
     }
 
     private fun validateAddContent(content: Content) {
-        if (content.news == null) {
-            throw IllegalArgumentException("추가할 컨텐츠에 뉴스가 등록되어 있지 않습니다.") // TODO 명확한 예외 정의할 것
-        }
         if (content.news != this) {
             throw IllegalArgumentException("컨텐츠에 등록된 뉴스가 동일하지 않습니다.") // TODO 명확한 예외 정의할 것
         }

@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToOne
 
 @Entity
 class Content(
+    news: News,
     newsInformation: NewsInformation,
     language: Language,
     content: String,
@@ -26,7 +27,7 @@ class Content(
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "news_id", nullable = false)
-    var news: News? = null
+    var news: News = news
         private set
 
     @Embedded
@@ -42,12 +43,4 @@ class Content(
     @Column(name = "content", nullable = false)
     var content: String = content
         private set
-
-    fun initialNews(news: News) {
-        if (this.news != null) {
-            throw IllegalArgumentException("이미 뉴스에 등록된 컨텐츠 입니다.") // TODO 명확한 예외 정의할 것
-        }
-        this.news = news
-        news.addContent(this)
-    }
 }

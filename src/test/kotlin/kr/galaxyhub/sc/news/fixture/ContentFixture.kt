@@ -2,11 +2,12 @@ package kr.galaxyhub.sc.news.fixture
 
 import kr.galaxyhub.sc.news.domain.Content
 import kr.galaxyhub.sc.news.domain.Language
+import kr.galaxyhub.sc.news.domain.News
 import kr.galaxyhub.sc.news.domain.NewsInformation
 
 object ContentFixture {
 
-    fun of(language: Language): Content = when (language) {
+    fun from(language: Language, news: News): Content = when (language) {
         Language.ENGLISH -> Content(
             newsInformation = NewsInformation(
                 title = "Star Citizen Live",
@@ -14,6 +15,7 @@ object ContentFixture {
             ),
             language = language,
             content = "blah blah",
+            news = news,
         )
 
         Language.KOREAN -> Content(
@@ -23,6 +25,7 @@ object ContentFixture {
             ),
             language = language,
             content = "어쩌구 저쩌구",
+            news = news,
         )
     }
 }
