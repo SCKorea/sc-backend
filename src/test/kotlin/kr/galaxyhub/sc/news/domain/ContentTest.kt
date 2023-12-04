@@ -33,12 +33,12 @@ class ContentTest : DescribeSpec({
         }
 
         context("컨텐츠가 뉴스에 등록된 상태가 아니면") {
+            val news = NewsFixture.create()
             val content = ContentFixture.of(Language.ENGLISH)
 
-            it("성공적으로 등록된다.") {
-                val news = NewsFixture.create()
-                content.initialNews(news)
+            content.initialNews(news)
 
+            it("뉴스가 성공적으로 등록된다.") {
                 content.news shouldBe news
             }
         }

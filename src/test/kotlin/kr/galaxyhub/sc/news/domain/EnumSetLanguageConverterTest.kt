@@ -18,9 +18,7 @@ class EnumSetLanguageConverterTest : DescribeSpec({
             val attribute = EnumSet.of(Language.ENGLISH)
 
             it(",가 없는 문자열을 반환한다.") {
-                val expect = enumSetLanguageConverter.convertToDatabaseColumn(attribute)
-
-                expect shouldBe "ENGLISH"
+                enumSetLanguageConverter.convertToDatabaseColumn(attribute) shouldBe "ENGLISH"
             }
         }
 
@@ -29,7 +27,6 @@ class EnumSetLanguageConverterTest : DescribeSpec({
 
             it(",가 있는 문자열을 반환한다.") {
                 val expect = enumSetLanguageConverter.convertToDatabaseColumn(attribute)
-
                 assertSoftly {
                     expect shouldContain ","
                     expect shouldContain "ENGLISH"
@@ -42,9 +39,7 @@ class EnumSetLanguageConverterTest : DescribeSpec({
             val attribute = EnumSet.noneOf(Language::class.java)
 
             it("빈 문자열을 반환한다.") {
-                val expect = enumSetLanguageConverter.convertToDatabaseColumn(attribute)
-
-                expect shouldBe ""
+                enumSetLanguageConverter.convertToDatabaseColumn(attribute) shouldBe ""
             }
         }
     }
@@ -77,13 +72,11 @@ class EnumSetLanguageConverterTest : DescribeSpec({
         }
 
         context("null 또는 빈 문자열이면") {
-            val dbDate = listOf(null, "", " ", "\t", "\n")
+            val dbData = listOf(null, "", " ", "\t", "\n")
 
             it("비어 있는 요소를 반환한다.") {
-                dbDate.forAll {
-                    val expect = enumSetLanguageConverter.convertToEntityAttribute(it)
-
-                    expect shouldHaveSize 0
+                dbData.forAll {
+                    enumSetLanguageConverter.convertToEntityAttribute(it) shouldHaveSize 0
                 }
             }
         }

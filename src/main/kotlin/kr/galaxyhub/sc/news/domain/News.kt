@@ -46,15 +46,23 @@ class News(
     private val contents: MutableList<Content> = mutableListOf()
 
     fun addContent(content: Content) {
-        val language = content.language
-        if (mutableSupportLanguages.contains(language)) {
-            throw IllegalArgumentException("이미 해당 언어로 작성된 뉴스가 있습니다.") // TODO 명확한 예외 정의할 것
-        }
+        validateAddContent(content)
         if (mutableSupportLanguages.isEmpty()) {
             newsInformation = content.newsInformation
         }
         contents.add(content)
-        content.initialNews(this)
-        mutableSupportLanguages.add(language)
+        mutableSupportLanguages.add(content.language)
+    }
+
+    private fun validateAddContent(content: Content) {
+        if (content.news == null) {
+            throw IllegalArgumentException("추가할 컨텐츠에 뉴스가 등록되어 있지 않습니다.") // TODO 명확한 예외 정의할 것
+        }
+        if (content.news != this) {
+            throw IllegalArgumentException("컨텐츠에 등록된 뉴스가 동일하지 않습니다.") // TODO 명확한 예외 정의할 것
+        }
+        if (mutableSupportLanguages.contains(content.language)) {
+            throw IllegalArgumentException("이미 해당 언어로 작성된 뉴스가 있습니다.") // TODO 명확한 예외 정의할 것
+        }
     }
 }

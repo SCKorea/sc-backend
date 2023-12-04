@@ -8,6 +8,8 @@ import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.throwable.shouldHaveMessage
+import io.mockk.every
+import io.mockk.spyk
 import kr.galaxyhub.sc.news.fixture.ContentFixture
 import kr.galaxyhub.sc.news.fixture.NewsFixture
 
@@ -22,54 +24,81 @@ class NewsTest : DescribeSpec({
             }
 
             it("newsInformation은 null이 아닌, Empty이다.") {
+                val expect = news.newsInformation
                 assertSoftly {
-                    news.newsInformation shouldNotBe null
-                    news.newsInformation shouldBe NewsInformation.EMPTY
+                    expect shouldNotBe null
+                    expect shouldBe NewsInformation.EMPTY
                 }
             }
         }
     }
 
     describe("addContent") {
-        context("뉴스에 컨텐츠가 추가된 상태에서") {
+        context("컨텐츠의 뉴스가 null이면") {
             val news = NewsFixture.create()
-            news.addContent(ContentFixture.of(Language.ENGLISH))
+            val content = spyk(ContentFixture.of(Language.ENGLISH))
 
-            context("중복된 언어의 컨텐츠가 추가되면") {
+            every { content.news } returns null
+
+            it("IllegalArgumentException 예외를 던진다.") {
+                val exception = shouldThrow<IllegalArgumentException> {
+                    news.addContent(content)
+                }
+                exception shouldHaveMessage "추가할 컨텐츠에 뉴스가 등록되어 있지 않습니다."
+            }
+        }
+
+        context("컨텐츠의 뉴스가 null이 아니고") {
+            context("컨텐츠의 뉴스가 동일하지 않으면") {
+                val news = NewsFixture.create()
+                val otherNews = NewsFixture.create()
+                val content = spyk(ContentFixture.of(Language.ENGLISH))
+
+                every { content.news } returns otherNews
+
                 it("IllegalArgumentException 예외를 던진다.") {
                     val exception = shouldThrow<IllegalArgumentException> {
-                        news.addContent(ContentFixture.of(Language.ENGLISH))
+                        news.addContent(content)
+                    }
+                    exception shouldHaveMessage "컨텐츠에 등록된 뉴스가 동일하지 않습니다."
+                }
+            }
+
+            context("뉴스에 중복된 언어의 컨텐츠를 추가하면") {
+                val news = NewsFixture.create()
+                val englishContent = spyk(ContentFixture.of(Language.ENGLISH))
+                val otherEnglishContent = spyk(ContentFixture.of(Language.ENGLISH))
+
+                every { englishContent.news } returns news
+                every { otherEnglishContent.news } returns news
+
+                news.addContent(englishContent)
+
+                it("IllegalArgumentException 예외를 던진다.") {
+                    val exception = shouldThrow<IllegalArgumentException> {
+                        news.addContent(otherEnglishContent)
                     }
                     exception shouldHaveMessage "이미 해당 언어로 작성된 뉴스가 있습니다."
                 }
             }
 
-            context("중복되지 않은 언어의 컨텐츠가 추가되면") {
-                val content = ContentFixture.of(Language.KOREAN)
-                news.addContent(content)
+            context("뉴스에 중복되지 않은 언어의 컨텐츠를 추가하면") {
+                val news = NewsFixture.create()
+                val englishContent = spyk(ContentFixture.of(Language.ENGLISH))
+                val koreanContent = spyk(ContentFixture.of(Language.KOREAN))
 
-                it("성공적으로 추가된다.") {
-                    news.supportLanguages shouldContainExactly setOf(Language.KOREAN, Language.ENGLISH)
+                every { englishContent.news } returns news
+                every { koreanContent.news } returns news
+
+                news.addContent(englishContent)
+                news.addContent(koreanContent)
+
+                it("supportLanguages가 성공적으로 추가된다.") {
+                    news.supportLanguages shouldContainExactly setOf(Language.ENGLISH, Language.KOREAN)
                 }
 
-                it("newsInformation은 변경되지 않는다.") {
-                    news.newsInformation shouldNotBe content.newsInformation
-                }
-            }
-        }
-
-        context("뉴스에 컨텐츠가 없는 상태에서") {
-            val news = NewsFixture.create()
-            context("컨텐츠가 추가되면") {
-                val content = ContentFixture.of(Language.ENGLISH)
-                news.addContent(content)
-
-                it("성공적으로 추가된다.") {
-                    news.supportLanguages shouldContainExactly setOf(Language.ENGLISH)
-                }
-
-                it("newsInformation이 설정된다.") {
-                    news.newsInformation shouldBe content.newsInformation
+                it("처음 추가된 컨텐츠의 newsInformation이 설정된다.") {
+                    news.newsInformation shouldBe englishContent.newsInformation
                 }
             }
         }

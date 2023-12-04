@@ -48,5 +48,6 @@ class Content(
             throw IllegalArgumentException("이미 뉴스에 등록된 컨텐츠 입니다.") // TODO 명확한 예외 정의할 것
         }
         this.news = news
+        news.addContent(this)
     }
 }
