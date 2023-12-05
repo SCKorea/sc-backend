@@ -28,19 +28,19 @@ class Content(
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "news_id", nullable = false)
     var news: News = news
-        private set
+        protected set
 
     @Embedded
     var newsInformation: NewsInformation = newsInformation
-        private set
+        protected set
 
     @Enumerated(EnumType.STRING)
     @Column(name = "language", nullable = false)
     var language: Language = language
-        private set
+        protected set
 
     @Lob
     @Column(name = "content", nullable = false)
     var content: String = content
-        private set
+        protected set
 }

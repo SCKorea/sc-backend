@@ -23,19 +23,19 @@ class News(
     @Enumerated(EnumType.STRING)
     @Column(name = "news_type", nullable = false)
     var newsType: NewsType = newsType
-        private set
+        protected set
 
     @Column(name = "origin_id", nullable = false)
     var originId: Long = originId
-        private set
+        protected set
 
     @Column(name = "published_at", nullable = false)
     var publishedAt: LocalDateTime = publishedAt
-        private set
+        protected set
 
     @Embedded
     var newsInformation: NewsInformation = NewsInformation.EMPTY
-        private set
+        protected set
 
     @Convert(converter = EnumSetLanguageConverter::class)
     @Column(name = "support_languages", nullable = false)
