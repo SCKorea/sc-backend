@@ -9,7 +9,7 @@ import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
 import jakarta.persistence.OneToMany
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.util.EnumSet
 import kr.galaxyhub.sc.common.domain.PrimaryKeyEntity
 
@@ -17,7 +17,7 @@ import kr.galaxyhub.sc.common.domain.PrimaryKeyEntity
 class News(
     newsType: NewsType,
     originId: Long,
-    publishedAt: LocalDateTime,
+    publishedAt: ZonedDateTime,
 ) : PrimaryKeyEntity() {
 
     @Enumerated(EnumType.STRING)
@@ -30,7 +30,7 @@ class News(
         protected set
 
     @Column(name = "published_at", nullable = false)
-    var publishedAt: LocalDateTime = publishedAt
+    var publishedAt: ZonedDateTime = publishedAt
         protected set
 
     @Embedded
