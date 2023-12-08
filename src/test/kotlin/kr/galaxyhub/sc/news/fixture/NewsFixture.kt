@@ -12,5 +12,6 @@ object NewsFixture {
         newsType = NewsType.NEWS,
         publishedAt = ZonedDateTime.of(LocalDateTime.parse("2023-12-04T03:53:33"), ZoneId.systemDefault()),
         originId = 19478,
+        originUrl = "https://sc.galaxyhub.kr/"
     )
 }

@@ -17,6 +17,7 @@ import kr.galaxyhub.sc.common.domain.PrimaryKeyEntity
 class News(
     newsType: NewsType,
     originId: Long,
+    originUrl: String,
     publishedAt: ZonedDateTime,
 ) : PrimaryKeyEntity() {
 
@@ -27,6 +28,10 @@ class News(
 
     @Column(name = "origin_id", nullable = false)
     var originId: Long = originId
+        protected set
+
+    @Column(name = "originUrl", nullable = false)
+    var originUrl: String = originUrl
         protected set
 
     @Column(name = "published_at", nullable = false)
