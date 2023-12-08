@@ -42,6 +42,15 @@ dependencies {
     runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testImplementation("io.mockk:mockk:1.13.4")
+    testImplementation("io.mockk:mockk-jvm:1.13.4")
+    testImplementation("com.ninja-squad:springmockk:4.0.2")
+    testImplementation("io.kotest:kotest-runner-junit5:5.7.2")
+    testImplementation("io.kotest:kotest-assertions-core:5.7.2")
+    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.3")
+
+    // https://mvnrepository.com/artifact/com.github.f4b6a3/ulid-creator
+    implementation("com.github.f4b6a3:ulid-creator:5.2.2")
 }
 
 tasks.withType<KotlinCompile> {
@@ -62,4 +71,10 @@ tasks.test {
 tasks.asciidoctor {
     inputs.dir(snippetsDir)
     dependsOn(tasks.test)
+}
+
+allOpen {
+    annotation("jakarta.persistence.Entity")
+    annotation ("jakarta.persistence.Embeddable")
+    annotation ("jakarta.persistence.MappedSuperclass")
 }
