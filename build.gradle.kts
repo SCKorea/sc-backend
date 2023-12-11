@@ -53,6 +53,8 @@ dependencies {
     // https://mvnrepository.com/artifact/com.github.f4b6a3/ulid-creator
     implementation("com.github.f4b6a3:ulid-creator:5.2.2")
     asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
+
+    implementation("io.github.oshai:kotlin-logging-jvm:5.1.1")
 }
 
 tasks.withType<KotlinCompile> {
