@@ -12,6 +12,8 @@ import jakarta.persistence.OneToMany
 import java.time.ZonedDateTime
 import java.util.EnumSet
 import kr.galaxyhub.sc.common.domain.PrimaryKeyEntity
+import kr.galaxyhub.sc.common.exception.NotFoundException
+import kr.galaxyhub.sc.common.support.validate
 
 @Entity
 class News(
@@ -60,11 +62,12 @@ class News(
     }
 
     private fun validateAddContent(content: Content) {
-        if (content.news != this) {
-            throw IllegalArgumentException("컨텐츠에 등록된 뉴스가 동일하지 않습니다.") // TODO 명확한 예외 정의할 것
-        }
-        if (mutableSupportLanguages.contains(content.language)) {
-            throw IllegalArgumentException("이미 해당 언어로 작성된 뉴스가 있습니다.") // TODO 명확한 예외 정의할 것
-        }
+        validate(content.news != this) { "컨텐츠에 등록된 뉴스가 동일하지 않습니다." }
+        validate(mutableSupportLanguages.contains(content.language)) { "이미 해당 언어로 작성된 뉴스가 있습니다." }
+    }
+
+    fun getContentByLanguage(language: Language): Content {
+        return contents.find { it.language == language }
+            ?: throw NotFoundException("해당 언어의 컨텐츠가 존재하지 않습니다.")
     }
 }
