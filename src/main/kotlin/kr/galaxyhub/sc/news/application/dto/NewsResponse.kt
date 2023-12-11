@@ -14,7 +14,7 @@ data class NewsResponse(
     val publishedAt: ZonedDateTime,
     val supportLanguages: Set<Language>,
     val originId: Long,
-    val originUrl: String
+    val originUrl: String,
 ) {
 
     companion object {

@@ -26,7 +26,7 @@ class NewsControllerV1(
 ) {
 
     @GetMapping
-    fun findAll():ResponseEntity<ApiResponse<List<NewsResponse>>> {
+    fun findAll(): ResponseEntity<ApiResponse<List<NewsResponse>>> {
         val response = newsQueryService.findAll()
         return ResponseEntity.ok()
             .body(ApiResponse.success(response))
@@ -35,7 +35,7 @@ class NewsControllerV1(
     @GetMapping("/{id}")
     fun findDetailById(
         @PathVariable id: UUID,
-        @RequestParam language: Language
+        @RequestParam language: Language,
     ): ResponseEntity<ApiResponse<NewsDetailResponse>> {
         val response = newsQueryService.getDetailByIdAndLanguage(id, language)
         return ResponseEntity.ok()
