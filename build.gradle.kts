@@ -26,6 +26,7 @@ repositories {
     mavenCentral()
 }
 
+val asciidoctorExt: Configuration by configurations.creating
 val snippetsDir by extra { file("build/generated-snippets") }
 
 dependencies {
@@ -51,6 +52,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.github.f4b6a3/ulid-creator
     implementation("com.github.f4b6a3:ulid-creator:5.2.2")
+    asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
 }
 
 tasks.withType<KotlinCompile> {
@@ -71,6 +73,25 @@ tasks.test {
 tasks.asciidoctor {
     inputs.dir(snippetsDir)
     dependsOn(tasks.test)
+    configurations("asciidoctorExt")
+    baseDirFollowsSourceFile()
+}
+
+tasks.register("copyDocument", Copy::class) {
+    dependsOn(tasks.asciidoctor)
+    doFirst {
+        delete(file("src/main/resources/static/docs"))
+    }
+    from(file("build/docs/asciidoc"))
+    into(file("src/main/resources/static/docs"))
+}
+
+tasks.build {
+    dependsOn(tasks.getByName("copyDocument"))
+}
+
+tasks.bootJar {
+    dependsOn(tasks.getByName("copyDocument"))
 }
 
 allOpen {
