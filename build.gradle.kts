@@ -26,8 +26,12 @@ repositories {
     mavenCentral()
 }
 
-val asciidoctorExt: Configuration by configurations.creating
-val snippetsDir by extra { file("build/generated-snippets") }
+val asciidoctorExt = "asciidoctorExt"
+configurations.create(asciidoctorExt) {
+    extendsFrom(configurations["testImplementation"])
+}
+
+val snippetsDir = file("build/generated-snippets")
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
@@ -64,22 +68,19 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
 tasks.test {
     outputs.dir(snippetsDir)
+    useJUnitPlatform()
 }
 
 tasks.asciidoctor {
     inputs.dir(snippetsDir)
     dependsOn(tasks.test)
-    configurations("asciidoctorExt")
+    configurations(asciidoctorExt)
     baseDirFollowsSourceFile()
 }
 
-tasks.register("copyDocument", Copy::class) {
+val copyDocument = tasks.register<Copy>("copyDocument") {
     dependsOn(tasks.asciidoctor)
     doFirst {
         delete(file("src/main/resources/static/docs"))
@@ -89,15 +90,15 @@ tasks.register("copyDocument", Copy::class) {
 }
 
 tasks.build {
-    dependsOn(tasks.getByName("copyDocument"))
+    dependsOn(copyDocument)
 }
 
 tasks.bootJar {
-    dependsOn(tasks.getByName("copyDocument"))
+    dependsOn(copyDocument)
 }
 
 allOpen {
     annotation("jakarta.persistence.Entity")
-    annotation ("jakarta.persistence.Embeddable")
-    annotation ("jakarta.persistence.MappedSuperclass")
+    annotation("jakarta.persistence.Embeddable")
+    annotation("jakarta.persistence.MappedSuperclass")
 }
