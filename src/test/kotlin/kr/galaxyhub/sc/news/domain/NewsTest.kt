@@ -8,6 +8,7 @@ import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.throwable.shouldHaveMessage
+import kr.galaxyhub.sc.common.exception.BadRequestException
 import kr.galaxyhub.sc.news.fixture.ContentFixture
 import kr.galaxyhub.sc.news.fixture.NewsFixture
 
@@ -37,8 +38,8 @@ class NewsTest : DescribeSpec({
             val otherNews = NewsFixture.create()
             val content = ContentFixture.from(Language.ENGLISH, otherNews)
 
-            it("IllegalArgumentException 예외를 던진다.") {
-                val exception = shouldThrow<IllegalArgumentException> {
+            it("BadRequestException 예외를 던진다.") {
+                val exception = shouldThrow<BadRequestException> {
                     news.addContent(content)
                 }
                 exception shouldHaveMessage "컨텐츠에 등록된 뉴스가 동일하지 않습니다."
@@ -52,8 +53,8 @@ class NewsTest : DescribeSpec({
 
             news.addContent(englishContent)
 
-            it("IllegalArgumentException 예외를 던진다.") {
-                val exception = shouldThrow<IllegalArgumentException> {
+            it("BadRequestException 예외를 던진다.") {
+                val exception = shouldThrow<BadRequestException> {
                     news.addContent(otherEnglishContent)
                 }
                 exception shouldHaveMessage "이미 해당 언어로 작성된 뉴스가 있습니다."

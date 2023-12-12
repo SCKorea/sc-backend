@@ -26,7 +26,12 @@ repositories {
     mavenCentral()
 }
 
-val snippetsDir by extra { file("build/generated-snippets") }
+val asciidoctorExt = "asciidoctorExt"
+configurations.create(asciidoctorExt) {
+    extendsFrom(configurations.testImplementation.get())
+}
+
+val snippetsDir = file("build/generated-snippets")
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
@@ -51,6 +56,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.github.f4b6a3/ulid-creator
     implementation("com.github.f4b6a3:ulid-creator:5.2.2")
+    asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
+
+    implementation("io.github.oshai:kotlin-logging-jvm:5.1.1")
 }
 
 tasks.withType<KotlinCompile> {
@@ -60,21 +68,37 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
 tasks.test {
     outputs.dir(snippetsDir)
+    useJUnitPlatform()
 }
 
 tasks.asciidoctor {
     inputs.dir(snippetsDir)
     dependsOn(tasks.test)
+    configurations(asciidoctorExt)
+    baseDirFollowsSourceFile()
+}
+
+val copyDocument = tasks.register<Copy>("copyDocument") {
+    dependsOn(tasks.asciidoctor)
+    doFirst {
+        delete(file("src/main/resources/static/docs"))
+    }
+    from(file("build/docs/asciidoc"))
+    into(file("src/main/resources/static/docs"))
+}
+
+tasks.build {
+    dependsOn(copyDocument)
+}
+
+tasks.bootJar {
+    dependsOn(copyDocument)
 }
 
 allOpen {
     annotation("jakarta.persistence.Entity")
-    annotation ("jakarta.persistence.Embeddable")
-    annotation ("jakarta.persistence.MappedSuperclass")
+    annotation("jakarta.persistence.Embeddable")
+    annotation("jakarta.persistence.MappedSuperclass")
 }
