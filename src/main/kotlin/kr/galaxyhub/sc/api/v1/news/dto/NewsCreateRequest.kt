@@ -1,4 +1,4 @@
-package kr.galaxyhub.sc.api.news.v1.dto
+package kr.galaxyhub.sc.api.v1.news.dto
 
 import java.time.ZonedDateTime
 import kr.galaxyhub.sc.news.application.NewsCreateCommand

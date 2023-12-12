@@ -1,8 +1,8 @@
-package kr.galaxyhub.sc.api.news.v1
+package kr.galaxyhub.sc.api.v1.news
 
 import java.util.UUID
 import kr.galaxyhub.sc.api.common.ApiResponse
-import kr.galaxyhub.sc.api.news.v1.dto.NewsCreateRequest
+import kr.galaxyhub.sc.api.v1.news.dto.NewsCreateRequest
 import kr.galaxyhub.sc.common.support.toUri
 import kr.galaxyhub.sc.news.application.NewsCommandService
 import kr.galaxyhub.sc.news.application.NewsQueryService

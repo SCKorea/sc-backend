@@ -1,4 +1,4 @@
-package kr.galaxyhub.sc.api.news.v1
+package kr.galaxyhub.sc.api.v1.news
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.util.UUID
-import kr.galaxyhub.sc.api.news.v1.dto.NewsCreateRequest
+import kr.galaxyhub.sc.api.v1.news.dto.NewsCreateRequest
 import kr.galaxyhub.sc.api.support.ARRAY
 import kr.galaxyhub.sc.api.support.ENUM
 import kr.galaxyhub.sc.api.support.NUMBER
