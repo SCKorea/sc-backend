@@ -28,7 +28,7 @@ repositories {
 
 val asciidoctorExt = "asciidoctorExt"
 configurations.create(asciidoctorExt) {
-    extendsFrom(configurations["testImplementation"])
+    extendsFrom(configurations.testImplementation.get())
 }
 
 val snippetsDir = file("build/generated-snippets")
