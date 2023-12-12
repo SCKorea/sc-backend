@@ -9,8 +9,9 @@ data class NewsInformation(
     val title: String?,
 
     @Column(name = "excerpt", nullable = true)
-    val excerpt: String?
+    val excerpt: String?,
 ) {
+
     companion object {
 
         val EMPTY = NewsInformation(null, null)

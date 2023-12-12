@@ -1,0 +1,7 @@
+= Star Citizen Korean Translation Project - API Docs
+:doctype: book
+:toc: left
+:source-highlighter: highlightjs
+:sectlinks:
+
+include::news-api.adoc[]
