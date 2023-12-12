@@ -5,8 +5,8 @@ import jakarta.persistence.Embeddable
 
 @Embeddable
 data class NewsInformation(
-    @Column(name = "title", nullable = true)
-    val title: String?,
+    @Column(name = "title", nullable = false)
+    val title: String,
 
     @Column(name = "excerpt", nullable = true)
     val excerpt: String?,
@@ -14,7 +14,7 @@ data class NewsInformation(
 
     companion object {
 
-        val EMPTY = NewsInformation(null, null)
+        val EMPTY = NewsInformation("", null)
     }
 }
 

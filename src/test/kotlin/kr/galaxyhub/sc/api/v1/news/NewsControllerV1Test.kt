@@ -128,7 +128,7 @@ class NewsControllerV1Test(
                     requestBody(
                         "newsType" type ENUM(NewsType::class) means "뉴스 타입",
                         "title" type STRING means "뉴스 제목",
-                        "excerpt" type STRING means "뉴스 발췌",
+                        "excerpt" type STRING means "뉴스 발췌" isOptional true,
                         "publishedAt" type ZONEDDATETIME means "뉴스 발행 시간",
                         "originId" type NUMBER means "원본 뉴스 식별자",
                         "originUrl" type STRING means "원본 뉴스의 URL",
