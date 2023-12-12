@@ -38,6 +38,6 @@ private fun createField(
     val descriptor = RequestDocumentation
         .parameterWithName(value)
         .description(description)
-        .attributes(*RestDocsUtils.getAllEmptyFormats())
+        .attributes(*RestDocsUtils.getAllEmptyAttributes())
     return DocParam(descriptor)
 }

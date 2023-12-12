@@ -38,7 +38,7 @@ class RestDocDsl {
         queryParametersSnippet = RequestDocumentation.queryParameters(params.map { it.descriptor })
     }
 
-    internal fun perform(identifier: String, resultActionDsl: ResultActionsDsl): ResultActionsDsl {
+    fun perform(identifier: String, resultActionDsl: ResultActionsDsl): ResultActionsDsl {
         return resultActionDsl.andDo {
             handle(
                 MockMvcRestDocumentation.document(

@@ -19,7 +19,7 @@ class RestDocsUtils {
 
         fun constraint(value: String): Attributes.Attribute = CONSTRAINT_BUILDER.value(value)
 
-        fun getAllEmptyFormats(): Array<Attributes.Attribute> {
+        fun getAllEmptyAttributes(): Array<Attributes.Attribute> {
             return arrayOf(EMPTY_FORMAT, EMPTY_CONSTRAINT)
         }
     }

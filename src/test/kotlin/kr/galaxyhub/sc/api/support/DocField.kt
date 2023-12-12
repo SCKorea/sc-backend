@@ -54,7 +54,7 @@ private fun createField(
         .fieldWithPath(value)
         .type(type)
         .description("")
-        .attributes(*RestDocsUtils.getAllEmptyFormats())
+        .attributes(*RestDocsUtils.getAllEmptyAttributes())
     return DocField(descriptor)
 }
 
