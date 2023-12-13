@@ -32,7 +32,7 @@ class News(
     var originId: Long = originId
         protected set
 
-    @Column(name = "originUrl", nullable = false)
+    @Column(name = "origin_url", nullable = false)
     var originUrl: String = originUrl
         protected set
 
