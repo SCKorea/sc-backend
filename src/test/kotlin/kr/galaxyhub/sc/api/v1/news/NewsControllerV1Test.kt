@@ -45,13 +45,11 @@ class NewsControllerV1Test(
 
     describe("GET /api/v1/news/{id}") {
         context("유효한 요청이 전달되면") {
-            it("200 응답과 뉴스의 상세 정보가 조회된다.") {
-                // given
-                val id = UUID.randomUUID()
-                val response = newsDetailResponse(id)
-                every { newsQueryService.getDetailByIdAndLanguage(id, Language.ENGLISH) } returns response
+            val id = UUID.randomUUID()
+            val response = newsDetailResponse(id)
+            every { newsQueryService.getDetailByIdAndLanguage(id, Language.ENGLISH) } returns response
 
-                // when & then
+            it("200 응답과 뉴스의 상세 정보가 조회된다.") {
                 mockMvc.docGet("/api/v1/news/{id}", id) {
                     contentType = MediaType.APPLICATION_JSON
                     param("language" to Language.ENGLISH)
@@ -84,12 +82,10 @@ class NewsControllerV1Test(
 
     describe("GET /api/v1/news") {
         context("유효한 요청이 전달되면") {
-            it("200 응답과 모든 뉴스의 정보가 조회된다.") {
-                // given
-                val response = listOf(newsResponse())
-                every { newsQueryService.findAll() } returns response
+            val response = listOf(newsResponse())
+            every { newsQueryService.findAll() } returns response
 
-                // when & then
+            it("200 응답과 모든 뉴스의 정보가 조회된다.") {
                 mockMvc.docGet("/api/v1/news") {
                     contentType = MediaType.APPLICATION_JSON
                 }.andExpect {
@@ -113,12 +109,10 @@ class NewsControllerV1Test(
 
     describe("POST /api/v1/news") {
         context("유효한 요청이 전달되면") {
-            it("201 응답과 뉴스의 식별자가 반환된다.") {
-                // given
-                val request = newsCreateRequest()
-                every { newsCommandService.create(any()) } returns UUID.randomUUID()
+            val request = newsCreateRequest()
+            every { newsCommandService.create(any()) } returns UUID.randomUUID()
 
-                // when & then
+            it("201 응답과 뉴스의 식별자가 반환된다.") {
                 mockMvc.docPost("/api/v1/news") {
                     contentType = MediaType.APPLICATION_JSON
                     content = objectMapper.writeValueAsString(request)

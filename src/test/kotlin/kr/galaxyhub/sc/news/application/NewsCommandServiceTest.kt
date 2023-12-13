@@ -23,37 +23,31 @@ class NewsCommandServiceTest(
     describe("create") {
         context("originId에 대해 저장된 뉴스가 없으면") {
             it("새로운 뉴스가 생성된다.") {
-                // given
-                val command = newsCreateCommand()
-
-                // when
-                val id = withContext(Dispatchers.IO) {
-                    newsCommandService.create(command)
+                val originId = 1L
+                val newsId = withContext(Dispatchers.IO) {
+                    newsCommandService.create(newsCreateCommand(originId))
                 }
 
-                // then
-                val news = newsRepository.findById(id)!!
+                val news = newsRepository.findById(newsId)!!
                 news shouldNotBe null
                 news.supportLanguages shouldContainExactly setOf(Language.KOREAN)
             }
         }
 
         context("originId에 대해 저장된 뉴스가 있으면") {
-            it("기존 뉴스에 새로운 언어에 대한 컨텐츠가 추가된다.") {
-                // given
-                val existsCommand = newsCreateCommand()
-                withContext(Dispatchers.IO) {
-                    newsCommandService.create(existsCommand)
-                }
+            val originId = 1L
+            val existsCommand = newsCreateCommand(originId)
+            withContext(Dispatchers.IO) {
+                newsCommandService.create(existsCommand)
+            }
 
-                // when
+            it("기존 뉴스에 새로운 언어에 대한 컨텐츠가 추가된다.") {
                 val command = existsCommand.copy(language = Language.ENGLISH)
-                val id = withContext(Dispatchers.IO) {
+                val newsId = withContext(Dispatchers.IO) {
                     newsCommandService.create(command)
                 }
 
-                // then
-                val news = newsRepository.findById(id)!!
+                val news = newsRepository.findById(newsId)!!
                 news.supportLanguages shouldContainExactly setOf(Language.KOREAN, Language.ENGLISH)
                 newsRepository.findAll() shouldHaveSize 1
             }
@@ -61,12 +55,12 @@ class NewsCommandServiceTest(
     }
 })
 
-private fun newsCreateCommand() = NewsCreateCommand(
+private fun newsCreateCommand(originId: Long) = NewsCreateCommand(
     newsType = NewsType.NEWS,
     title = "제목",
     excerpt = "줄거리",
     publishedAt = ZonedDateTime.of(LocalDateTime.parse("2023-12-04T03:53:33"), ZoneId.systemDefault()),
-    originId = 1,
+    originId = originId,
     originUrl = "https://sc.galaxyhub.kr/",
     language = Language.KOREAN,
     content = "내용"
