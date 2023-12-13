@@ -24,7 +24,7 @@ class News(
 ) : PrimaryKeyEntity() {
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "news_type", nullable = false)
+    @Column(name = "news_type", nullable = false, columnDefinition = "varchar")
     var newsType: NewsType = newsType
         protected set
 

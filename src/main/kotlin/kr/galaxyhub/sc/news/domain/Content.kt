@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
-import jakarta.persistence.Lob
 import jakarta.persistence.ManyToOne
 
 @Entity
@@ -35,11 +34,10 @@ class Content(
         protected set
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "language", nullable = false)
+    @Column(name = "language", nullable = false, columnDefinition = "varchar")
     var language: Language = language
         protected set
 
-    @Lob
     @Column(name = "content", nullable = false)
     var content: String = content
         protected set
