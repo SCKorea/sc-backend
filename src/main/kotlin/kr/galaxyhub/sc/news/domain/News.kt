@@ -24,7 +24,7 @@ class News(
 ) : PrimaryKeyEntity() {
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "news_type", nullable = false)
+    @Column(name = "news_type", nullable = false, columnDefinition = "varchar")
     var newsType: NewsType = newsType
         protected set
 
@@ -32,7 +32,7 @@ class News(
     var originId: Long = originId
         protected set
 
-    @Column(name = "originUrl", nullable = false)
+    @Column(name = "origin_url", nullable = false)
     var originUrl: String = originUrl
         protected set
 
