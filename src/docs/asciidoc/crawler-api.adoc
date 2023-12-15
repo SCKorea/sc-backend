@@ -1,0 +1,15 @@
+[[crawler-api]]
+== 크롤러
+
+[[crawler-crawling]]
+=== 크롤링
+
+*요청*
+
+include::{snippets}/crawler/crawling/http-request.adoc[]
+include::{snippets}/crawler/crawling/request-fields.adoc[]
+
+*응답*
+
+include::{snippets}/crawler/crawling/http-response.adoc[]
+include::{snippets}/crawler/crawling/response-fields.adoc[]
