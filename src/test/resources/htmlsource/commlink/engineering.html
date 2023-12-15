@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Anti-flicker snippet (recommended)  -->
+    <style>.async-hide { opacity: 0 !important} </style>
+    <script type="text/javascript">(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+        h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+        (a[n]=a[n]||[]).hide=h;if (d) a[n].push({'userId' : d});setTimeout(function(){i();h.end=null},c);h.timeout=c;
+    })(window,document.documentElement,'async-hide','dataLayer',1500,
+        {'GTM-KHNFZPT':true},undefined,'');</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Roberts Space Industries is the official go-to website for all news  about Star Citizen and Squadron 42. It also hosts the online store for game items and merch, as well as all the community tools used by our fans.">
+    <meta name="csrf-token" content="8317c818dc3f0cefa66faf0ecfabb5d22dd92cc7b174a3ee45fa9798f36843e6">
+    <meta property="og:site_name" content="
+  Q&amp;A: Argo SRV - Roberts Space Industries | Follow the development of Star Citizen and Squadron 42
+">
+    <meta property="og:image" content="https://robertsspaceindustries.com/media/2hjhz78oo34i1r/channel_item_full/Star_Citizen_ARGO_SRV_KF_03-21-9_4k.jpg">
+    <meta property="og:description" content="Roberts Space Industries is the official go-to website for all news  about Star Citizen and Squadron 42. It also hosts the online store for game items and merch, as well as all the community tools used by our fans.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://robertsspaceindustries.com/comm-link/SCW/19607-IMPORT">
+    <meta property="og:locale" content="us_EN">
+    <link rel="preconnect" href="//cdn.robertsspaceindustries.com">
+    <link rel="preconnect" href="//fonts.fstatic.com">
+    <link rel="preconnect" href="//cdnjs.cloudflare.com">
+    <link rel="preconnect" href="//media.robertsspaceindustries.com">
+    <link rel="preconnect" href="//www.google-analytics.com">
+    <link rel="preload" as="font" href="https://cdn.robertsspaceindustries.com/static/fonts/univia-pro/univia-pro-400.woff2">
+    <link rel="preload" as="font" href="https://cdn.robertsspaceindustries.com/static/fonts/univia-pro/univia-pro-700.woff2">
+    <link rel="preload" as="font" href="https://cdn.robertsspaceindustries.com/static/fonts/univia-pro/univia-pro-800.woff2">
+    <link rel="stylesheet" href="https://robertsspaceindustries.com/plt-client/style.css?v=7.145.0">
+    <link href="/rsi/static/css/cross-brand-less.css?v=7.145.0" media="all" rel="stylesheet">
+    <link href="/rsi/static/packages/platformbar/rsi.platformbar.build.112af.css" media="all" rel="stylesheet">
+    <link href="/rsi/static/packages/enlist/rsi.enlist.build.6b236.css" media="all" rel="stylesheet">
+    <script src="https://sentry.turbulent.ca/js-sdk-loader/2e12f629641e4f21a3c1f5da10e1b474.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        Sentry.onLoad(function() {
+            Sentry.init({
+                dsn: 'https://2e12f629641e4f21a3c1f5da10e1b474@sentry.turbulent.ca/53',
+                environment: 'prod',
+                release: 'rsi-website@7.145.0',
+                maxBreadcrumbs: 50,
+                debug: 1 ? true : false,
+                ignoreErrors: ['Sign In failed. Please confirm you are not a bot', 'MultiStepRequired']
+            });
+        });
+    </script>
+    <script type="text/javascript" src="/cache/en/rsi-external-js.js?v=7.145.0"></script>
+    <script type="text/javascript" src="/cache/en/rsi-templates-js.js?v=7.145.0"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/dhw3beb.css">
+    <script id="CookieConsent" src="/cookie-consent/script.js" type="text/javascript"></script><!--
+  type="text/plain" should be removed to be able to debug Google Tag Manager on the page.
+  However, it is ESSENTIAL to leave it in normal circumstances to let CookieBot handle GTM and cookies.
+  -->
+    <script data-cookieconsent="statistics" type="text/plain">
+    // Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KHNFZPT');
+    // EndGoogle Tag Manager
+  </script>
+    <title>
+        Q&amp;A: Argo SRV - Roberts Space Industries | Follow the development of Star Citizen and Squadron 42
+    </title>
+    <script type="text/javascript" src="/rsi/static/packages/core/rsi.core.build.39e1f.js"></script>
+    <script type="text/javascript" src="/rsi/static/packages/account/rsi.account.build.6d264.js"></script>
+    <script type="text/javascript" src="/rsi/static/packages/store/rsi.store.build.e7a39.js"></script>
+    <script>
+        $(document).ready(function() {
+            window.Common = new RSI.Common({});
+            window.Main = new RSI.Main({
+                'is_mobile': 0,
+                'probation_cookie' : '',
+                'require_captcha': 0
+            });
+            window.Mark = new Turbulent.Mark({ 'name' : 'Rsi-XSRF', 'token' : 'db16ZQ:NiGPEmZMC1i3BPsLrrSkeg', 'ttl' : 1800 });
+
+            window.WscOverlay = new RSI.WscOverlay({});
+
+            var destinations = [];
+
+            window.Main.destinations = destinations;
+            window.PageStore = new RSI.Store({
+                'store_prefix' : '/pledge',
+                'bootstrapConfig': {"injection":{"attachmentClass":"RSIStoreApp","files":{"js":["bootstrap.js"],"css":["index.css"]}},"platform":{"api":"\/api"},"store":{"path":"\/pledge-store","manifest":"manifest.json"},"customizer":{"api":"\/pledge-store\/api\/customizer","ga_tracking_code":"G-V6MWYXRQNP"}}
+            });
+
+
+
+            var productsTracking = [];
+            var eCommerceData = {
+                'trackingAction': "",
+                'currency': "",
+                'trackingStep': "",
+                'trackingProducts': productsTracking
+            };
+            window.eCommerceTracking = new RSI.Store.eCommerceTracking(
+                eCommerceData
+            );
+
+        });
+
+        $(window).load(function() {
+
+        });
+
+    </script>
+    <script>
+        window.recaptcha_is_loaded = false;
+        window.on_recaptcha_load_callback = function() {
+            window.recaptcha_is_loaded = true;
+        };
+    </script>
+    <script src="https://www.recaptcha.net/recaptcha/enterprise.js?onload=on_recaptcha_load_callback&amp;render=6LerBOgUAAAAAKPg6vsAFPTN66Woz-jBClxdQU-o" async defer></script>
+    <script type="text/javascript">
+
+    </script>
+    <link rel="stylesheet" href="https://robertsspaceindustries.com/alexandria/shared-library-ts/latest/manufacturers.argo.brand.skin.css" media="all">
+    <style type="text/css">
+        /* CSS from ATOM */
+
+    </style>
+    <script src="https://robertsspaceindustries.com/pledge-store/store.js"></script>
+    <script type="text/javascript">
+        /* JS from ATOM */
+
+    </script>
+    <style>
+
+        background:url(https://cdn.robertsspaceindustries.com/static/images/noisebg.gif) repeat center top #000b11;
+
+    </style>
+    <link href="https://robertsspaceindustries.com/rsi/assets/fonts.css?family=Electrolize|Orbitron:400,500,700|Quantico|Share+Tech+Mono" rel="stylesheet" type="text/css">
+    <link href="/cache/en/rsi-css.css?v=7.145.0" media="all" rel="stylesheet">
+</head>
+<body id="alexandria-content" class="">
+<div class="l-notification-bar l-notification-bar--rsi js-notification-bar" id="notification-bar-root">
+    <c-notification-bar v-bind:latestagreementsslugs="[]" v-bind:loggedin="0" v-bind:onhomepage="0"></c-notification-bar>
+    <div class="l-notification-container l-notification-bar__boxes js-notification-bar-boxes">
+        <div class="l-notification__wrapper">
+            <div class="l-notification-bar__box is-hidden js-notification-bar-box js-notification-bar-box--announcement">
+                <div class="c-notification c-notification--p c-notification--announcement js-bottom-notif-msg-announcement">
+                    <div class="c-notification__inner">
+                        <div class="c-notification__content">
+                            <div class="c-notification__title">
+                                Luminalia 2953
+                            </div>
+                            <div class="c-notification__message">
+                                It’s beginning to look a lot like Luminalia! Unwrap gifts from our Luminalia Calendar, get in the spirit with Holiday Deals, join a very special Arena Commander mode, and more!
+                            </div>
+                        </div>
+                        <div class="c-notification__actions">
+                            <div class="c-notification__wrapper-link">
+                                <a href="https://robertsspaceindustries.com/comm-link/transmission/19605-Luminalia-2953" class="c-notification__button js-bottom-notif-link-announcement"> <span class="c-notification__button-text"> More info </span> <span class="c-iconed__icon c-iconed__icon--arrow"></span> </a>
+                            </div><span class="c-notification__actions-label">or</span>
+                            <div class="c-notification__wrapper-link">
+                                <a class="c-notification__button js-bottom-notif-btn-announcement"> <span class="c-notification__button-text"> Close </span> <span class="c-iconed__icon c-iconed__icon--close"></span> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><c-unsupported-browser v-cloak>
+            <div class="l-notification-bar__box js-notification-bar-box">
+                <div class="c-notification  c-notification--browser-support js-bottom-notif-msg-browser-support">
+                    <div class="c-notification__inner">
+                        <div class="c-notification__content">
+                            <div class="c-notification__title">
+                                IE11 is no longer supported
+                            </div>
+                            <div class="c-notification__message">
+                                We do not support Internet Explorer 11 and below. Please use a different web browser.
+                            </div>
+                        </div>
+                        <div class="c-notification__actions">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c-unsupported-browser>
+        </div>
+    </div>
+</div>
+<div id="bodyWrapper">
+    <header class="c-header-wrapper c-header-wrapper--rsi js-header-wrapper " id="cross-brand-header">
+        <div id="platform-bar" class="c-header__platform-bar "></div>
+        <div class="c-right-sidebar c-right-sidebar--signin" id="account-sidebar">
+            <div class="js-toggle-account__backdrop invisible"></div><a href="#" class="c-right-sidebar__back js-toggle-account">Back <span></span> <span></span> </a>
+            <div id="enlist-root" data-theme="rsi" data-enlisting="" data-ptu=""></div>
+            <script type="text/javascript" src="/rsi/static/packages/enlist/rsi.enlist.build.6b236.js"></script>
+        </div>
+        <div class="c-header-wrapper__backdrop js-toggle-games"></div>
+    </header>
+    <div id="platform-backdrop"></div>
+    <script type="text/javascript">
+        RSI.Platformbar = {
+            theme: "rsi",
+            loggedState: "logged-out",
+            tabs: [
+                {
+                    type: 'brands',
+                    name: "Games",
+                    subItems: [
+                        {
+                            name: "sc",
+                            href: "/star-citizen",
+                            description: "Join the Universe"
+                        },
+                        {
+                            name: "s42",
+                            href: "/squadron42",
+                            description: "Start the adventure"
+                        },
+                        {
+                            name: "rsi",
+                            href: "/",
+                            description: "Follow the Development"
+                        }
+                    ]
+                },
+                {
+                    type: 'apps',
+                    name: "Apps",
+                    subItems: [
+                        [
+                            {
+                                new: "New",
+                                name: "Community Hub",
+                                href: "/community-hub",
+                                description: "Share your content with the community"
+                            },
+                            {
+                                name: "Spectrum",
+                                href: "/spectrum/community/SC",
+                                description: "Your communication platform"
+                            },
+                            {
+                                name: "Launcher",
+                                href: "/download",
+                                description: "Download Star Citizen",
+                            }
+                        ],
+                        [
+                            {
+                                name: "Roadmap",
+                                href: "/roadmap",
+                                description: "Keep track of the development"
+                            },
+                            {
+                                name: "Telemetry",
+                                href: "/telemetry",
+                                description: "Keep track of the player’s performance"
+                            },
+                            {
+                                name: "Issue Council",
+                                href: "https://issue-council.robertsspaceindustries.com",
+                                description: "Help us make the game better",
+                            }
+                        ],
+                        [
+                            {
+                                name: "Starmap",
+                                href: "/starmap",
+                                description: "Your map to the universe"
+                            },
+                            {
+                                name: "Galactapedia",
+                                href: "/galactapedia",
+                                description: "Your guide to the universe"
+                            }
+                        ]
+                    ]
+                },
+            ],
+            navigation: {
+                store: {
+                    name: "Pledge Store",
+                    href: "/pledge",
+                    isHidden: false      },
+                hub: {
+                    name: "Learn How to Play",
+                    href: "/playstarcitizen",
+                    show: false      },
+                support: {
+                    name: "Support",
+                    href: "//support.robertsspaceindustries.com"
+                },
+                account: {
+                    name: "Account",
+                    href: "/account/settings",
+                    isHidden: false      }
+            }
+        };
+
+        $(document).ready(function() {
+            window.header = new RSI.Header({});
+        });
+    </script>
+    <header class="c-brand-menu c-brand-menu----rsi" id="brand-menu">
+        <span class="c-brand-menu__section"> Roberts Space Industries <sup>®</sup> </span>
+        <div class="c-brand-menu__backdrop"></div>
+        <nav class="c-brand-menu__container">
+            <div class="c-brand-menu__logo">
+                <a href="/"><span class="h-svg h-svg__logo-rsi--fullcolor-large js-svg-inliner"></span> </a>
+            </div>
+            <div class="c-brand-menu__items-container">
+                <ul class="c-brand-menu__items">
+                    <li class="c-brand-menu__item  "><a class="c-menu-link c-menu-link----rsi c-brand-menu__link" href="/comm-link"> <span class="c-brand-menu__item-text">Comm-Link</span> </a></li>
+                    <li class="c-brand-menu__item  has-submenu js-open-brand-submenu"><a class="c-menu-link c-menu-link----rsi c-brand-menu__link" href="/community-hub"> <span class="c-brand-menu__item-text">Community</span> </a>
+                        <div class="c-brand-submenu">
+                            <a href="#" class="c-brand-submenu-back js-brand-submenu-close"> <span class="c-brand-submenu-back-text">Back /</span> <span class="c-brand-submenu-back-section">Community</span> </a>
+                            <div class="c-brand-submenu__left"></div>
+                            <div class="c-brand-submenu__wrapper">
+                                <ul class="c-brand-submenu__items">
+                                    <li class="c-brand-submenu__item "><a href="/spectrum" class="c-brand-submenu__link c-menu-link c-menu-link--small c-menu-link----rsi"> Spectrum </a></li>
+                                    <li class="c-brand-submenu__item "><a href="/community-hub" class="c-brand-submenu__link c-menu-link c-menu-link--small c-menu-link----rsi"> Hub </a></li>
+                                    <li class="c-brand-submenu__item "><a href="/community/orgs" class="c-brand-submenu__link c-menu-link c-menu-link--small c-menu-link----rsi"> Organizations </a></li>
+                                    <li class="c-brand-submenu__item "><a href="/community/leaderboards/top" class="c-brand-submenu__link c-menu-link c-menu-link--small c-menu-link----rsi"> Leaderboards </a></li>
+                                    <li class="c-brand-submenu__item "><a href="/fankit" class="c-brand-submenu__link c-menu-link c-menu-link--small c-menu-link----rsi"> Fankit </a></li>
+                                </ul>
+                            </div>
+                            <div class="c-brand-submenu__right"></div>
+                        </div></li>
+                    <li class="c-brand-menu__item  has-submenu js-open-brand-submenu"><a class="c-menu-link c-menu-link----rsi c-brand-menu__link" href="/development"> <span class="c-brand-menu__item-text">Development</span> </a>
+                        <div class="c-brand-submenu">
+                            <a href="#" class="c-brand-submenu-back js-brand-submenu-close"> <span class="c-brand-submenu-back-text">Back /</span> <span class="c-brand-submenu-back-section">Development</span> </a>
+                            <div class="c-brand-submenu__left"></div>
+                            <div class="c-brand-submenu__wrapper">
+                                <ul class="c-brand-submenu__items">
+                                    <li class="c-brand-submenu__item "><a href="/roadmap" class="c-brand-submenu__link c-menu-link c-menu-link--small c-menu-link----rsi"> Roadmap </a></li>
+                                    <li class="c-brand-submenu__item "><a href="/community/devtracker" class="c-brand-submenu__link c-menu-link c-menu-link--small c-menu-link----rsi"> Dev Tracker </a></li>
+                                    <li class="c-brand-submenu__item "><a href="/telemetry" class="c-brand-submenu__link c-menu-link c-menu-link--small c-menu-link----rsi"> Telemetry </a></li>
+                                    <li class="c-brand-submenu__item "><a href="https://issue-council.robertsspaceindustries.com" class="c-brand-submenu__link c-menu-link c-menu-link--small c-menu-link----rsi"> Issue Council </a></li>
+                                    <li class="c-brand-submenu__item "><a href="/patch-notes" class="c-brand-submenu__link c-menu-link c-menu-link--small c-menu-link----rsi"> Patch Notes </a></li>
+                                    <li class="c-brand-submenu__item "><a href="/ship-matrix" class="c-brand-submenu__link c-menu-link c-menu-link--small c-menu-link----rsi"> Ship Matrix </a></li>
+                                    <li class="c-brand-submenu__item "><a href="/funding-goals" class="c-brand-submenu__link c-menu-link c-menu-link--small c-menu-link----rsi"> Funding </a></li>
+                                </ul>
+                            </div>
+                            <div class="c-brand-submenu__right"></div>
+                        </div></li>
+                </ul>
+            </div>
+            <div class="c-brand-menu__cta">
+                <a href="/star-citizen/play-now" class="c-brand-cta-btn js-google-analytics-event-tracker" data-event-category="FlyNow" data-event-label="navMenuClick">
+                    <div></div><span class="c-brand-cta-btn__text"> <strong>Play now</strong> </span>
+                    <div></div></a>
+            </div>
+        </nav>
+    </header>
+    <div class="page-wrapper">
+        <div id="post-background"></div>
+        <div id="contentbody" class=" alexandria-content-body " style="">
+            <div id="layout-system">
+                <div class="turbo-anchor" id="78098823" data-plugin_key="plugin_trblt_navigation" data-position="0"></div><g-navigation-sales :logo="{&quot;isDisplayed&quot;:true,&quot;link&quot;:&quot;&quot;,&quot;alignement&quot;:&quot;left&quot;,&quot;simpleImage&quot;:{&quot;originalFormat&quot;:{&quot;desktop&quot;:&quot;/i/feb951ae94e09a73d746ebe914dfc89758b171d3/JvFFVmatwWHVAenhK68zvnrCa6cNkim6hiZGw3d15mkj3CxKfwSUzLJCGR4a9fjW4cRZYaWf6DHnsoSo7fhFWjGE5KcnYhZbtb8KmieCNZZ5Wk5j6jTGAq7RaDunAAJtcjKtjva2kE/75/sc-branding-argo-icon-light-rgb-4k.png&quot;,&quot;tablet&quot;:&quot;/i/feb951ae94e09a73d746ebe914dfc89758b171d3/JvFFVmatwWHVAenhK68zvnrCa6cNkim6hiZGw3d15mkj3CxKfwSUzLJCGR4a9fjW4cRZYaWf6DHnsoSo7fhFWjGE5KcnYhZbtb8KmieCNZZ5Wk5j6jTGAq7RaDunAAJtcjKtjva2kE/75/sc-branding-argo-icon-light-rgb-4k.png&quot;,&quot;mobile&quot;:&quot;/i/feb951ae94e09a73d746ebe914dfc89758b171d3/JvFFVmatwWHVAenhK68zvnrCa6cNkim6hiZGw3d15mkj3CxKfwSUzLJCGR4a9fjW4cRZYaWf6DHnsoSo7fhFWjGE5KcnYhZbtb8KmieCNZZ5Wk5j6jTGAq7RaDunAAJtcjKtjva2kE/75/sc-branding-argo-icon-light-rgb-4k.png&quot;,&quot;max&quot;:&quot;/i/f2612ca267d2128f887c53c19cf4a8802b43991a/JvFFVmatwWHVAenhK68zvnrCa6cNkim6hiZGw3d15mkj3CxKfwSUzLJCGR4a9fjW4cRZYaWf6DHnsoSo7fhFWjGE5KcnYhZbtb8KmieCNZZ5Wk5j6jTGAq7RaDunAAJtcjKtjva2kE/sc-branding-argo-icon-light-rgb-4k.png&quot;,&quot;__typename&quot;:&quot;ImageURIs&quot;},&quot;webp&quot;:{&quot;desktop&quot;:&quot;/i/feb951ae94e09a73d746ebe914dfc89758b171d3/JvFFVmatwWHVAenhK68zvnrCa6cNkim6hiZGw3d15mkj3CxKfwSUzLJCGR4a9fjW4cRZYaWf6DHnsoSo7fhFWjGE5KcnYhZbtb8KmieCNZZ5Wk5j6jTGAq7RaDunAAJtcjKtjva2kE/75/sc-branding-argo-icon-light-rgb-4k.webp&quot;,&quot;tablet&quot;:&quot;/i/feb951ae94e09a73d746ebe914dfc89758b171d3/JvFFVmatwWHVAenhK68zvnrCa6cNkim6hiZGw3d15mkj3CxKfwSUzLJCGR4a9fjW4cRZYaWf6DHnsoSo7fhFWjGE5KcnYhZbtb8KmieCNZZ5Wk5j6jTGAq7RaDunAAJtcjKtjva2kE/75/sc-branding-argo-icon-light-rgb-4k.webp&quot;,&quot;mobile&quot;:&quot;/i/feb951ae94e09a73d746ebe914dfc89758b171d3/JvFFVmatwWHVAenhK68zvnrCa6cNkim6hiZGw3d15mkj3CxKfwSUzLJCGR4a9fjW4cRZYaWf6DHnsoSo7fhFWjGE5KcnYhZbtb8KmieCNZZ5Wk5j6jTGAq7RaDunAAJtcjKtjva2kE/75/sc-branding-argo-icon-light-rgb-4k.webp&quot;,&quot;max&quot;:&quot;/i/f2612ca267d2128f887c53c19cf4a8802b43991a/JvFFVmatwWHVAenhK68zvnrCa6cNkim6hiZGw3d15mkj3CxKfwSUzLJCGR4a9fjW4cRZYaWf6DHnsoSo7fhFWjGE5KcnYhZbtb8KmieCNZZ5Wk5j6jTGAq7RaDunAAJtcjKtjva2kE/sc-branding-argo-icon-light-rgb-4k.webp&quot;,&quot;__typename&quot;:&quot;ImageURIs&quot;},&quot;alt&quot;:&quot;SC Branding Argo Icon Light-RGB 4k&quot;}}" :call-to-action="{&quot;isDisplayed&quot;:true,&quot;alignement&quot;:&quot;right&quot;,&quot;label&quot;:&quot;SECURE YOURS NOW&quot;,&quot;link&quot;:&quot;https://robertsspaceindustries.com/comm-link/transmission/19452-Unveiling-The-ARGO-SRV&quot;}" :navigation="{&quot;isDisplayed&quot;:false,&quot;alignement&quot;:&quot;right&quot;,&quot;items&quot;:[{&quot;label&quot;:&quot;In this dimension&quot;,&quot;link&quot;:&quot;&quot;},{&quot;label&quot;:&quot;Integration&quot;,&quot;link&quot;:&quot;&quot;},{&quot;label&quot;:&quot;Exploration&quot;,&quot;link&quot;:&quot;&quot;},{&quot;label&quot;:&quot;Energy crates&quot;,&quot;link&quot;:&quot;&quot;},{&quot;label&quot;:&quot;Quantum drive&quot;,&quot;link&quot;:&quot;&quot;}]}" :back-to="{&quot;isDisplayed&quot;:false,&quot;label&quot;:&quot;BACK to RSI&quot;,&quot;link&quot;:&quot;https://robertsspaceindustries.com/&quot;}" :is-mini-cart-displayed="false" :siblings="[{&quot;label&quot;:&quot;SRV&quot;}]" v-cloak=""></g-navigation-sales>
+                <div data-arrangement_key="full-width" class="turbo-anchor" id="5186f245" data-plugin_key="plugin_trblt_banner_advanced" data-position="1"></div><g-banner-advanced :content="{&quot;displayed&quot;:false}" :media="{&quot;background&quot;:{&quot;picture&quot;:{&quot;originalFormat&quot;:{&quot;desktop&quot;:&quot;/i/9cad03aa454eb0be3f17e6a84b9149d233450f41/resize(2500,1072,cover,crop(3840,1646,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zetJBACmuK2etUmhYxtDzeXamGq1WFMUtRZjT3TqwJsSGo46qkYiGAxZfm98MALJCahDhfmscFkfvkRHcUuh1Q))/75/star-citizen-argo-srv-gal-01-21-9-4k.jpg&quot;,&quot;tablet&quot;:&quot;/i/cf026d7736bf3011a6189ceee8cce01022724eb5/resize(1500,643,cover,crop(3840,1645,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zetJBACmuK2etUmhYxtDzeXamGq1WFMUtRZjT3TqwJsSGo46qkYiGAxZfm98MALJCahDhfmscFkfvkRHcUuh1Q))/75/star-citizen-argo-srv-gal-01-21-9-4k.jpg&quot;,&quot;mobile&quot;:&quot;/i/1d993b831365cf82c073c92616733f3790485146/resize(1000,429,cover,crop(3840,1646,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zetJBACmuK2etUmhYxtDzeXamGq1WFMUtRZjT3TqwJsSGo46qkYiGAxZfm98MALJCahDhfmscFkfvkRHcUuh1Q))/75/star-citizen-argo-srv-gal-01-21-9-4k.jpg&quot;,&quot;max&quot;:&quot;/i/eea1f83efe6fa7a8b8f2d9f4dbee1c11e97625ea/7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zetJBACmuK2etUmhYxtDzeXamGq1WFMUtRZjT3TqwJsSGo46qkYiGAxZfm98MALJCahDhfmscFkfvkRHcUuh1Q/star-citizen-argo-srv-gal-01-21-9-4k.jpg&quot;,&quot;__typename&quot;:&quot;ImageURIs&quot;},&quot;webp&quot;:{&quot;desktop&quot;:&quot;/i/9cad03aa454eb0be3f17e6a84b9149d233450f41/resize(2500,1072,cover,crop(3840,1646,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zetJBACmuK2etUmhYxtDzeXamGq1WFMUtRZjT3TqwJsSGo46qkYiGAxZfm98MALJCahDhfmscFkfvkRHcUuh1Q))/75/star-citizen-argo-srv-gal-01-21-9-4k.webp&quot;,&quot;tablet&quot;:&quot;/i/cf026d7736bf3011a6189ceee8cce01022724eb5/resize(1500,643,cover,crop(3840,1645,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zetJBACmuK2etUmhYxtDzeXamGq1WFMUtRZjT3TqwJsSGo46qkYiGAxZfm98MALJCahDhfmscFkfvkRHcUuh1Q))/75/star-citizen-argo-srv-gal-01-21-9-4k.webp&quot;,&quot;mobile&quot;:&quot;/i/1d993b831365cf82c073c92616733f3790485146/resize(1000,429,cover,crop(3840,1646,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zetJBACmuK2etUmhYxtDzeXamGq1WFMUtRZjT3TqwJsSGo46qkYiGAxZfm98MALJCahDhfmscFkfvkRHcUuh1Q))/75/star-citizen-argo-srv-gal-01-21-9-4k.webp&quot;,&quot;max&quot;:&quot;/i/eea1f83efe6fa7a8b8f2d9f4dbee1c11e97625ea/7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zetJBACmuK2etUmhYxtDzeXamGq1WFMUtRZjT3TqwJsSGo46qkYiGAxZfm98MALJCahDhfmscFkfvkRHcUuh1Q/star-citizen-argo-srv-gal-01-21-9-4k.webp&quot;,&quot;__typename&quot;:&quot;ImageURIs&quot;},&quot;alt&quot;:&quot;Star Citizen ARGO SRV GAL 01-21-9 4k&quot;},&quot;video&quot;:{&quot;displayed&quot;:false}}}" layout="full-width" v-cloak=""></g-banner-advanced>
+                <div data-arrangement_key="arrangementA" class="turbo-anchor" id="ea01e8e4-877c-42ca-bf99-c05e5c7ff070" data-plugin_key="plugin_trblt_introduction" data-position="2"></div><g-introduction :info="{&quot;title&quot;:&quot;Argo SRV&quot;,&quot;subtitle&quot;:&quot;Q&amp;A&quot;,&quot;contents&quot;:[&quot;<p>Now that the SRV has been added to the ‘verse, we asked the vehicle and gameplay teams a few questions about Argo's new towing ship, as well as a refresh on some of the questions from our previous Q&amp;A. Here are the answers, straight from the designers themselves.</p>&quot;]}" arrangement="arrangementA" img-alt="" img-url="" v-cloak=""></g-introduction>
+                <div class="turbo-anchor" id="40175806-cd83-4ba3-9ef0-680b7e10be50" data-plugin_key="plugin_trblt_narrative" data-position="3"></div><g-narrative-group v-cloak="">
+                <g-article :show-emphasis="false" body="<h4>Can the SRV’s towing beam move SCU containers, items, asteroids/rocks, or even people?&nbsp;</h4><p>The SRV’s towing beam is a little different compared to your “ordinary” tractor beam. It can move cargo containers and ships and, in the future, will also be able to tow asteroids and rocks. However, it will not be able to detach items and move people. </p><p>&nbsp;</p><h4>Can the SRV quantum travel while towing?&nbsp;</h4><p>Yes. One of the SRV's main roles in the universe will be to help ships that have broken down, run out of fuel, or are critically damaged.</p><p>&nbsp;</p><h4>Can multiple SRVs work together to move larger ships/objects? If so, can this be done in quantum travel? </h4><p>Multiple SRVs can link up to pull larger and heavier vehicles. They will also be able to quantum travel while linked together, though this feature is coming later. </p><p>&nbsp;</p><h4>Does towing impact the SRV’s fuel consumption?&nbsp;</h4><p>Anything that changes a ship’s weight will have an impact on its fuel consumption, as it will have to work harder to provide the same level of thrust.</p>" v-cloak=""></g-article>
+                <g-illustration image-size="fitContent" :simple-image="{&quot;originalFormat&quot;:{&quot;desktop&quot;:&quot;/i/4dac1407e28773512cde32e809718282927565e5/resize(2500,1071,cover,crop(3840,1645,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zfN7oZt5fiPkG1vxoTCu7B44DEBdX4EmQWCBLgeskYrj7gR2oNiuB1uP1uRFH8xqtDuDZUCrLfV6kB1W9XU8vJ))/75/star-citizen-argo-srv-gal-02-21-9-4k.jpg&quot;,&quot;tablet&quot;:&quot;/i/09e378388d2a1b696c20e621f65cdcb55d7fae66/resize(1500,643,cover,crop(3840,1645,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zfN7oZt5fiPkG1vxoTCu7B44DEBdX4EmQWCBLgeskYrj7gR2oNiuB1uP1uRFH8xqtDuDZUCrLfV6kB1W9XU8vJ))/75/star-citizen-argo-srv-gal-02-21-9-4k.jpg&quot;,&quot;mobile&quot;:&quot;/i/3ae971551904b3b992d89cd2a492fe7904889ae0/resize(1000,429,cover,crop(3840,1646,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zfN7oZt5fiPkG1vxoTCu7B44DEBdX4EmQWCBLgeskYrj7gR2oNiuB1uP1uRFH8xqtDuDZUCrLfV6kB1W9XU8vJ))/75/star-citizen-argo-srv-gal-02-21-9-4k.jpg&quot;,&quot;max&quot;:&quot;/i/928e2c493d5f9d9645b8b2d739fb3fdfbd7656a9/7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zfN7oZt5fiPkG1vxoTCu7B44DEBdX4EmQWCBLgeskYrj7gR2oNiuB1uP1uRFH8xqtDuDZUCrLfV6kB1W9XU8vJ/star-citizen-argo-srv-gal-02-21-9-4k.jpg&quot;,&quot;__typename&quot;:&quot;ImageURIs&quot;},&quot;webp&quot;:{&quot;desktop&quot;:&quot;/i/4dac1407e28773512cde32e809718282927565e5/resize(2500,1071,cover,crop(3840,1645,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zfN7oZt5fiPkG1vxoTCu7B44DEBdX4EmQWCBLgeskYrj7gR2oNiuB1uP1uRFH8xqtDuDZUCrLfV6kB1W9XU8vJ))/75/star-citizen-argo-srv-gal-02-21-9-4k.webp&quot;,&quot;tablet&quot;:&quot;/i/09e378388d2a1b696c20e621f65cdcb55d7fae66/resize(1500,643,cover,crop(3840,1645,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zfN7oZt5fiPkG1vxoTCu7B44DEBdX4EmQWCBLgeskYrj7gR2oNiuB1uP1uRFH8xqtDuDZUCrLfV6kB1W9XU8vJ))/75/star-citizen-argo-srv-gal-02-21-9-4k.webp&quot;,&quot;mobile&quot;:&quot;/i/3ae971551904b3b992d89cd2a492fe7904889ae0/resize(1000,429,cover,crop(3840,1646,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zfN7oZt5fiPkG1vxoTCu7B44DEBdX4EmQWCBLgeskYrj7gR2oNiuB1uP1uRFH8xqtDuDZUCrLfV6kB1W9XU8vJ))/75/star-citizen-argo-srv-gal-02-21-9-4k.webp&quot;,&quot;max&quot;:&quot;/i/928e2c493d5f9d9645b8b2d739fb3fdfbd7656a9/7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zfN7oZt5fiPkG1vxoTCu7B44DEBdX4EmQWCBLgeskYrj7gR2oNiuB1uP1uRFH8xqtDuDZUCrLfV6kB1W9XU8vJ/star-citizen-argo-srv-gal-02-21-9-4k.webp&quot;,&quot;__typename&quot;:&quot;ImageURIs&quot;},&quot;__typename&quot;:&quot;GenerateURIsResponseDto&quot;,&quot;alt&quot;:&quot;Star Citizen ARGO SRV GAL 02-21-9 4k&quot;}" v-cloak=""></g-illustration>
+                <g-article :show-emphasis="false" body="<h4>Can the towing beam be used both in space and in atmosphere?&nbsp;</h4><p>Yes, the tractor beam works both in space and atmosphere. But, as gravity is applied to the object being towed, it could mean the tether breaks or becomes harder to wield.</p><p>&nbsp;</p><h4>Does a ship or vehicle need to be in soft death to be towed?&nbsp;</h4><p>No, as long as the ship does not have active shields, you will be able to attempt to tow it.</p><p>&nbsp;</p><h4>Can the towing beam be used “in reverse”? For example, a larger ship pulling a disabled SRV that still has towing capability?&nbsp;</h4><p>Yes, this is possible, but the ship the towing beam is attached to has to fly very carefully.</p><p>&nbsp;</p><h4>What’s the effective range of the towing beam?&nbsp;</h4><p>As of now, the maximum distance that you can target a ship is 300m, with a maximum-strength distance of 125m - the max-strength distance is the distance the towing beam will try to get the ship to when in towing mode. However, these are balancing values, so are subject to change.</p>" v-cloak=""></g-article>
+                <g-illustration image-size="fitContent" :simple-image="{&quot;originalFormat&quot;:{&quot;desktop&quot;:&quot;/i/78ed9f334899b73c72f8960822b3edead9094d4b/resize(2500,1071,cover,crop(3840,1645,0,0,2N61tyyncFaFmKbngvqgJgRNA55m91yKeAiRTKYZuN4XzYjmBQsHUY4AsvtReXpHvQhyDX87z1G68Vp2gqfixDv7nuWUBckkJi429rr8XkXVbecqzeaAX2bK9MkHt8VS7ha5ckcBtZKU))/75/star-citizen-argo-srv-kf-03-21-9-4k.jpg&quot;,&quot;tablet&quot;:&quot;/i/db13854b05e7e1d2fad467211c429a2de48b1d39/resize(1500,643,cover,crop(3840,1645,0,0,2N61tyyncFaFmKbngvqgJgRNA55m91yKeAiRTKYZuN4XzYjmBQsHUY4AsvtReXpHvQhyDX87z1G68Vp2gqfixDv7nuWUBckkJi429rr8XkXVbecqzeaAX2bK9MkHt8VS7ha5ckcBtZKU))/75/star-citizen-argo-srv-kf-03-21-9-4k.jpg&quot;,&quot;mobile&quot;:&quot;/i/cb9cda79d8dba2c1df8b8d6a0d80a0e2269e102e/resize(1000,429,cover,crop(3840,1646,0,0,2N61tyyncFaFmKbngvqgJgRNA55m91yKeAiRTKYZuN4XzYjmBQsHUY4AsvtReXpHvQhyDX87z1G68Vp2gqfixDv7nuWUBckkJi429rr8XkXVbecqzeaAX2bK9MkHt8VS7ha5ckcBtZKU))/75/star-citizen-argo-srv-kf-03-21-9-4k.jpg&quot;,&quot;max&quot;:&quot;/i/0f00e2f6a9ededadbbbfb1281e61d92a5eafc624/2N61tyyncFaFmKbngvqgJgRNA55m91yKeAiRTKYZuN4XzYjmBQsHUY4AsvtReXpHvQhyDX87z1G68Vp2gqfixDv7nuWUBckkJi429rr8XkXVbecqzeaAX2bK9MkHt8VS7ha5ckcBtZKU/star-citizen-argo-srv-kf-03-21-9-4k.jpg&quot;,&quot;__typename&quot;:&quot;ImageURIs&quot;},&quot;webp&quot;:{&quot;desktop&quot;:&quot;/i/78ed9f334899b73c72f8960822b3edead9094d4b/resize(2500,1071,cover,crop(3840,1645,0,0,2N61tyyncFaFmKbngvqgJgRNA55m91yKeAiRTKYZuN4XzYjmBQsHUY4AsvtReXpHvQhyDX87z1G68Vp2gqfixDv7nuWUBckkJi429rr8XkXVbecqzeaAX2bK9MkHt8VS7ha5ckcBtZKU))/75/star-citizen-argo-srv-kf-03-21-9-4k.webp&quot;,&quot;tablet&quot;:&quot;/i/db13854b05e7e1d2fad467211c429a2de48b1d39/resize(1500,643,cover,crop(3840,1645,0,0,2N61tyyncFaFmKbngvqgJgRNA55m91yKeAiRTKYZuN4XzYjmBQsHUY4AsvtReXpHvQhyDX87z1G68Vp2gqfixDv7nuWUBckkJi429rr8XkXVbecqzeaAX2bK9MkHt8VS7ha5ckcBtZKU))/75/star-citizen-argo-srv-kf-03-21-9-4k.webp&quot;,&quot;mobile&quot;:&quot;/i/cb9cda79d8dba2c1df8b8d6a0d80a0e2269e102e/resize(1000,429,cover,crop(3840,1646,0,0,2N61tyyncFaFmKbngvqgJgRNA55m91yKeAiRTKYZuN4XzYjmBQsHUY4AsvtReXpHvQhyDX87z1G68Vp2gqfixDv7nuWUBckkJi429rr8XkXVbecqzeaAX2bK9MkHt8VS7ha5ckcBtZKU))/75/star-citizen-argo-srv-kf-03-21-9-4k.webp&quot;,&quot;max&quot;:&quot;/i/0f00e2f6a9ededadbbbfb1281e61d92a5eafc624/2N61tyyncFaFmKbngvqgJgRNA55m91yKeAiRTKYZuN4XzYjmBQsHUY4AsvtReXpHvQhyDX87z1G68Vp2gqfixDv7nuWUBckkJi429rr8XkXVbecqzeaAX2bK9MkHt8VS7ha5ckcBtZKU/star-citizen-argo-srv-kf-03-21-9-4k.webp&quot;,&quot;__typename&quot;:&quot;ImageURIs&quot;},&quot;__typename&quot;:&quot;GenerateURIsResponseDto&quot;,&quot;alt&quot;:&quot;Star Citizen ARGO SRV KF 03-21-9 4k&quot;}" v-cloak=""></g-illustration>
+                <g-article :show-emphasis="false" body="<h4>What prevents an SRV from stealing another vehicle with its beam?&nbsp;</h4><p>If the target ship has its shields up, the SRV will be unable to tow it. So, if someone wants to make sure their vehicle cannot be taken, they will need to leave it powered on with the shields up.</p><p>&nbsp;</p><h4>Is the tractor arm bespoke to the SRV, or can it be swapped to another capable ship?</h4><p>The SRV uses a bespoke tractor beam setup unique to the SRV.</p><p>&nbsp;</p><h4>Does activating the towing beam affect your signature levels?&nbsp;</h4><p>Yes. As the towing beam uses power, it will cause your ship to generate more signature.</p><p>&nbsp;</p><h4>Does the SRV have any weapon racks or personal storage?&nbsp;</h4><p>The SRV comes with a weapon rack for you and your passengers to store their equipment in. It also features a suit locker and personal storage for the pilot.</p>" v-cloak=""></g-article>
+                <g-illustration image-size="fitContent" :simple-image="{&quot;originalFormat&quot;:{&quot;desktop&quot;:&quot;/i/f5b388e564fa84870654ad8a416488d471bb9289/resize(2500,1071,cover,crop(3840,1645,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zepEtgynbeJ2jTFRqW6eNnpeKSfKxAR3HwsDY6Eg8ajdkRqmAhhKkhqzdk3x2LNTQFrX5pWk1otnn7BAKGAsRQ))/75/star-citizen-argo-srv-gal-03-21-9-4k.jpg&quot;,&quot;tablet&quot;:&quot;/i/491cd21d09ddca034c0ca0db9933ae2d3fab57d5/resize(1500,643,cover,crop(3840,1645,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zepEtgynbeJ2jTFRqW6eNnpeKSfKxAR3HwsDY6Eg8ajdkRqmAhhKkhqzdk3x2LNTQFrX5pWk1otnn7BAKGAsRQ))/75/star-citizen-argo-srv-gal-03-21-9-4k.jpg&quot;,&quot;mobile&quot;:&quot;/i/15d4b51393e76f96df97906d55386024e9b83c58/resize(1000,429,cover,crop(3840,1646,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zepEtgynbeJ2jTFRqW6eNnpeKSfKxAR3HwsDY6Eg8ajdkRqmAhhKkhqzdk3x2LNTQFrX5pWk1otnn7BAKGAsRQ))/75/star-citizen-argo-srv-gal-03-21-9-4k.jpg&quot;,&quot;max&quot;:&quot;/i/4d7a714420f0538240698f7685655d5a7b234202/7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zepEtgynbeJ2jTFRqW6eNnpeKSfKxAR3HwsDY6Eg8ajdkRqmAhhKkhqzdk3x2LNTQFrX5pWk1otnn7BAKGAsRQ/star-citizen-argo-srv-gal-03-21-9-4k.jpg&quot;,&quot;__typename&quot;:&quot;ImageURIs&quot;},&quot;webp&quot;:{&quot;desktop&quot;:&quot;/i/f5b388e564fa84870654ad8a416488d471bb9289/resize(2500,1071,cover,crop(3840,1645,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zepEtgynbeJ2jTFRqW6eNnpeKSfKxAR3HwsDY6Eg8ajdkRqmAhhKkhqzdk3x2LNTQFrX5pWk1otnn7BAKGAsRQ))/75/star-citizen-argo-srv-gal-03-21-9-4k.webp&quot;,&quot;tablet&quot;:&quot;/i/491cd21d09ddca034c0ca0db9933ae2d3fab57d5/resize(1500,643,cover,crop(3840,1645,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zepEtgynbeJ2jTFRqW6eNnpeKSfKxAR3HwsDY6Eg8ajdkRqmAhhKkhqzdk3x2LNTQFrX5pWk1otnn7BAKGAsRQ))/75/star-citizen-argo-srv-gal-03-21-9-4k.webp&quot;,&quot;mobile&quot;:&quot;/i/15d4b51393e76f96df97906d55386024e9b83c58/resize(1000,429,cover,crop(3840,1646,0,0,7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zepEtgynbeJ2jTFRqW6eNnpeKSfKxAR3HwsDY6Eg8ajdkRqmAhhKkhqzdk3x2LNTQFrX5pWk1otnn7BAKGAsRQ))/75/star-citizen-argo-srv-gal-03-21-9-4k.webp&quot;,&quot;max&quot;:&quot;/i/4d7a714420f0538240698f7685655d5a7b234202/7258xSVeJbKnAd6YfEdrV2zYP321pPHbH3spwArLE7xbo15jzxLwiY4zepEtgynbeJ2jTFRqW6eNnpeKSfKxAR3HwsDY6Eg8ajdkRqmAhhKkhqzdk3x2LNTQFrX5pWk1otnn7BAKGAsRQ/star-citizen-argo-srv-gal-03-21-9-4k.webp&quot;,&quot;__typename&quot;:&quot;ImageURIs&quot;},&quot;__typename&quot;:&quot;GenerateURIsResponseDto&quot;,&quot;alt&quot;:&quot;Star Citizen ARGO SRV GAL 03-21-9 4k&quot;}" v-cloak=""></g-illustration>
+            </g-narrative-group>
+                <div class="turbo-anchor" id="69a80f94" data-plugin_key="plugin_trblt_disclaimer" data-position="4"></div><g-disclaimer>
+                <template slot="title">
+                    DISCLAIMER
+                </template>
+                <template slot="content">
+                    <p>The answers accurately reflect development's intentions at the time of writing, but the company and development team reserve the right to adapt, improve, or change feature and ship designs in response to feedback, playtesting, design revisions, or other considerations to improve balance or the quality of the game overall.</p>
+                </template>
+            </g-disclaimer>
+            </div>
+            <script src="https://robertsspaceindustries.com/alexandria/shared-library-ts/latest/main.js"></script>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.11/moment-timezone-with-data.min.js"></script>
+    <script type="text/plain" data-cookieconsent="statistics">
+  $.cookie('moment_timezone', moment.tz.guess(), { expires: 31, path: '/' });
+</script>
+    <script id="tpl_number_counter_digits" type="text/x-jsmart-tmpl">{if !$seperator}{$seperator=','}{/if}
+{if !$first_max}{$first_max=9}{/if}
+{for $digit = 0 to $length-1}
+  <div class="mask">
+    <div class="carousel">
+      {if $digit == 0}
+        {$max = $first_max}
+      {else}
+        {$max = 9}
+      {/if}
+      {for $i=0 to $max}
+        <div class="item {if $val_arr[$digit] == $i}on{/if}" rel="{$i}">{$i}</div>
+      {/for}
+    </div>
+  </div>
+  {if ($length - $digit) % 3 == 1 && $digit != $length-1}
+  <div class="seperator">{$seperator}</div>
+  {/if}
+{/for}</script>
+    <script id="base_modal" type="text/x-jsmart-tmpl"><div class="modal-wrapper {block name="modal_wrapper_class"}{/block}">
+  <div class="top-border">
+    {block name="modal_lines"}
+    <img src="https://cdn.robertsspaceindustries.com/static/images/modal_blue_line.png" />
+    {/block}
+    <div class="h-border"></div>
+    <div class="l-corner"></div>
+    <div class="r-corner"></div>
+  </div>
+  <div class="modal-inner">
+    <a class="close js-close trans-03s .trans-opacity" href=""></a>
+    {block name="modal_content"}{/block}
+    {block name="modal_footer"}{/block}
+  </div>
+  <div class="bottom-border">
+    <div class="h-border"></div>
+    <div class="l-corner"></div>
+    <div class="r-corner"></div>
+    {block name="modal_lines"}
+    <img src="https://cdn.robertsspaceindustries.com/static/images/modal_blue_line.png" />
+    {/block}
+  </div>
+</div></script>
+    <script id="base_modal_flat" type="text/x-jsmart-tmpl"><div class="modal-wrapper {block name="modal_wrapper_class"}{/block}">
+
+  <div class="modal-inner">
+    <a class="close js-close trans-03s .trans-opacity" href=""></a>
+    {block name="modal_content"}{/block}
+    {block name="modal_footer"}{/block}
+  </div>
+
+</div></script>
+    <script id="tpl_modals_slideshow" type="text/x-jsmart-tmpl"><img class="top-border" src="https://cdn.robertsspaceindustries.com/static/images/modal_top.png">
+<a href="" class="close js-close"></a>
+<div class="mask">
+  <a class="js-prev prev control"></a>
+  <a class="js-next next control"></a>
+  <div class="slideshow-carousel carousel" rel="{$index}">
+    {foreach from=$images item="image"}
+      <div class="{if $index == $image@index}on{/if}">
+      {if $image.is_video}
+        <div class="video-holder">
+          <div id="slideshow_video_{$image@index}" data-source="{$image->source_url}">
+            <video width="100%" height="100%" preload="auto" {if $video}src="{$image->source_url}"{/if} controls></video>
+          </div>
+        </div>
+      {else}
+        <div class="media js-media-slideshow-{$image@iteration}">
+        {if $image.low_res}
+          <picture>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source data-srcset="{$image.full_res}" media="(min-width: 300px)" />
+            <!--[if IE 9]></video><![endif]-->
+            <img data-srcset="{$image.low_res}" alt="{$image.title}" />
+          </picture>
+        {else}
+          <img data-src="{$image.source_url}" />
+        {/if}
+        </div>
+      {/if}
+        <div class="text">
+          {if !$image.is_video}
+          <a href="{$image.source_url}" class="download"></a>
+          {/if}
+          <div class="copyright">© 2012-{$year}<br />Cloud Imperium Games Corporation &<br />Roberts Space Industries Corp.</div>
+          <div class="page-number">{$image@iteration} / {count($images)}</div>
+          <div class="caption v-center">{if $image.title && $image.title != "undefined"}{$image.title}{/if}</div>
+          <div class="cboth"></div>
+        </div>
+      </div>
+    {/foreach}
+  </div>
+</div>
+<img class="bottom-border" src="https://cdn.robertsspaceindustries.com/static/images/modal_bottom.png"></script>
+    <script id="tpl_contact_us" type="text/x-jsmart-tmpl"><div class="modal-wrapper ">
+  <div class="top-border">
+
+    <img src="https://cdn.robertsspaceindustries.com/static/images/modal_blue_line.png" />
+
+    <div class="h-border"></div>
+    <div class="l-corner"></div>
+    <div class="r-corner"></div>
+  </div>
+  <div class="modal-inner">
+    <a class="close js-close trans-03s .trans-opacity" href=""></a>
+
+<div id="contact" class="inner-content on">
+  <h2><span class="icon"></span>CONTACT</h2>
+  <div class="padder">
+    <div class="separator"></div>
+    <form name="" action="" method="POST">
+  <div class="error-message js-error-message"></div>
+  <div class="success-message js-success-message"></div>
+    <fieldset class="last">
+    <label for="contact_email">Email Address</label>
+    <input type="text" name="email" value="" class="trans-02s trans-color trans-box-shadow" id="contact_email" />
+  </fieldset>
+    <fieldset>
+    <label for="contact_subject">Subject</label>
+    <input type="text" name="subject" value="" class="trans-02s trans-color trans-box-shadow" id="contact_subject" />
+    <label>Contacting us for:</label>
+    <ul class="category-info">
+            <li id="tech_support_info">Questions about download, installation, networking, or in-game client problems</li>
+            <li id="subscription_info">Questions about monthly and yearly subscription plans</li>
+            <li id="account_billing_info">Issues related to your account, such as incorrect information or ability to access account, or Billing with regards to payments and payment methods</li>
+            <li id="melt_request_info">To reclaim a pledge over $1,000 for store credit (please note - this is a permanent action)</li>
+            <li id="merchandise_info">Questions about physical and/or shipped merchandise</li>
+            <li id="hacked_info">Issues related to compromised account or missing pledge.</li>
+            <li id="account_recovery_info">For issues with account authentication, lost passwords and related queries</li>
+            <li id="probation_info">Issues related to forums probation or ban</li>
+            <li id="refund_request_info">Refund requests and related inquiries</li>
+            <li id="customer_support_info">For general questions and queries regarding Star Citizen</li>
+          </ul>
+  </fieldset>
+  <fieldset>
+    <label for="contact_text">Description</label>
+    <textarea name="text" class="trans-02s trans-color trans-box-shadow" id="contact_text"></textarea>
+  </fieldset>
+  <div class="contact-submit-wrapper">
+    <div class="line"></div>
+    <button class="submit js-submit"><strong>submit your message</strong></button>
+  </div>
+</form>
+    <div class="separator"></div>
+  </div>
+</div>
+
+
+  </div>
+  <div class="bottom-border">
+    <div class="h-border"></div>
+    <div class="l-corner"></div>
+    <div class="r-corner"></div>
+
+    <img src="https://cdn.robertsspaceindustries.com/static/images/modal_blue_line.png" />
+
+  </div>
+</div></script>
+    <script id="tpl_error" type="text/x-jsmart-tmpl"><div class="modal-error js-modal-error">
+  <p class="modal-text js-modal-text"></p>
+  <a class="close js-close trans-03s .trans-opacity" href=""></a>
+</div></script>
+    <script id="tpl_success" type="text/x-jsmart-tmpl"><div class="modal-success js-modal-success">
+  <p class="modal-text js-modal-text"></p>
+  <a class="close js-close trans-03s .trans-opacity" href=""></a>
+</div></script>
+    <script id="tpl_progress" type="text/x-jsmart-tmpl"><div class="modal-progress js-modal-progress">
+  <div class="traj-loader">
+    <div class="fast-blink"></div>
+    <span class="modal-text js-modal-text"></span>
+  </div>
+</div></script>
+    <script id="tpl_outbound" type="text/x-jsmart-tmpl"><div class="modal-wrapper ">
+  <div class="top-border">
+
+    <img src="https://cdn.robertsspaceindustries.com/static/images/modal_blue_line.png" />
+
+    <div class="h-border"></div>
+    <div class="l-corner"></div>
+    <div class="r-corner"></div>
+  </div>
+  <div class="modal-inner">
+    <a class="close js-close trans-03s .trans-opacity" href=""></a>
+
+<div id="outbound" class="inner-content on">
+  <h2><span class="icon"></span>OUTBOUND LINK</h2>
+  <div class="padder">
+    <div class="separator"></div>
+    <form name="" action="" method="POST">
+      <div class="error-message js-error-message"> <span class=important>WARNING</span><br/><br/> This link will bring you outside of the RSI site and into the depths of the internet. Continue?<br/><br/><span class="url"></span> </div>
+      <div class="success-message js-success-message"><span class=important>STAND BY</span><br/><br/> Initiating hyperlink.<br/><br/></div>
+
+      <fieldset class="clearfix last">
+        <span class="submit-wrapper">
+          <span class="submit-hover trans-02s trans-opacity"></span>
+          <input type="submit" value="WARP" class="trans-02s trans-color trans-background" />
+        </span>
+      </fieldset>
+    </form>
+    <div class="separator"></div>
+  </div>
+</div>
+
+
+  </div>
+  <div class="bottom-border">
+    <div class="h-border"></div>
+    <div class="l-corner"></div>
+    <div class="r-corner"></div>
+
+    <img src="https://cdn.robertsspaceindustries.com/static/images/modal_blue_line.png" />
+
+  </div>
+</div></script>
+    <script id="tpl_l-notification-bar" type="text/x-jsmart-tmpl"><div class="l-notification-bar js-notification-bar">
+
+  <div class="l-notification-bar__watermark js-svg-inliner h-svg__logo-star-citizen"></div>
+
+  <div class="l-notification-bar__boxes">
+    {if !$viewedCookieNotif}
+      <div class="l-notification-bar__box">
+        {include file='tpl_c-notification'
+          type='cookie'
+          title='COOKIES:'
+          message="Our website uses Google Analytics to analyze our traffic. <br/>To learn how you can control Google's use of your data and how you can opt out <a href='https://www.google.com/policies/privacy/partners/'>click here</a>."
+          linkText='See Details'
+          buttonText='Got it!'}
+      </div>
+    {/if}
+
+    {if !$viewedPrivacyNotif}
+      <div class="l-notification-bar__box">
+        {include file='tpl_c-notification'
+          type='privacy'
+          title='PRIVACY POLICY:'
+          message='We adjusted the PP to reflect the decision of the European Court of Justice regarding Safe Harbor, the fact that RSI has moved and added some services providers.'
+          linkText='View Privacy Policy'
+          buttonText='Got it!'}
+      </div>
+    {/if}
+  </div>
+
+</div>
+</script>
+    <script id="tpl_c-notification" type="text/x-jsmart-tmpl"><div class="c-notification js-bottom-notif-msg-{$type}">
+    <div class="c-notification__title">{$title}</div>
+    <div class="c-notification__message">
+      {$message}
+    </div>
+
+    {if $linkText}
+        <div class="c-notification__wrapper-link">
+            <a class="c-notification__link js-bottom-notif-link-{$type}">
+            {$linkText}
+            </a>
+        </div>
+    {/if}
+
+    <a class="c-notification__button js-bottom-notif-btn-{$type}">
+
+      <span class="c-notification__button-text">
+       {$buttonText}
+      </span>
+
+      {if $type neq 'announcement'}
+        <div class="c-iconed__icon c-iconed__icon--checkmark"></div>
+      {/if}
+    </a>
+</div>
+</script>
+    <script id="tpl_confirm" type="text/x-jsmart-tmpl"><div class="modal-confirm js-modal-confirm clearfix">
+  <p class="modal-text js-modal-text"></p>
+  <a class="bt-close js-close trans-03s trans-opacity" href=""></a>
+  <a class="bt-confirm js-confirm trans-03s trans-opacity" href=""></a>
+	<div class="buttons">
+		<a class="shadow-button trans-02s trans-color js-close bt-close rm"     >
+  <span class="label js-label trans-02s">Cancel</span>
+  <span class="icon trans-02s"><span class="effect trans-opacity trans-03s"></span></span>
+  <span class="left-section"></span>
+  <span class="right-section"></span>
+</a>
+		<a class="shadow-button trans-02s trans-color js-confirm bt-confirm green"     >
+  <span class="label js-label trans-02s">Confirm</span>
+  <span class="icon trans-02s"><span class="effect trans-opacity trans-03s"></span></span>
+  <span class="left-section"></span>
+  <span class="right-section"></span>
+</a>
+	</div>
+</div>
+</script>
+    <script id="tpl_alert" type="text/x-jsmart-tmpl"><div class="modal-alert js-modal-alert clearfix">
+  <p class="modal-text js-modal-text"></p>
+  <div class="buttons">
+    <a class="shadow-button trans-02s trans-color js-confirm bt-confirm green"     >
+  <span class="label js-label trans-02s">OK</span>
+  <span class="icon trans-02s"><span class="effect trans-opacity trans-03s"></span></span>
+  <span class="left-section"></span>
+  <span class="right-section"></span>
+</a>
+  </div>
+</div></script>
+    <script id="tpl_video" type="text/x-jsmart-tmpl">{extends file="base_modal"}
+{block name='modal_content'}
+<div id="ship-commercial" class="inner-content">
+
+  <div class="hr"></div>
+  <div class="content-block4">
+
+    <div class="bottom"></div>
+  </div>
+  {if $distant_source=="vimeo"}
+  <iframe id="commercial" src="/rsi/static/cookiebot-embed.html" data-cookieconsent="marketing" data-src="//player.vimeo.com/video/{$video_id}?wmode=transparent" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+  {else}
+  <iframe id="commercial" frameborder="0" allowfullscreen="1" title="YouTube video player" width="100%" height="100%" src="/rsi/static/cookiebot-embed.html" data-cookieconsent="marketing" data-src="https://www.youtube.com/embed/{$video_id}?autoplay=1"></iframe>
+  {/if}
+</div>
+{/block}
+</script>
+    <script id="tpl_comment_report" type="text/x-jsmart-tmpl"><div class="modal-wrapper ">
+  <div class="top-border">
+
+    <img src="https://cdn.robertsspaceindustries.com/static/images/modal_blue_line.png" />
+
+    <div class="h-border"></div>
+    <div class="l-corner"></div>
+    <div class="r-corner"></div>
+  </div>
+  <div class="modal-inner">
+    <a class="close js-close trans-03s .trans-opacity" href=""></a>
+
+<div id="comment-report" class="inner-content on">
+  <h2><span class="icon"></span>Report this comment</h2>
+  <div class="padder">
+    <div class="separator"></div>
+    <form name="" action="" method="POST">
+<input type="hidden" name="comment_id" value="">
+  <div class="error-message js-error-message"></div>
+  <div class="success-message js-success-message"></div>
+    <fieldset class="last">
+    <label for="report_email">Email Address</label>
+    <span class="corner-wrapper">
+      <input type="text" name="email" value="" class="trans-02s trans-color trans-box-shadow js-form-data" id="report_email" />
+      <span class="corner corner-top-left"></span>
+      <span class="corner corner-top-right"></span>
+      <span class="corner corner-bottom-left"></span>
+      <span class="corner corner-bottom-right"></span>
+    </span>
+  </fieldset>
+    <fieldset>
+    <label>Report Type</label>
+
+
+
+
+    <a class="js-selectlist selectlist " rel="" href="">
+    <div class="arrow"></div>
+    <span>Please select the type best matching your report</span>
+              <ul class="body">
+
+                                                              <li class="js-option option " rel="obscenity" >
+                                                                        Obscene Content
+                                                    </li>
+                                                                <li class="js-option option " rel="abuse" >
+                                                                        Abusive Conduct
+                                                    </li>
+                                                                <li class="js-option option " rel="other" >
+                                                                        Other
+                                                    </li>
+
+            </ul>
+        <input type="hidden" name="category" class="js-category js-form-data" id="category"/>
+  </a>
+    </fieldset>
+  <fieldset>
+    <label for="report_text">Details</label>
+    <span class="corner-wrapper">
+      <textarea name="text" class="trans-02s trans-color trans-box-shadow js-form-data" id="report_text" maxlength="2500"></textarea>
+      <span class="corner corner-top-left"></span>
+      <span class="corner corner-top-right"></span>
+      <span class="corner corner-bottom-left"></span>
+      <span class="corner corner-bottom-right"></span>
+    </span>
+  </fieldset>
+  <fieldset class="clearfix last">
+    <span class="submit-wrapper">
+      <span class="submit-hover trans-02s trans-opacity"></span>
+      <input type="submit" value="Submit" class="trans-02s trans-color trans-background" />
+    </span>
+  </fieldset>
+</form>
+    <div class="separator"></div>
+  </div>
+</div>
+
+
+  </div>
+  <div class="bottom-border">
+    <div class="h-border"></div>
+    <div class="l-corner"></div>
+    <div class="r-corner"></div>
+
+    <img src="https://cdn.robertsspaceindustries.com/static/images/modal_blue_line.png" />
+
+  </div>
+</div></script>
+    <footer class="c-platform-footer c-platform-footer--rsi">
+        <div class="l-platform-footer-container">
+            <div class="c-platform-footer__column l-column ">
+                <ul class="c-platform-footer-brand c-platform-footer-brand--sc">
+                    <li class="c-platform-footer-brand__item"><span class="c-brand c-brand--sc js-footer-open-sub-menu"> <span class="c-brand__logo c-brand__logo--sc"> <span class="js-svg-inliner h-svg h-svg__logo-star-citizen"></span> <span class="js-svg-inliner h-svg h-svg__logo-star-citizen--fullcolor"></span> </span> <span class="c-brand__label"> Join the<br>
+          Universe </span> <span class="c-brand__arrow">
+          <svg width="10px" height="17px" viewBox="0 0 10 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+           <path transform="translate(-8.000000, -5.000000)" d="M15.3610114,5.87946602 L8.86459388,12.5876406 C8.62203758,12.8388577 8.50002884,13.1692873 8.50002884,13.499717 C8.49783707,13.8331643 8.6205764,14.1628395 8.86459388,14.4140566 L15.3610114,21.1229856 C15.8468546,21.6246653 16.6424685,21.6269285 17.1312341,21.1222312 C17.6236526,20.6130074 17.6214608,19.7982494 17.1334258,19.2943064 L11.5232155,13.5012258 L17.1334258,7.7088996 C17.6185384,7.20721987 17.6214608,6.38567218 17.1312341,5.88022042 C16.8857554,5.62674014 16.5657564,5.5 16.246488,5.5 C15.9257585,5.5 15.6057595,5.62749455 15.3610114,5.87946602 Z" id="path-1"></path>
+          </svg></span> </span>
+                        <ul class="c-platform-footer-list c-platform-footer-list--sc">
+                            <li class="c-platform-footer-list__item"><a href="/star-citizen" class="c-platform-footer-link">About the Game</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/star-citizen/howto/1" class="c-platform-footer-link">How to Play</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/star-citizen/universe" class="c-platform-footer-link">The Universe</a></li>
+                        </ul>
+                        <ul class="c-platform-footer-list c-platform-footer-list-social c-platform-footer-list-social--sc c-platform-footer-list--sc">
+                            <li class="c-platform-footer-list-social__item"><span class="c-brand__label-social"> Social Links </span></li>
+                            <li class="c-platform-footer-list__item"><a class="c-platform-footer-link c-platform-footer-link--icon" href="https://www.facebook.com/RobertsSpaceIndustries/"> <span class="c-iconed__icon c-iconed__icon--facebook"></span> Facebook </a></li>
+                            <li class="c-platform-footer-list__item"><a class="c-platform-footer-link c-platform-footer-link--icon" href="https://twitter.com/RobertsSpaceInd"> <span class="c-iconed__icon c-iconed__icon--twitter"></span> Twitter </a></li>
+                            <li class="c-platform-footer-list__item"><a class="c-platform-footer-link c-platform-footer-link--icon" href="https://www.instagram.com/robertsspaceind"> <span class="c-iconed__icon c-iconed__icon--instagram"></span> Instagram </a></li>
+                            <li class="c-platform-footer-list__item"><a class="c-platform-footer-link c-platform-footer-link--icon" href=" https://www.youtube.com/channel/UCTeLqJq1mXUX5WWoNXLmOIA"> <span class="c-iconed__icon c-iconed__icon--youtube"></span> Youtube </a></li>
+                            <li class="c-platform-footer-list__item"><a class="c-platform-footer-link c-platform-footer-link--icon" href="https://www.twitch.tv/starcitizen"> <span class="c-iconed__icon c-iconed__icon--twitch"></span> Twitch </a></li>
+                        </ul></li>
+                </ul>
+            </div>
+            <div class="c-platform-footer__column l-column ">
+                <ul class="c-platform-footer-brand c-platform-footer-brand--s42">
+                    <li class="c-platform-footer-brand__item"><span class="c-brand c-brand--s42 js-footer-open-sub-menu"> <span class="c-brand__logo c-brand__logo--s42"> <span class="js-svg-inliner h-svg h-svg__logo-squadron42"></span> <span class="js-svg-inliner h-svg h-svg__logo-squadron42--fullcolor"></span> </span> <span class="c-brand__label"> Start the<br>
+          Adventure </span> <span class="c-brand__arrow">
+          <svg width="10px" height="17px" viewBox="0 0 10 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+           <path transform="translate(-8.000000, -5.000000)" d="M15.3610114,5.87946602 L8.86459388,12.5876406 C8.62203758,12.8388577 8.50002884,13.1692873 8.50002884,13.499717 C8.49783707,13.8331643 8.6205764,14.1628395 8.86459388,14.4140566 L15.3610114,21.1229856 C15.8468546,21.6246653 16.6424685,21.6269285 17.1312341,21.1222312 C17.6236526,20.6130074 17.6214608,19.7982494 17.1334258,19.2943064 L11.5232155,13.5012258 L17.1334258,7.7088996 C17.6185384,7.20721987 17.6214608,6.38567218 17.1312341,5.88022042 C16.8857554,5.62674014 16.5657564,5.5 16.246488,5.5 C15.9257585,5.5 15.6057595,5.62749455 15.3610114,5.87946602 Z" id="path-1"></path>
+          </svg></span> </span>
+                        <ul class="c-platform-footer-list c-platform-footer-list--s42">
+                            <li class="c-platform-footer-list__item"><a href="/squadron42" class="c-platform-footer-link">The Game</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/squadron42#enlist" class="c-platform-footer-link">Enlist Today</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/squadron42#roadmap" class="c-platform-footer-link">Status</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/pledge/Packages/Squadron-42-Standalone-Pledge" class="c-platform-footer-link">Pledge</a></li>
+                        </ul>
+                        <ul class="c-platform-footer-list c-platform-footer-list-social c-platform-footer-list-social--s42 c-platform-footer-list--s42">
+                            <li class="c-platform-footer-list-social__item"><span class="c-brand__label-social"> Social Links </span></li>
+                            <li class="c-platform-footer-list__item"><a class="c-platform-footer-link c-platform-footer-link--icon" href="https://www.facebook.com/Squad42/"> <span class="c-iconed__icon c-iconed__icon--facebook"></span> Facebook </a></li>
+                            <li class="c-platform-footer-list__item"><a class="c-platform-footer-link c-platform-footer-link--icon" href="https://twitter.com/squadron_42"> <span class="c-iconed__icon c-iconed__icon--twitter"></span> Twitter </a></li>
+                            <li class="c-platform-footer-list__item"><a class="c-platform-footer-link c-platform-footer-link--icon" href="https://www.instagram.com/squadron42"> <span class="c-iconed__icon c-iconed__icon--instagram"></span> Instagram </a></li>
+                        </ul></li>
+                </ul>
+            </div>
+            <div class="c-platform-footer__column l-column is-active">
+                <ul class="c-platform-footer-brand c-platform-footer-brand--rsi">
+                    <li class="c-platform-footer-brand__item"><span class="c-brand c-brand--rsi js-footer-open-sub-menu"> <span class="c-brand__logo c-brand__logo--rsi"> <span class="js-svg-inliner h-svg h-svg__logo-rsi"></span> <span class="js-svg-inliner h-svg h-svg__logo-rsi--fullcolor"></span> </span> <span class="c-brand__label"> Follow the Development </span> <span class="c-brand__arrow">
+          <svg width="10px" height="17px" viewBox="0 0 10 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+           <path transform="translate(-8.000000, -5.000000)" d="M15.3610114,5.87946602 L8.86459388,12.5876406 C8.62203758,12.8388577 8.50002884,13.1692873 8.50002884,13.499717 C8.49783707,13.8331643 8.6205764,14.1628395 8.86459388,14.4140566 L15.3610114,21.1229856 C15.8468546,21.6246653 16.6424685,21.6269285 17.1312341,21.1222312 C17.6236526,20.6130074 17.6214608,19.7982494 17.1334258,19.2943064 L11.5232155,13.5012258 L17.1334258,7.7088996 C17.6185384,7.20721987 17.6214608,6.38567218 17.1312341,5.88022042 C16.8857554,5.62674014 16.5657564,5.5 16.246488,5.5 C15.9257585,5.5 15.6057595,5.62749455 15.3610114,5.87946602 Z" id="path-1"></path>
+          </svg></span> </span>
+                        <ul class="c-platform-footer-list c-platform-footer-list--rsi">
+                            <li class="c-platform-footer-list__item"><a href="/" class="c-platform-footer-link">Home</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/comm-link" class="c-platform-footer-link">Transmissions</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/community-hub" class="c-platform-footer-link">Community</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/roadmap" class="c-platform-footer-link">Development</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/pledge" class="c-platform-footer-link ">Pledge Store</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/download" class="c-platform-footer-link ">Download</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/spectrum/community/SC" class="c-platform-footer-link">Spectrum</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/citizencon" class="c-platform-footer-link">Citizencon</a></li>
+                        </ul></li>
+                </ul>
+            </div>
+            <div class="c-platform-footer__column l-column l-column--smaller">
+                <ul class="c-platform-footer-brand c-platform-footer-brand--utility">
+                    <li class="c-platform-footer-brand__item"><span class="c-brand c-brand--rsi js-footer-open-sub-menu"> <span class="c-brand__logo c-brand__logo--utility"> <span class="js-svg-inliner h-svg h-svg__logo-utility"></span> <span class="js-svg-inliner h-svg h-svg__logo-utility--fullcolor"></span> </span> <span class="c-brand__label"> Utilities </span> <span class="c-brand__arrow">
+          <svg width="10px" height="17px" viewBox="0 0 10 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+           <path transform="translate(-8.000000, -5.000000)" d="M15.3610114,5.87946602 L8.86459388,12.5876406 C8.62203758,12.8388577 8.50002884,13.1692873 8.50002884,13.499717 C8.49783707,13.8331643 8.6205764,14.1628395 8.86459388,14.4140566 L15.3610114,21.1229856 C15.8468546,21.6246653 16.6424685,21.6269285 17.1312341,21.1222312 C17.6236526,20.6130074 17.6214608,19.7982494 17.1334258,19.2943064 L11.5232155,13.5012258 L17.1334258,7.7088996 C17.6185384,7.20721987 17.6214608,6.38567218 17.1312341,5.88022042 C16.8857554,5.62674014 16.5657564,5.5 16.246488,5.5 C15.9257585,5.5 15.6057595,5.62749455 15.3610114,5.87946602 Z" id="path-1"></path>
+          </svg></span> </span>
+                        <ul class="c-platform-footer-list c-platform-footer-list--utility">
+                            <li class="c-platform-footer-list__item"><a href="//support.robertsspaceindustries.com" class="c-platform-footer-link">Help</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/press" class="c-platform-footer-link">Press</a></li>
+                            <li class="c-platform-footer-list__item"><a href="https://cloudimperiumgames.com/join-us" class="c-platform-footer-link">Careers</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/acknowledgements" class="c-platform-footer-link">Acknowledgements</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/pledge/redeem-code" class="c-platform-footer-link">Redeem a code</a></li>
+                        </ul></li>
+                </ul>
+            </div>
+            <div class="c-platform-footer__column l-column l-column--smaller">
+                <ul class="c-platform-footer-brand c-platform-footer-brand--legal">
+                    <li class="c-platform-footer-brand__item"><span class="c-brand c-brand--rsi js-footer-open-sub-menu"> <span class="c-brand__logo c-brand__logo--legal"> <span class="js-svg-inliner h-svg h-svg__logo-legal"></span> <span class="js-svg-inliner h-svg h-svg__logo-legal--fullcolor"></span> </span> <span class="c-brand__label"> Legal </span> <span class="c-brand__arrow">
+          <svg width="10px" height="17px" viewBox="0 0 10 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+           <path transform="translate(-8.000000, -5.000000)" d="M15.3610114,5.87946602 L8.86459388,12.5876406 C8.62203758,12.8388577 8.50002884,13.1692873 8.50002884,13.499717 C8.49783707,13.8331643 8.6205764,14.1628395 8.86459388,14.4140566 L15.3610114,21.1229856 C15.8468546,21.6246653 16.6424685,21.6269285 17.1312341,21.1222312 C17.6236526,20.6130074 17.6214608,19.7982494 17.1334258,19.2943064 L11.5232155,13.5012258 L17.1334258,7.7088996 C17.6185384,7.20721987 17.6214608,6.38567218 17.1312341,5.88022042 C16.8857554,5.62674014 16.5657564,5.5 16.246488,5.5 C15.9257585,5.5 15.6057595,5.62749455 15.3610114,5.87946602 Z" id="path-1"></path>
+          </svg></span> </span>
+                        <ul class="c-platform-footer-list c-platform-footer-list--legal">
+                            <li class="c-platform-footer-list__item"><a href="/legal" class="c-platform-footer-link">Legal</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/tos" class="c-platform-footer-link">Terms of Services</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/privacy" class="c-platform-footer-link">Privacy Policy</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/eula" class="c-platform-footer-link">EULA</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/dmca" class="c-platform-footer-link">DMCA</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/responsible-disclosure" target="_blank" class="c-platform-footer-link">Responsible disclosure</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/privacy#california" class="c-platform-footer-link">California notice at collection</a></li>
+                            <li class="c-platform-footer-list__item"><a href="/cookies#preferences" class="c-platform-footer-link">Do Not Sell or Share My Personal Information</a></li>
+                        </ul></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <div class="c-platform-copyright c-platform-copyright--rsi">
+        <div class="l-platform-copyright-container">
+            <img src="https://cdn.robertsspaceindustries.com/static/images/footer/logo-large-RSI.png" class="c-platform-copyright__logo c-platform-copyright__rsi-logo"> <a href="https://cloudimperiumgames.com" class="c-platform-copyright__link"> <img src="https://cdn.robertsspaceindustries.com/static/images/footer/logo-large-CIG.png" class="c-platform-copyright__logo c-platform-copyright__cig-logo"> </a>
+            <p class="c-platform-copyright__body">© 2012-2023 Cloud Imperium Rights LLC and Cloud Imperium Rights Ltd.</p>
+        </div>
+    </div><!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHNFZPT" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript><!-- End Google Tag Manager (noscript) -->
+    <script type="text/javascript">
+        window.RSI.Footer = new RSI.Footer();
+    </script>
+</div>
+<script type="module" src="https://robertsspaceindustries.com/plt-client/plt-client.es.js"></script>
+<script type="text/javascript" src="/rsi/static/packages/platformbar/rsi.platformbar.build.112af.js"></script>
+</body>
+</html>
