@@ -1,5 +1,7 @@
 package kr.galaxyhub.sc.crawler.domain
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 /**
  * 크롤링한 뉴스의 제목, 소제목, 요약을 나타냅니다.
  * @property title: 제목.
@@ -10,5 +12,6 @@ package kr.galaxyhub.sc.crawler.domain
 data class Introduction(
     val title: String,
     val subtitle: String,
+    @JsonProperty("contents")
     val summary: List<String>,
 )
