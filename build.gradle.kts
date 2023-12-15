@@ -59,6 +59,9 @@ dependencies {
     asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
 
     implementation("io.github.oshai:kotlin-logging-jvm:5.1.1")
+
+    // Jsoup
+    implementation("org.jsoup:jsoup:1.17.1")
 }
 
 tasks.withType<KotlinCompile> {
