@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class CrawlerConfig(
-    val objectMapper: ObjectMapper,
+    private val objectMapper: ObjectMapper,
 ) {
 
     @Bean
