@@ -3,9 +3,13 @@ package kr.galaxyhub.sc.auth.config
 import kr.galaxyhub.sc.auth.domain.OAuth2Client
 import kr.galaxyhub.sc.auth.domain.OAuth2Clients
 import kr.galaxyhub.sc.auth.infra.DiscordOAuth2Client
+import kr.galaxyhub.sc.auth.infra.LocalOAuth2Client
+import kr.galaxyhub.sc.member.domain.SocialType
+import kr.galaxyhub.sc.member.domain.UserInfo
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import org.springframework.web.reactive.function.client.WebClient
 
 @Configuration
@@ -27,6 +31,15 @@ class OAuth2WebClientConfig(
             clientSecret = clientSecret,
             redirectUri = redirectUri
         )
+    }
+
+    @Bean
+    @Profile("!prod")
+    fun localOAuth2Client(): OAuth2Client {
+        val memory = mutableMapOf<String, UserInfo>()
+        memory["1"] = UserInfo(SocialType.LOCAL, "1", "seokjin8678@gmail.com", "seokjin8678", null)
+        memory["2"] = UserInfo(SocialType.LOCAL, "2", "laeng@gmail.com", "laeng", null)
+        return LocalOAuth2Client(memory)
     }
 
     @Bean
