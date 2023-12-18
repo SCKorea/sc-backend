@@ -6,4 +6,15 @@ data class UserInfo(
     val email: String?,
     val nickname: String,
     val profileImage: String?,
-)
+) {
+
+    fun toMember(): Member {
+        return Member(
+            socialId = socialId,
+            socialType = socialType,
+            nickname = nickname,
+            email = email,
+            profileImage = profileImage
+        )
+    }
+}
