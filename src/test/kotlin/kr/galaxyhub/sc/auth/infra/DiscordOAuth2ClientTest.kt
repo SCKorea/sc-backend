@@ -5,6 +5,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
+import kr.galaxyhub.sc.common.exception.BadRequestException
 import kr.galaxyhub.sc.common.exception.InternalServerError
 import kr.galaxyhub.sc.common.support.enqueue
 import okhttp3.mockwebserver.MockWebServer
@@ -51,6 +52,15 @@ class DiscordOAuth2ClientTest : DescribeSpec({
             it("InternalServerError 예외를 던진다.") {
                 val ex = shouldThrow<InternalServerError> { discordOAuth2Client.getAccessToken("code") }
                 ex shouldHaveMessage "Discord OAuth2 서버에 문제가 발생했습니다."
+            }
+        }
+
+        context("외부 서버가 401 응답을 반환하면") {
+            mockWebServer.enqueue { statusCode(401) }
+
+            it("BadRequestException 예외를 던진다.") {
+                val ex = shouldThrow<BadRequestException> { discordOAuth2Client.getAccessToken("wrong code") }
+                ex shouldHaveMessage "잘못된 OAuth2 Authorization 코드입니다."
             }
         }
 
