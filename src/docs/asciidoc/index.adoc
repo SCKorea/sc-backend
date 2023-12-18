@@ -5,3 +5,5 @@
 :sectlinks:
 
 include::news-api.adoc[]
+
+include::crawler-api.adoc[]
