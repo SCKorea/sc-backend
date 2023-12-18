@@ -63,6 +63,9 @@ dependencies {
 
     // Jsoup
     implementation("org.jsoup:jsoup:1.17.1")
+
+    // Mock Web Server
+    testImplementation("com.squareup.okhttp3:mockwebserver")
 }
 
 tasks.withType<KotlinCompile> {
