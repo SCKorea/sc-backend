@@ -3,7 +3,7 @@ package kr.galaxyhub.sc.crawler.infra
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
-import kr.galaxyhub.sc.news.application.Crawler
+import kr.galaxyhub.sc.crawler.application.Crawler
 import kr.galaxyhub.sc.news.application.NewsCreateCommand
 import kr.galaxyhub.sc.news.domain.Language
 import kr.galaxyhub.sc.news.domain.NewsType

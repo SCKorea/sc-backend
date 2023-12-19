@@ -1,9 +1,9 @@
 package kr.galaxyhub.sc.crawler.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import kr.galaxyhub.sc.crawler.application.Crawlers
 import kr.galaxyhub.sc.crawler.domain.DocumentProvider
 import kr.galaxyhub.sc.crawler.domain.HtmlParser
-import kr.galaxyhub.sc.crawler.infra.Crawlers
 import kr.galaxyhub.sc.crawler.infra.EngineeringCrawler
 import kr.galaxyhub.sc.crawler.infra.parser.MarkdownHtmlParser
 import kr.galaxyhub.sc.crawler.infra.parser.PlainHtmlParser

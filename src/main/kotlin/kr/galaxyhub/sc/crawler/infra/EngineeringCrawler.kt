@@ -5,10 +5,10 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import kr.galaxyhub.sc.common.exception.BadRequestException
+import kr.galaxyhub.sc.crawler.application.Crawler
 import kr.galaxyhub.sc.crawler.domain.DocumentProvider
 import kr.galaxyhub.sc.crawler.domain.HtmlParser
 import kr.galaxyhub.sc.crawler.domain.Introduction
-import kr.galaxyhub.sc.news.application.Crawler
 import kr.galaxyhub.sc.news.application.NewsCreateCommand
 import kr.galaxyhub.sc.news.domain.Language
 import kr.galaxyhub.sc.news.domain.NewsType

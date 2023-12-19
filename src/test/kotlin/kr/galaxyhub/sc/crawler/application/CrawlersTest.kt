@@ -1,9 +1,10 @@
-package kr.galaxyhub.sc.crawler.infra
+package kr.galaxyhub.sc.crawler.application
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import kr.galaxyhub.sc.common.exception.BadRequestException
+import kr.galaxyhub.sc.crawler.infra.FakeCrawler
 
 class CrawlersTest : DescribeSpec({
     var crawlers: Crawlers

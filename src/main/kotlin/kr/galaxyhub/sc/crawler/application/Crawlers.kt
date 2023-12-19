@@ -1,7 +1,6 @@
-package kr.galaxyhub.sc.crawler.infra
+package kr.galaxyhub.sc.crawler.application
 
 import kr.galaxyhub.sc.common.exception.BadRequestException
-import kr.galaxyhub.sc.news.application.Crawler
 import kr.galaxyhub.sc.news.application.NewsCreateCommand
 
 class Crawlers(
