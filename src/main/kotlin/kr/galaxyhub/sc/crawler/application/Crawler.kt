@@ -1,4 +1,6 @@
-package kr.galaxyhub.sc.news.application
+package kr.galaxyhub.sc.crawler.application
+
+import kr.galaxyhub.sc.news.application.NewsCreateCommand
 
 interface Crawler {
 

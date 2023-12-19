@@ -1,7 +1,6 @@
 package kr.galaxyhub.sc.crawler.application
 
 import java.util.UUID
-import kr.galaxyhub.sc.crawler.infra.Crawlers
 import kr.galaxyhub.sc.news.application.NewsCommandService
 import org.springframework.stereotype.Service
 
