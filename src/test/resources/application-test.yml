@@ -18,3 +18,9 @@ logging:
         orm:
           jdbc:
             bind: trace
+galaxyhub:
+  oauth2:
+    discord:
+      client_id: discord_id
+      client_secret: discord_client_secret
+      redirect_uri: http://localhost:8080/api/v1/auth/oauth2/code?provider=discord

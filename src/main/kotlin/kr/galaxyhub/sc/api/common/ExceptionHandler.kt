@@ -4,6 +4,7 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.servlet.http.HttpServletRequest
 import kr.galaxyhub.sc.common.exception.GalaxyhubException
 import kr.galaxyhub.sc.common.support.LogLevel
+import org.springframework.beans.TypeMismatchException
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode
@@ -33,6 +34,18 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
 
     private fun MissingServletRequestParameterException.missingParameters(): String {
         return this.detailMessageArguments.contentToString()
+    }
+
+    override fun handleTypeMismatch(
+        ex: TypeMismatchException,
+        headers: HttpHeaders,
+        status: HttpStatusCode,
+        request: WebRequest,
+    ): ResponseEntity<Any> {
+        return ResponseEntity(
+            ApiResponse("${ex.propertyName}에 잘못된 값이 입력 되었습니다.", "${ex.propertyName},${ex.value}"),
+            HttpStatus.BAD_REQUEST
+        )
     }
 
     @ExceptionHandler(GalaxyhubException::class)

@@ -1,0 +1,15 @@
+[[auth-api]]
+== 인증
+
+[[auth-oauth2-login]]
+=== OAuth2 로그인
+
+*요청*
+
+include::{snippets}/auth/oauth2/login/http-request.adoc[]
+include::{snippets}/auth/oauth2/login/query-parameters.adoc[]
+
+*응답*
+
+include::{snippets}/auth/oauth2/login/http-response.adoc[]
+include::{snippets}/auth/oauth2/login/response-fields.adoc[]
