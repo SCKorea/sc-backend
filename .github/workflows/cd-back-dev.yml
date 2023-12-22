@@ -1,0 +1,53 @@
+name: cd-back-dev
+
+on:
+  push:
+    branches:
+      - dev
+    paths: 'src/**'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: repository checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          token: ${{ secrets.SUBMODULE_TOKEN }}
+
+      - name: install java 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu'
+
+      - name: assign grant gradlew
+        run: chmod +x gradlew
+
+      - name: build with gradle
+        run: ./gradlew build
+
+      - name: deploy use scp
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{vars.SCKR_DEV_IP}}
+          username: ${{secrets.SCKR_DEV_USERNAME}}
+          key: ${{secrets.SCKR_DEV_SSH_KEY}}
+          source: "./build/libs/*.jar"
+          target: ${{ vars.SCKR_DEV_JAR_DIR }}
+          strip_components: 3
+
+      - name: run application use ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{vars.SCKR_DEV_IP}}
+          username: ${{secrets.SCKR_DEV_USERNAME}}
+          key: ${{secrets.SCKR_DEV_SSH_KEY}}
+          script_stop: true
+          script: ${{ vars.SCKR_DEV_DEPLOY_COMMAND }}
