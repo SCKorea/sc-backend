@@ -5,7 +5,7 @@ CREATE TABLE content
     language VARCHAR(255)          NOT NULL,
     content  TEXT                  NOT NULL,
     title    VARCHAR(255)          NOT NULL,
-    excerpt  VARCHAR(255)          NULL,
+    excerpt  VARCHAR(512)          NULL,
     CONSTRAINT pk_content PRIMARY KEY (sequence)
 );
 
@@ -18,7 +18,7 @@ CREATE TABLE news
     published_at      DATETIME     NOT NULL,
     support_languages VARCHAR(255) NOT NULL,
     title             VARCHAR(255) NOT NULL,
-    excerpt           VARCHAR(255) NULL,
+    excerpt           VARCHAR(512) NULL,
     CONSTRAINT pk_news PRIMARY KEY (id)
 );
 
