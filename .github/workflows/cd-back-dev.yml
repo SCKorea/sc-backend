@@ -41,7 +41,7 @@ jobs:
           key: ${{secrets.SCKR_DEV_SSH_KEY}}
           source: "./build/libs/*.jar"
           target: ${{ vars.SCKR_DEV_JAR_DIR }}
-          strip_components: 3
+          strip_components: 2
 
       - name: run application use ssh
         uses: appleboy/ssh-action@master
