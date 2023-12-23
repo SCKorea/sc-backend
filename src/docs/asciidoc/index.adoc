@@ -9,3 +9,5 @@ include::news-api.adoc[]
 include::crawler-api.adoc[]
 
 include::auth-api.adoc[]
+
+include::translation-api.adoc[]
