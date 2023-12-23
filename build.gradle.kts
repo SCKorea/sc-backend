@@ -114,3 +114,7 @@ allOpen {
     annotation("jakarta.persistence.Embeddable")
     annotation("jakarta.persistence.MappedSuperclass")
 }
+
+tasks.jar {
+    enabled = false
+}
