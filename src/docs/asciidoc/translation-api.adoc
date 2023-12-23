@@ -1,0 +1,25 @@
+[[translation-api]]
+== 번역
+
+[[translation-translate]]
+=== 뉴스 번역 요청
+
+*요청*
+include::{snippets}/translation/translate/http-request.adoc[]
+include::{snippets}/translation/translate/path-parameters.adoc[]
+include::{snippets}/translation/translate/request-fields.adoc[]
+
+*응답*
+include::{snippets}/translation/translate/http-response.adoc[]
+include::{snippets}/translation/translate/response-fields.adoc[]
+
+[[translation-find-by-id]]
+=== 번역 진행 상황 단건 조회
+
+*요청*
+include::{snippets}/translation/find-by-id/http-request.adoc[]
+include::{snippets}/translation/find-by-id/path-parameters.adoc[]
+
+*응답*
+include::{snippets}/translation/find-by-id/http-response.adoc[]
+include::{snippets}/translation/find-by-id/response-fields.adoc[]
