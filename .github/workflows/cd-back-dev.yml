@@ -15,6 +15,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: set timezone
+        uses: szenius/set-timezone@v1.2
+        with:
+          timezoneLinux: "Asia/Seoul"
+
       - name: repository checkout
         uses: actions/checkout@v3
         with:
@@ -30,6 +35,9 @@ jobs:
       - name: assign grant gradlew
         run: chmod +x gradlew
 
+      - name: build with gradle for rest docs
+        run: ./gradlew build
+
       - name: build with gradle
         run: ./gradlew build
 
@@ -41,7 +49,7 @@ jobs:
           key: ${{secrets.SCKR_DEV_SSH_KEY}}
           source: "./build/libs/*.jar"
           target: ${{ vars.SCKR_DEV_JAR_DIR }}
-          strip_components: 3
+          strip_components: 2
 
       - name: run application use ssh
         uses: appleboy/ssh-action@master
