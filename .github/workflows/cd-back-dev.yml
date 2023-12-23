@@ -30,6 +30,9 @@ jobs:
       - name: assign grant gradlew
         run: chmod +x gradlew
 
+      - name: build with gradle for rest docs
+        run: ./gradlew build
+
       - name: build with gradle
         run: ./gradlew build
 
