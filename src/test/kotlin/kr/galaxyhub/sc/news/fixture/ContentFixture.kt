@@ -14,7 +14,7 @@ object ContentFixture {
         ),
         language: Language = Language.ENGLISH,
         content: String = "blah blah",
-        newsId: UUID,
+        newsId: UUID = UUID.randomUUID(),
     ): Content {
         return Content(
             newsInformation = newsInformation,
