@@ -1,7 +1,7 @@
 CREATE TABLE translate_progression
 (
-    id                  BINARY(36)   NOT NULL,
-    news_id             BINARY(36)   NOT NULL,
+    id                  BINARY(16)   NOT NULL,
+    news_id             BINARY(16)   NOT NULL,
     source_language     VARCHAR(255) NOT NULL,
     target_language     VARCHAR(255) NOT NULL,
     translation_status  VARCHAR(255) NOT NULL,
