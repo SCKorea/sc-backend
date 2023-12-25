@@ -8,6 +8,7 @@ import jakarta.persistence.Table
 import jakarta.persistence.UniqueConstraint
 import java.util.UUID
 import kr.galaxyhub.sc.common.domain.PrimaryKeyEntity
+import kr.galaxyhub.sc.common.support.validate
 import kr.galaxyhub.sc.news.domain.Language
 
 @Entity
@@ -26,8 +27,14 @@ class TranslateProgression(
     newsId: UUID,
     sourceLanguage: Language,
     targetLanguage: Language,
-    translatorProvider: TranslatorProvider
+    translatorProvider: TranslatorProvider,
 ) : PrimaryKeyEntity() {
+
+    init {
+        validate(sourceLanguage == targetLanguage) {
+            "sourceLanguage와 targetLanguage는 같을 수 없습니다. language=$sourceLanguage"
+        }
+    }
 
     @Column(name = "news_id", nullable = false, columnDefinition = "uuid")
     val newsId: UUID = newsId
@@ -52,4 +59,21 @@ class TranslateProgression(
     @Column(name = "message")
     var message: String? = null
         protected set
+
+    fun changeComplete() {
+        checkStatusProgress()
+        translationStatus = TranslationStatus.COMPLETE
+    }
+
+    fun changeFailure(message: String?) {
+        checkStatusProgress()
+        translationStatus = TranslationStatus.FAILURE
+        this.message = message
+    }
+
+    private fun checkStatusProgress() {
+        validate(translationStatus != TranslationStatus.PROGRESS) {
+            "translationStatus이 PROGRESS가 아닙니다. translationStatus=$translationStatus"
+        }
+    }
 }
