@@ -1,8 +1,8 @@
 package kr.galaxyhub.sc.news.fixture
 
+import java.util.UUID
 import kr.galaxyhub.sc.news.domain.Content
 import kr.galaxyhub.sc.news.domain.Language
-import kr.galaxyhub.sc.news.domain.News
 import kr.galaxyhub.sc.news.domain.NewsInformation
 
 object ContentFixture {
@@ -14,13 +14,13 @@ object ContentFixture {
         ),
         language: Language = Language.ENGLISH,
         content: String = "blah blah",
-        news: News,
+        newsId: UUID,
     ): Content {
         return Content(
             newsInformation = newsInformation,
             language = language,
             content = content,
-            news = news
+            newsId = newsId
         )
     }
 }

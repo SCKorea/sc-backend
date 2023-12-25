@@ -3,11 +3,11 @@ package kr.galaxyhub.sc.translation.infra
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 import io.github.oshai.kotlinlogging.KotlinLogging
+import java.util.UUID
 import kr.galaxyhub.sc.common.exception.BadRequestException
 import kr.galaxyhub.sc.common.exception.InternalServerError
 import kr.galaxyhub.sc.news.domain.Content
 import kr.galaxyhub.sc.news.domain.Language
-import kr.galaxyhub.sc.news.domain.News
 import kr.galaxyhub.sc.news.domain.NewsInformation
 import kr.galaxyhub.sc.translation.domain.TranslatorClient
 import kr.galaxyhub.sc.translation.domain.TranslatorProvider
@@ -33,7 +33,7 @@ class DeepLTranslatorClient(
                 throw handleError(it)
             }
             .bodyToMono<DeepLResponse>()
-            .map { it.toContent(content.news, targetLanguage) }
+            .map { it.toContent(content.newsId, targetLanguage) }
     }
 
     /**
@@ -80,9 +80,14 @@ private data class DeepLResponse(
     val translations: List<DeepLSentenceResponse>,
 ) {
 
-    fun toContent(news: News, language: Language): Content {
+    fun toContent(newsId: UUID, language: Language): Content {
         val newsInformation = toNewsInformation()
-        return Content(news, newsInformation, language, toContentString())
+        return Content(
+            newsId = newsId,
+            newsInformation = newsInformation,
+            language = language,
+            content = toContentString()
+        )
     }
 
     private fun toNewsInformation(): NewsInformation {

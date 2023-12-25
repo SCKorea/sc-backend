@@ -19,13 +19,13 @@ class NewsCommandService(
 
     fun create(command: NewsCreateCommand): UUID {
         val news = newsRepository.findByOriginId(command.originId) ?: newsRepository.save(command.toNews())
-        val content = createContent(news, command)
+        val content = createContent(news.id, command)
         news.addContent(content)
         return news.id
     }
 
-    private fun createContent(news: News, command: NewsCreateCommand) = Content(
-        news = news,
+    private fun createContent(newsId: UUID, command: NewsCreateCommand) = Content(
+        newsId = newsId,
         language = command.language,
         content = command.content,
         newsInformation = NewsInformation(

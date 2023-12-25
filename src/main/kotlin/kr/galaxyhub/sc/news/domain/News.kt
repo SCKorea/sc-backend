@@ -49,7 +49,7 @@ class News(
     private val mutableSupportLanguages: EnumSet<Language> = EnumSet.noneOf(Language::class.java)
     val supportLanguages: Set<Language> get() = mutableSupportLanguages.toHashSet()
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST], mappedBy = "news")
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST], mappedBy = "newsId")
     private val contents: MutableList<Content> = mutableListOf()
 
     fun addContent(content: Content) {
@@ -62,7 +62,7 @@ class News(
     }
 
     private fun validateAddContent(content: Content) {
-        validate(content.news != this) { "컨텐츠에 등록된 뉴스가 동일하지 않습니다." }
+        validate(content.newsId != id) { "컨텐츠에 등록된 뉴스가 동일하지 않습니다." }
         validate(mutableSupportLanguages.contains(content.language)) { "이미 해당 언어로 작성된 뉴스가 있습니다." }
     }
 

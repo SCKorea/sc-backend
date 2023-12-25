@@ -47,8 +47,8 @@ class TranslationCommandServiceTest : DescribeSpec({
     describe("translate") {
         context("뉴스에 번역을 원하는 언어의 컨텐츠가 존재하면") {
             val news = NewsFixture.create()
-            news.addContent(ContentFixture.create(news = news, language = Language.ENGLISH))
-            news.addContent(ContentFixture.create(news = news, language = Language.KOREAN))
+            news.addContent(ContentFixture.create(newsId = news.id, language = Language.ENGLISH))
+            news.addContent(ContentFixture.create(newsId = news.id, language = Language.KOREAN))
             newsRepository.save(news)
             val command = TranslationCommand(news.id, Language.ENGLISH, Language.KOREAN, TranslatorProvider.LOCAL)
 
@@ -62,7 +62,7 @@ class TranslationCommandServiceTest : DescribeSpec({
 
         context("뉴스에 번역할 원문 언어의 컨텐츠가 없으면") {
             val news = NewsFixture.create()
-            news.addContent(ContentFixture.create(news = news, language = Language.KOREAN))
+            news.addContent(ContentFixture.create(newsId = news.id, language = Language.KOREAN))
             val command = TranslationCommand(news.id, Language.ENGLISH, Language.KOREAN, TranslatorProvider.LOCAL)
 
             it("BadRequestException 예외를 던진다.") {
@@ -75,7 +75,7 @@ class TranslationCommandServiceTest : DescribeSpec({
 
         context("translatorClient에 예외가 발생하면") {
             val news = NewsFixture.create()
-            news.addContent(ContentFixture.create(news = news, language = Language.ENGLISH))
+            news.addContent(ContentFixture.create(newsId = news.id, language = Language.ENGLISH))
             newsRepository.save(news)
             val command = TranslationCommand(news.id, Language.ENGLISH, Language.KOREAN, TranslatorProvider.LOCAL)
             every { translatorClient.requestTranslate(any(), any()) } returns Mono.fromSupplier {
@@ -102,10 +102,10 @@ class TranslationCommandServiceTest : DescribeSpec({
 
         context("유효한 요청이 전달되면") {
             val news = NewsFixture.create()
-            news.addContent(ContentFixture.create(news = news, language = Language.ENGLISH))
+            news.addContent(ContentFixture.create(newsId = news.id, language = Language.ENGLISH))
             newsRepository.save(news)
             val command = TranslationCommand(news.id, Language.ENGLISH, Language.KOREAN, TranslatorProvider.LOCAL)
-            val translatedContent = ContentFixture.create(news = news, language = Language.KOREAN)
+            val translatedContent = ContentFixture.create(newsId = news.id, language = Language.KOREAN)
             every { translatorClient.requestTranslate(any(), any()) } returns Mono.just(translatedContent)
             every { eventPublisher.publishEvent(ofType<NewsAppendContentEvent>()) } returns Unit
 
