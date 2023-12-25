@@ -84,7 +84,11 @@ class TranslationControllerV1Test(
                         "data.translateProgressionId" type STRING means "번역 진행 상황의 식별자",
                         "data.targetNewsId" type STRING means "번역할 뉴스의 식별자",
                         "data.translationStatus" type ENUM(TranslationStatus::class) means "번역 상태",
-                        "data.message" type STRING means "번역 진행 상황의 추가적 메시지" isOptional true
+                        "data.message" type STRING means "번역 진행 상황의 추가적 메시지" isOptional true,
+                        "data.sourceLanguage" type ENUM(Language::class) means "번역할 뉴스의 원문 언어",
+                        "data.targetLanguage" type ENUM(Language::class) means "번역을 원하는 언어",
+                        "data.translationProvider" type ENUM(TranslatorProvider.entries
+                            .filter { it != TranslatorProvider.LOCAL }) means "번역 서비스 제공자",
                     )
                 }
             }
@@ -96,4 +100,7 @@ private fun translationResponse(translateProgressionId: UUID) = TranslationRespo
     translateProgressionId = translateProgressionId,
     targetNewsId = UUID.randomUUID(),
     translationStatus = TranslationStatus.PROGRESS,
+    sourceLanguage = Language.ENGLISH,
+    targetLanguage = Language.KOREAN,
+    translationProvider = TranslatorProvider.DEEPL
 )
