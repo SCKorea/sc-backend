@@ -13,6 +13,7 @@ import kr.galaxyhub.sc.news.domain.Language
 
 @Entity
 @Table(
+    name = "translate_progression",
     uniqueConstraints = [
         UniqueConstraint(
             name = "UNIQUE_NEWS_ID_AND_DESTINATION_LANGUAGE",
