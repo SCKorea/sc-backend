@@ -10,13 +10,12 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional
 class TranslationCommandService(
-    private val translationProgressionRepository: TranslationProgressionRepository
+    private val translationProgressionRepository: TranslationProgressionRepository,
 ) {
 
     fun translate(command: TranslationCommand): UUID {
-        val newsId = command.newsId
-        val destinationLanguage = command.destinationLanguage
-        val translateProgression = TranslateProgression(newsId, destinationLanguage)
+        val (newsId, sourceLanguage, targetLanguage, translatorProvider) = command
+        val translateProgression = TranslateProgression(newsId, sourceLanguage, targetLanguage, translatorProvider)
         translationProgressionRepository.save(translateProgression)
         return translateProgression.id
     }

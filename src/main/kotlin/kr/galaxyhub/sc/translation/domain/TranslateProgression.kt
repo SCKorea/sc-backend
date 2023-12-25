@@ -17,27 +17,37 @@ import kr.galaxyhub.sc.news.domain.Language
             name = "UNIQUE_NEWS_ID_AND_DESTINATION_LANGUAGE",
             columnNames = [
                 "news_id",
-                "destination_language"
+                "target_language"
             ]
         )
     ]
 )
 class TranslateProgression(
     newsId: UUID,
-    destinationLanguage: Language,
+    sourceLanguage: Language,
+    targetLanguage: Language,
+    translatorProvider: TranslatorProvider
 ) : PrimaryKeyEntity() {
 
     @Column(name = "news_id", nullable = false, columnDefinition = "uuid")
     val newsId: UUID = newsId
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "destination_language", nullable = false, columnDefinition = "varchar")
-    val destinationLanguage: Language = destinationLanguage
+    @Column(name = "source_language", nullable = false, columnDefinition = "varchar")
+    val sourceLanguage: Language = sourceLanguage
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "target_language", nullable = false, columnDefinition = "varchar")
+    val targetLanguage: Language = targetLanguage
 
     @Enumerated(EnumType.STRING)
     @Column(name = "translation_status", nullable = false, columnDefinition = "varchar")
     var translationStatus: TranslationStatus = TranslationStatus.PROGRESS
         protected set
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "translator_provider", nullable = false, columnDefinition = "varchar")
+    val translatorProvider: TranslatorProvider = translatorProvider
 
     @Column(name = "message")
     var message: String? = null
