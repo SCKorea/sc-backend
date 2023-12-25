@@ -70,4 +70,8 @@ class News(
         return contents.find { it.language == language }
             ?: throw NotFoundException("해당 언어의 컨텐츠가 존재하지 않습니다.")
     }
+
+    fun isSupportLanguage(language: Language): Boolean {
+        return mutableSupportLanguages.contains(language)
+    }
 }

@@ -9,6 +9,9 @@ import org.springframework.data.repository.query.Param
 fun NewsRepository.getByDetailByIdAndLanguage(id: UUID, language: Language) = findFetchByIdAndLanguage(id, language)
     ?: throw NotFoundException("식별자와 언어에 대한 뉴스를 찾을 수 없습니다. id=${id}, language=${language}")
 
+fun NewsRepository.getOrThrow(id: UUID) = findById(id)
+    ?: throw NotFoundException("식별자에 대한 뉴스를 찾을 수 없습니다. id=${id}")
+
 interface NewsRepository : Repository<News, UUID> {
 
     fun save(news: News): News
