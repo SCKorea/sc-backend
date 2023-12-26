@@ -6,7 +6,6 @@ import kr.galaxyhub.sc.api.v1.translation.dto.TranslationRequest
 import kr.galaxyhub.sc.common.support.toUri
 import kr.galaxyhub.sc.translation.application.TranslationCommandService
 import kr.galaxyhub.sc.translation.application.TranslationQueryService
-import kr.galaxyhub.sc.translation.application.dto.TranslationCommand
 import kr.galaxyhub.sc.translation.application.dto.TranslationResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -28,7 +27,7 @@ class TranslationControllerV1(
         @PathVariable newsId: UUID,
         @RequestBody request: TranslationRequest,
     ): ResponseEntity<ApiResponse<UUID>> {
-        val command = TranslationCommand(newsId, request.destinationLanguage)
+        val command = request.toCommand(newsId)
         val translateProgressionId = translationCommandService.translate(command)
         return ResponseEntity.created("/api/v1/translation/${translateProgressionId}".toUri())
             .body(ApiResponse.success(translateProgressionId))

@@ -26,3 +26,5 @@ galaxyhub:
       redirect_uri: http://localhost:8080/api/v1/auth/oauth2/code?provider=discord
   jwt:
     secret-key: galaxyhubgalaxyhubgalaxyhubgalaxyhubgalaxyhubgalaxyhubgalaxyhubgalaxyhubgalaxyhubgalaxyhubgalaxyhubgalaxyhub
+  translator:
+    deepl-api-key: 018ca217-6dc6-7b92-888b-44dc684f3c27

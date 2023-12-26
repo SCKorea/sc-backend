@@ -18,6 +18,7 @@ import kr.galaxyhub.sc.translation.application.TranslationCommandService
 import kr.galaxyhub.sc.translation.application.TranslationQueryService
 import kr.galaxyhub.sc.translation.application.dto.TranslationResponse
 import kr.galaxyhub.sc.translation.domain.TranslationStatus
+import kr.galaxyhub.sc.translation.domain.TranslatorProvider
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.MediaType
@@ -36,7 +37,7 @@ class TranslationControllerV1Test(
 
     describe("POST /api/v1/translation/{newsId}") {
         context("유효한 요청이 전달되면") {
-            val request = TranslationRequest(Language.KOREAN)
+            val request = TranslationRequest(Language.ENGLISH, Language.KOREAN, TranslatorProvider.DEEPL)
             val newsId = UUID.randomUUID()
             every { translationCommandService.translate(any()) } returns UUID.randomUUID()
 
@@ -51,7 +52,10 @@ class TranslationControllerV1Test(
                         "newsId" pathMeans "번역할 뉴스의 식별자"
                     )
                     requestBody(
-                        "destinationLanguage" type ENUM(Language::class) means "번역 도착 언어"
+                        "sourceLanguage" type ENUM(Language::class) means "번역할 뉴스의 원문 언어",
+                        "targetLanguage" type ENUM(Language::class) means "번역을 원하는 언어",
+                        "translatorProvider" type ENUM(TranslatorProvider.entries
+                            .filter { it != TranslatorProvider.LOCAL }) means "번역 서비스 제공자"
                     )
                     responseBody(
                         "data" type STRING means "번역 진행 상황의 식별자"
@@ -80,7 +84,11 @@ class TranslationControllerV1Test(
                         "data.translateProgressionId" type STRING means "번역 진행 상황의 식별자",
                         "data.targetNewsId" type STRING means "번역할 뉴스의 식별자",
                         "data.translationStatus" type ENUM(TranslationStatus::class) means "번역 상태",
-                        "data.message" type STRING means "번역 진행 상황의 추가적 메시지" isOptional true
+                        "data.message" type STRING means "번역 진행 상황의 추가적 메시지" isOptional true,
+                        "data.sourceLanguage" type ENUM(Language::class) means "번역할 뉴스의 원문 언어",
+                        "data.targetLanguage" type ENUM(Language::class) means "번역을 원하는 언어",
+                        "data.translationProvider" type ENUM(TranslatorProvider.entries
+                            .filter { it != TranslatorProvider.LOCAL }) means "번역 서비스 제공자",
                     )
                 }
             }
@@ -92,4 +100,7 @@ private fun translationResponse(translateProgressionId: UUID) = TranslationRespo
     translateProgressionId = translateProgressionId,
     targetNewsId = UUID.randomUUID(),
     translationStatus = TranslationStatus.PROGRESS,
+    sourceLanguage = Language.ENGLISH,
+    targetLanguage = Language.KOREAN,
+    translationProvider = TranslatorProvider.DEEPL
 )

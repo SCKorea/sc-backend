@@ -36,7 +36,7 @@ class NewsTest : DescribeSpec({
         context("컨텐츠의 뉴스가 동일하지 않으면") {
             val news = NewsFixture.create()
             val otherNews = NewsFixture.create()
-            val content = ContentFixture.from(Language.ENGLISH, otherNews)
+            val content = ContentFixture.create(language = Language.ENGLISH, newsId = otherNews.id)
 
             it("BadRequestException 예외를 던진다.") {
                 val exception = shouldThrow<BadRequestException> {
@@ -48,8 +48,8 @@ class NewsTest : DescribeSpec({
 
         context("뉴스에 중복된 언어의 컨텐츠를 추가하면") {
             val news = NewsFixture.create()
-            val englishContent = ContentFixture.from(Language.ENGLISH, news)
-            val otherEnglishContent = ContentFixture.from(Language.ENGLISH, news)
+            val englishContent = ContentFixture.create(language = Language.ENGLISH, newsId = news.id)
+            val otherEnglishContent = ContentFixture.create(language = Language.ENGLISH, newsId = news.id)
 
             news.addContent(englishContent)
 
@@ -63,8 +63,8 @@ class NewsTest : DescribeSpec({
 
         context("뉴스에 중복되지 않은 언어의 컨텐츠를 추가하면") {
             val news = NewsFixture.create()
-            val englishContent = ContentFixture.from(Language.ENGLISH, news)
-            val koreanContent = ContentFixture.from(Language.KOREAN, news)
+            val englishContent = ContentFixture.create(language = Language.ENGLISH, newsId = news.id)
+            val koreanContent = ContentFixture.create(language = Language.KOREAN, newsId = news.id)
 
             news.addContent(englishContent)
             news.addContent(koreanContent)
