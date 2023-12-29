@@ -1,5 +1,6 @@
 package kr.galaxyhub.sc.auth.config
 
+import java.time.Duration
 import kr.galaxyhub.sc.auth.domain.OAuth2Client
 import kr.galaxyhub.sc.auth.domain.OAuth2Clients
 import kr.galaxyhub.sc.auth.infra.DiscordOAuth2Client
@@ -29,7 +30,8 @@ class OAuth2WebClientConfig(
                 .build(),
             clientId = clientId,
             clientSecret = clientSecret,
-            redirectUri = redirectUri
+            redirectUri = redirectUri,
+            timeoutDuration = Duration.ofSeconds(5)
         )
     }
 

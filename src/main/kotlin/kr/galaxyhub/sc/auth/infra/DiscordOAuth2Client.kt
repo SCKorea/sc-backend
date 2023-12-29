@@ -3,6 +3,7 @@ package kr.galaxyhub.sc.auth.infra
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 import io.github.oshai.kotlinlogging.KotlinLogging
+import java.time.Duration
 import kr.galaxyhub.sc.auth.domain.OAuth2Client
 import kr.galaxyhub.sc.common.exception.BadRequestException
 import kr.galaxyhub.sc.common.exception.InternalServerError
@@ -20,11 +21,14 @@ import reactor.core.publisher.Mono
 
 private val log = KotlinLogging.logger {}
 
+private const val TIMEOUT_MESSAGE = "Discord OAuth2 서버의 응답 시간이 초과되었습니다."
+
 class DiscordOAuth2Client(
     private val webClient: WebClient,
     private val clientId: String,
     private val clientSecret: String,
     private val redirectUri: String,
+    private val timeoutDuration: Duration,
 ) : OAuth2Client {
 
     override fun getAccessToken(code: String): String {
@@ -35,6 +39,10 @@ class DiscordOAuth2Client(
             .onStatus({ it.isError }) { handleAccessTokenError(it) }
             .bodyToMono<DiscordAccessTokenResponse>()
             .handleConnectError("Discord OAuth2 서버와 연결 중 문제가 발생했습니다.")
+            .timeout(timeoutDuration, Mono.error {
+                log.info { TIMEOUT_MESSAGE }
+                InternalServerError(TIMEOUT_MESSAGE)
+            })
             .block()!!
             .accessToken
     }
@@ -73,6 +81,10 @@ class DiscordOAuth2Client(
             }
             .bodyToMono<DiscordUserInfoResponse>()
             .handleConnectError("Discord OAuth2 서버와 연결 중 문제가 발생했습니다.")
+            .timeout(timeoutDuration, Mono.error {
+                log.info { TIMEOUT_MESSAGE }
+                InternalServerError(TIMEOUT_MESSAGE)
+            })
             .block()!!
             .toUserInfo()
     }

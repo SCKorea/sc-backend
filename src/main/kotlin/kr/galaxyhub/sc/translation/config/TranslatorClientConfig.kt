@@ -1,5 +1,6 @@
 package kr.galaxyhub.sc.translation.config
 
+import java.time.Duration
 import kr.galaxyhub.sc.translation.domain.TranslatorClient
 import kr.galaxyhub.sc.translation.domain.TranslatorClients
 import kr.galaxyhub.sc.translation.infra.DeepLTranslatorClient
@@ -23,7 +24,7 @@ class TranslatorClientConfig(
             webClient.mutate()
                 .baseUrl("https://api.deepl.com")
                 .defaultHeader(HttpHeaders.AUTHORIZATION, "DeepL-Auth-Key $deepLApiKey")
-                .build()
+                .build(), Duration.ofSeconds(5)
         )
     }
 

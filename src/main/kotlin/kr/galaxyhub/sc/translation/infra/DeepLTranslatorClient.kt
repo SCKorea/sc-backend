@@ -3,6 +3,7 @@ package kr.galaxyhub.sc.translation.infra
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 import io.github.oshai.kotlinlogging.KotlinLogging
+import java.time.Duration
 import java.util.UUID
 import kr.galaxyhub.sc.common.exception.BadRequestException
 import kr.galaxyhub.sc.common.exception.InternalServerError
@@ -22,6 +23,7 @@ private val log = KotlinLogging.logger {}
 
 class DeepLTranslatorClient(
     private val webClient: WebClient,
+    private val timeoutDuration: Duration,
 ) : TranslatorClient {
 
     override fun requestTranslate(content: Content, targetLanguage: Language): Mono<Content> {
@@ -35,6 +37,10 @@ class DeepLTranslatorClient(
             }
             .bodyToMono<DeepLResponse>()
             .handleConnectError("DeepL 서버와 연결 중 문제가 발생했습니다.")
+            .timeout(timeoutDuration, Mono.error {
+                log.info { "DeepL 서버의 응답 시간이 초과되었습니다." }
+                InternalServerError("DeepL 서버의 응답 시간이 초과되었습니다.")
+            })
             .map { it.toContent(content.newsId, targetLanguage) }
     }
 
