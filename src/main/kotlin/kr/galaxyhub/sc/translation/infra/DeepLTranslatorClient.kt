@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming
 import io.github.oshai.kotlinlogging.KotlinLogging
 import java.util.UUID
 import kr.galaxyhub.sc.common.exception.BadRequestException
-import kr.galaxyhub.sc.common.exception.GalaxyhubException
 import kr.galaxyhub.sc.common.exception.InternalServerError
+import kr.galaxyhub.sc.common.support.handleConnectError
 import kr.galaxyhub.sc.news.domain.Content
 import kr.galaxyhub.sc.news.domain.Language
 import kr.galaxyhub.sc.news.domain.NewsInformation
@@ -31,41 +31,31 @@ class DeepLTranslatorClient(
             .retrieve()
             .onStatus({ it.isError }) {
                 log.info { "DeepL ErrorResponse=${it.bodyToMono<String>().block()}" } // 에러 응답 확인용. 추후 불필요하면 삭제
-                Mono.error(handleError(it))
+                handleResponseError(it)
             }
             .bodyToMono<DeepLResponse>()
-            .onErrorResume { Mono.error(handleConnectError(it)) }
+            .handleConnectError("DeepL 서버와 연결 중 문제가 발생했습니다.")
             .map { it.toContent(content.newsId, targetLanguage) }
     }
 
     /**
      * https://www.deepl.com/ko/docs-api/api-access/error-handling
      */
-    private fun handleError(clientResponse: ClientResponse): Exception {
+    private fun <T> handleResponseError(clientResponse: ClientResponse): Mono<T> {
         val statusCode = clientResponse.statusCode()
         return when (statusCode.value()) {
             HttpStatus.TOO_MANY_REQUESTS.value() -> {
-                BadRequestException("단기간에 너무 많은 요청을 보냈습니다.")
+                Mono.error(BadRequestException("단기간에 너무 많은 요청을 보냈습니다."))
             }
 
             456 -> {
                 log.error { "DeepL 할당량이 초과되었습니다." }
-                InternalServerError("할당량이 초과되었습니다. 관리자에게 문의하세요.")
+                Mono.error(InternalServerError("할당량이 초과되었습니다. 관리자에게 문의하세요."))
             }
 
             else -> {
                 log.warn { "DeepL 서버에 일시적 문제가 발생했습니다." }
-                InternalServerError("번역기 서버에 일시적 문제가 발생했습니다.")
-            }
-        }
-    }
-
-    private fun handleConnectError(ex: Throwable): Exception {
-        return when (ex) {
-            is GalaxyhubException -> ex
-            else -> {
-                log.error(ex) { "DeepL 서버에 연결할 수 없습니다." }
-                InternalServerError("번역기 서버에 연결할 수 없습니다.")
+                Mono.error(InternalServerError("번역기 서버에 일시적 문제가 발생했습니다."))
             }
         }
     }

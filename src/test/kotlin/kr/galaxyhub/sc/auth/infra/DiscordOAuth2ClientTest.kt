@@ -2,6 +2,7 @@ package kr.galaxyhub.sc.auth.infra
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
@@ -12,6 +13,8 @@ import okhttp3.mockwebserver.MockWebServer
 import org.springframework.web.reactive.function.client.WebClient
 
 class DiscordOAuth2ClientTest : DescribeSpec({
+
+    isolationMode = IsolationMode.InstancePerLeaf
 
     val objectMapper = jacksonObjectMapper()
     val mockWebServer = MockWebServer()
@@ -72,6 +75,15 @@ class DiscordOAuth2ClientTest : DescribeSpec({
                 ex shouldHaveMessage "Discord OAuth2 서버에 문제가 발생했습니다."
             }
         }
+
+        context("외부 서버에 연결할 수 없으면") {
+            mockWebServer.shutdown()
+
+            it("InternalServerError 예외를 던진다.") {
+                val ex = shouldThrow<InternalServerError> { discordOAuth2Client.getAccessToken("code") }
+                ex shouldHaveMessage "외부 서버에 연결할 수 없습니다."
+            }
+        }
     }
 
     describe("getUserInfo") {
@@ -114,6 +126,15 @@ class DiscordOAuth2ClientTest : DescribeSpec({
             it("InternalServerError 예외를 던진다.") {
                 val ex = shouldThrow<InternalServerError> { discordOAuth2Client.getUserInfo("accessToken") }
                 ex shouldHaveMessage "Discord OAuth2 서버에 문제가 발생했습니다."
+            }
+        }
+
+        context("외부 서버에 연결할 수 없으면") {
+            mockWebServer.shutdown()
+
+            it("InternalServerError 예외를 던진다.") {
+                val ex = shouldThrow<InternalServerError> { discordOAuth2Client.getUserInfo("accessToken") }
+                ex shouldHaveMessage "외부 서버에 연결할 수 없습니다."
             }
         }
     }
