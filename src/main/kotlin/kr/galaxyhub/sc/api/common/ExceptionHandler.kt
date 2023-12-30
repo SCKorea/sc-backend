@@ -3,7 +3,6 @@ package kr.galaxyhub.sc.api.common
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.servlet.http.HttpServletRequest
 import kr.galaxyhub.sc.common.exception.GalaxyhubException
-import kr.galaxyhub.sc.common.support.LogLevel
 import org.springframework.beans.TypeMismatchException
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -53,12 +52,7 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
         e: GalaxyhubException,
         request: HttpServletRequest,
     ): ResponseEntity<ApiResponse<Unit>> {
-        when (e.logLevel) {
-            LogLevel.ERROR -> log.error(e) { "[🔴ERROR] - (${request.method} ${request.requestURI})" }
-            LogLevel.WARN -> log.warn(e) { "[🟠WARN] - (${request.method} ${request.requestURI})" }
-            LogLevel.INFO -> log.info(e) { "[🔵INFO] - (${request.method} ${request.requestURI})" }
-            LogLevel.DEBUG -> log.debug(e) { "[🟢DEBUG] - (${request.method} ${request.requestURI})" }
-        }
+        log.debug(e) { "[🟢DEBUG] - (${request.method} ${request.requestURI})" }
         return ResponseEntity(ApiResponse.error(e.message!!), e.httpStatus)
     }
 
