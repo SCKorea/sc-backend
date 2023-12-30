@@ -1,12 +1,13 @@
 package kr.galaxyhub.sc.translation.infra
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
+import java.time.Duration
+import java.util.concurrent.TimeUnit
 import kr.galaxyhub.sc.common.exception.BadRequestException
 import kr.galaxyhub.sc.common.exception.InternalServerError
 import kr.galaxyhub.sc.common.support.enqueue
@@ -20,35 +21,36 @@ class DeepLTranslatorClientTest : DescribeSpec({
 
     isolationMode = IsolationMode.InstancePerLeaf
 
-    val objectMapper = jacksonObjectMapper()
     val mockWebServer = MockWebServer()
     val deepLTranslatorClient = DeepLTranslatorClient(
         webClient = WebClient.builder()
             .baseUrl("${mockWebServer.url("/")}")
-            .build()
+            .build(),
+        timeoutDuration = Duration.ofSeconds(10)
     )
 
     describe("requestTranslate") {
-        context("외부 서버가 200 응답을 반환하면") {
-            val response = DeepLResponse(
-                listOf(
-                    DeepLSentenceResponse(
-                        detectedSourceLanguage = "EN",
-                        text = "제목입니다."
-                    ),
-                    DeepLSentenceResponse(
-                        detectedSourceLanguage = "EN",
-                        text = "발췌입니다."
-                    ),
-                    DeepLSentenceResponse(
-                        detectedSourceLanguage = "EN",
-                        text = "내용입니다."
-                    )
+        val response = DeepLResponse(
+            listOf(
+                DeepLSentenceResponse(
+                    detectedSourceLanguage = "EN",
+                    text = "제목입니다."
+                ),
+                DeepLSentenceResponse(
+                    detectedSourceLanguage = "EN",
+                    text = "발췌입니다."
+                ),
+                DeepLSentenceResponse(
+                    detectedSourceLanguage = "EN",
+                    text = "내용입니다."
                 )
             )
+        )
+
+        context("외부 서버가 200 응답을 반환하면") {
             mockWebServer.enqueue {
                 statusCode(200)
-                body(objectMapper.writeValueAsString(response))
+                body(response)
             }
 
             val expect = deepLTranslatorClient.requestTranslate(ContentFixture.create(), Language.KOREAN).block()!!
@@ -107,7 +109,29 @@ class DeepLTranslatorClientTest : DescribeSpec({
 
             it("InternalServerError 예외를 던진다.") {
                 val ex = shouldThrow<InternalServerError> { expect.block() }
-                ex shouldHaveMessage "번역기 서버에 연결할 수 없습니다."
+                ex shouldHaveMessage "DeepL 서버와 연결 중 문제가 발생했습니다."
+            }
+        }
+
+        context("외부 서버에 지연이 발생하면") {
+            val delayClient = DeepLTranslatorClient(
+                webClient = WebClient.builder()
+                    .baseUrl("${mockWebServer.url("/")}")
+                    .build(),
+                timeoutDuration = Duration.ofMillis(100)
+            )
+
+            mockWebServer.enqueue {
+                statusCode(200)
+                body(response)
+                delay(1, TimeUnit.SECONDS)
+            }
+
+            val expect = delayClient.requestTranslate(ContentFixture.create(), Language.KOREAN)
+
+            it("InternalServerError 예외를 던진다.") {
+                val ex = shouldThrow<InternalServerError> { expect.block() }
+                ex shouldHaveMessage "DeepL 서버의 응답 시간이 초과되었습니다."
             }
         }
     }

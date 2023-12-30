@@ -36,7 +36,7 @@ class TranslationCommandService(
         val translatorClient = translatorClients.getClient(translatorProvider)
         translatorClient.requestTranslate(content, targetLanguage)
             .doOnError {
-                log.warn { "뉴스 번역 요청이 실패하였습니다. newsId=${newsId}, translateProgressionId=${translateProgression.id}" }
+                log.info { "뉴스 번역 요청이 실패하였습니다. newsId=${newsId}, translateProgressionId=${translateProgression.id} cause=${it.message}" }
                 eventPublisher.publishEvent(TranslatorFailureEvent(translateProgression.id, it.message))
             }
             .subscribe {
