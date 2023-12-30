@@ -24,7 +24,7 @@ import org.jsoup.nodes.Element
  *
  * 글의 내용은 g-narrative-group 태그안의 g-article 태그의 body 속성으로 나타납니다.
  */
-class EngineeringCrawler(
+open class EngineeringCrawler(
     private val objectMapper: ObjectMapper,
     private val documentProvider: DocumentProvider,
     private val contentParser: HtmlParser,

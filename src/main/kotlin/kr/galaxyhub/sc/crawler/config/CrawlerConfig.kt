@@ -35,13 +35,18 @@ class CrawlerConfig(
     fun crawlers(): Crawlers {
         return Crawlers(
             listOf(
-                EngineeringCrawler(
-                    objectMapper = objectMapper,
-                    documentProvider = documentProvider(),
-                    contentParser = markdownHtmlParser(),
-                    introductionParser = plainHtmlParser(),
-                )
+                engineeringCrawler(),
             )
+        )
+    }
+
+    @Bean
+    fun engineeringCrawler(): EngineeringCrawler {
+        return EngineeringCrawler(
+            objectMapper = objectMapper,
+            documentProvider = documentProvider(),
+            contentParser = markdownHtmlParser(),
+            introductionParser = plainHtmlParser(),
         )
     }
 }
