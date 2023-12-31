@@ -5,7 +5,7 @@ import kr.galaxyhub.sc.news.application.dto.NewsDetailResponse
 import kr.galaxyhub.sc.news.application.dto.NewsResponse
 import kr.galaxyhub.sc.news.domain.Language
 import kr.galaxyhub.sc.news.domain.NewsRepository
-import kr.galaxyhub.sc.news.domain.getByDetailByIdAndLanguage
+import kr.galaxyhub.sc.news.domain.getFetchByIdAndLanguage
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -21,7 +21,7 @@ class NewsQueryService(
     }
 
     fun getDetailByIdAndLanguage(id: UUID, language: Language): NewsDetailResponse {
-        return newsRepository.getByDetailByIdAndLanguage(id, language)
+        return newsRepository.getFetchByIdAndLanguage(id, language)
             .let {
                 val content = it.getContentByLanguage(language)
                 NewsDetailResponse.of(it, content)
