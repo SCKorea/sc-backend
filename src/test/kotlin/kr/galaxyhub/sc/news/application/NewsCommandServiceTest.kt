@@ -1,8 +1,10 @@
 package kr.galaxyhub.sc.news.application
 
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -11,14 +13,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kr.galaxyhub.sc.news.domain.Language
 import kr.galaxyhub.sc.news.domain.MemoryNewsRepository
+import kr.galaxyhub.sc.news.domain.NewsInformation
 import kr.galaxyhub.sc.news.domain.NewsType
+import kr.galaxyhub.sc.news.fixture.ContentFixture
+import kr.galaxyhub.sc.news.fixture.NewsFixture
 
 class NewsCommandServiceTest(
     private val newsRepository: MemoryNewsRepository = MemoryNewsRepository(),
     private val newsCommandService: NewsCommandService = NewsCommandService(newsRepository),
 ) : DescribeSpec({
 
-    beforeContainer { newsRepository.clear() }
+    isolationMode = IsolationMode.InstancePerLeaf
 
     describe("create") {
         context("originId에 대해 저장된 뉴스가 없으면") {
@@ -50,6 +55,52 @@ class NewsCommandServiceTest(
                 val news = newsRepository.findById(newsId)!!
                 news.supportLanguages shouldContainExactly setOf(Language.KOREAN, Language.ENGLISH)
                 newsRepository.findAll() shouldHaveSize 1
+            }
+        }
+    }
+
+    describe("updateContent") {
+        val news = NewsFixture.create()
+        val content = ContentFixture.create(
+            newsId = news.id,
+            language = Language.ENGLISH,
+            newsInformation = NewsInformation("old", "old"),
+            content = "old",
+        )
+        news.addContent(content)
+        newsRepository.save(news)
+
+        context("Command의 newsInformation이 null이면") {
+            val command = NewsUpdateCommand(
+                language = Language.ENGLISH,
+                newsInformation = null,
+                content = "update"
+            )
+            newsCommandService.updateContent(news.id, command)
+
+            it("newsInformation은 수정되지 않는다.") {
+                content.newsInformation shouldBe NewsInformation("old", "old")
+            }
+
+            it("content는 수정된다.") {
+                content.content shouldBe "update"
+            }
+        }
+
+        context("Command의 content가 null이면") {
+            val command = NewsUpdateCommand(
+                language = Language.ENGLISH,
+                newsInformation = NewsInformation("update", "update"),
+                content = null
+            )
+            newsCommandService.updateContent(news.id, command)
+
+            it("content는 수정되지 않는다.") {
+                content.content shouldBe "old"
+            }
+
+            it("newsInformation은 수정된다.") {
+                content.newsInformation shouldBe NewsInformation("update", "update")
             }
         }
     }

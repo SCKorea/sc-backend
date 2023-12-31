@@ -39,4 +39,12 @@ class Content(
     @Column(name = "content", nullable = false)
     var content: String = content
         protected set
+
+    fun updateNewsInformation(newsInformation: NewsInformation) {
+        this.newsInformation = newsInformation
+    }
+
+    fun updateContent(content: String) {
+        this.content = content
+    }
 }

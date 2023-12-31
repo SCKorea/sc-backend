@@ -8,6 +8,7 @@ import kr.galaxyhub.sc.news.domain.News
 import kr.galaxyhub.sc.news.domain.NewsInformation
 import kr.galaxyhub.sc.news.domain.NewsRepository
 import kr.galaxyhub.sc.news.domain.NewsType
+import kr.galaxyhub.sc.news.domain.getFetchByIdAndLanguage
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -33,6 +34,18 @@ class NewsCommandService(
             excerpt = command.excerpt
         ),
     )
+
+    fun updateContent(newsId: UUID, command: NewsUpdateCommand) {
+        val (language, newsInformation, content) = command
+        val news = newsRepository.getFetchByIdAndLanguage(newsId, language)
+        val contentByLanguage = news.getContentByLanguage(language)
+        newsInformation?.also {
+            contentByLanguage.updateNewsInformation(it)
+        }
+        content?.also {
+            contentByLanguage.updateContent(it)
+        }
+    }
 }
 
 data class NewsCreateCommand(
@@ -53,3 +66,9 @@ data class NewsCreateCommand(
         originUrl = originUrl
     )
 }
+
+data class NewsUpdateCommand(
+    val language: Language,
+    val newsInformation: NewsInformation?,
+    val content: String?,
+)
