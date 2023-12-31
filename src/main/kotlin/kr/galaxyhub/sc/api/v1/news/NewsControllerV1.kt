@@ -32,12 +32,12 @@ class NewsControllerV1(
             .body(ApiResponse.success(response))
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{newsId}")
     fun findDetailById(
-        @PathVariable id: UUID,
+        @PathVariable newsId: UUID,
         @RequestParam language: Language,
     ): ResponseEntity<ApiResponse<NewsDetailResponse>> {
-        val response = newsQueryService.getDetailByIdAndLanguage(id, language)
+        val response = newsQueryService.getDetailByIdAndLanguage(newsId, language)
         return ResponseEntity.ok()
             .body(ApiResponse.success(response))
     }
@@ -46,8 +46,8 @@ class NewsControllerV1(
     fun create(
         @RequestBody request: NewsCreateRequest,
     ): ResponseEntity<ApiResponse<UUID>> {
-        val id = newsCommandService.create(request.toCommand())
-        return ResponseEntity.created("/api/v1/news/${id}".toUri())
-            .body(ApiResponse.success(id))
+        val newsId = newsCommandService.create(request.toCommand())
+        return ResponseEntity.created("/api/v1/news/${newsId}".toUri())
+            .body(ApiResponse.success(newsId))
     }
 }
