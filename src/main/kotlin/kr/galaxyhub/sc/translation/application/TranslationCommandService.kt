@@ -5,7 +5,7 @@ import java.util.UUID
 import kr.galaxyhub.sc.common.support.validate
 import kr.galaxyhub.sc.news.application.dto.NewsAppendContentEvent
 import kr.galaxyhub.sc.news.domain.NewsRepository
-import kr.galaxyhub.sc.news.domain.getByDetailByIdAndLanguage
+import kr.galaxyhub.sc.news.domain.getFetchByIdAndLanguage
 import kr.galaxyhub.sc.translation.application.dto.TranslationCommand
 import kr.galaxyhub.sc.translation.application.dto.TranslatorFailureEvent
 import kr.galaxyhub.sc.translation.domain.TranslateProgression
@@ -28,7 +28,7 @@ class TranslationCommandService(
 
     fun translate(command: TranslationCommand): UUID {
         val (newsId, sourceLanguage, targetLanguage, translatorProvider) = command
-        val news = newsRepository.getByDetailByIdAndLanguage(newsId, sourceLanguage)
+        val news = newsRepository.getFetchByIdAndLanguage(newsId, sourceLanguage)
         validate(news.isSupportLanguage(targetLanguage)) { "이미 뉴스에 번역된 컨텐츠가 존재합니다. targetLanguage=$targetLanguage" }
         val content = news.getContentByLanguage(sourceLanguage)
         val translateProgression = TranslateProgression(newsId, sourceLanguage, targetLanguage, translatorProvider)

@@ -4,11 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
 import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.every
+import io.mockk.justRun
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.util.UUID
-import kr.galaxyhub.sc.api.v1.news.dto.NewsCreateRequest
 import kr.galaxyhub.sc.api.support.ARRAY
 import kr.galaxyhub.sc.api.support.ENUM
 import kr.galaxyhub.sc.api.support.NUMBER
@@ -21,6 +21,8 @@ import kr.galaxyhub.sc.api.support.docPost
 import kr.galaxyhub.sc.api.support.param
 import kr.galaxyhub.sc.api.support.pathMeans
 import kr.galaxyhub.sc.api.support.type
+import kr.galaxyhub.sc.api.v1.news.dto.NewsCreateRequest
+import kr.galaxyhub.sc.api.v1.news.dto.NewsUpdateRequest
 import kr.galaxyhub.sc.news.application.NewsCommandService
 import kr.galaxyhub.sc.news.application.NewsQueryService
 import kr.galaxyhub.sc.news.application.dto.NewsDetailResponse
@@ -43,21 +45,21 @@ class NewsControllerV1Test(
     private val newsCommandService: NewsCommandService,
 ) : DescribeSpec({
 
-    describe("GET /api/v1/news/{id}") {
+    describe("GET /api/v1/news/{newsId}") {
         context("유효한 요청이 전달되면") {
-            val id = UUID.randomUUID()
-            val response = newsDetailResponse(id)
-            every { newsQueryService.getDetailByIdAndLanguage(id, Language.ENGLISH) } returns response
+            val newsId = UUID.randomUUID()
+            val response = newsDetailResponse(newsId)
+            every { newsQueryService.getDetailByIdAndLanguage(newsId, Language.ENGLISH) } returns response
 
             it("200 응답과 뉴스의 상세 정보가 조회된다.") {
-                mockMvc.docGet("/api/v1/news/{id}", id) {
+                mockMvc.docGet("/api/v1/news/{newsId}", newsId) {
                     contentType = MediaType.APPLICATION_JSON
                     param("language" to Language.ENGLISH)
                 }.andExpect {
                     status { isOk() }
                 }.andDocument("news/find-detail") {
                     pathParameters(
-                        "id" pathMeans "뉴스 식별자" constraint "UUID"
+                        "newsId" pathMeans "뉴스 식별자" constraint "UUID"
                     )
                     queryParameters(
                         "language" pathMeans "뉴스 언어" formattedAs ENUM(Language::class)
@@ -136,7 +138,41 @@ class NewsControllerV1Test(
             }
         }
     }
+
+    describe("POST /api/v1/news/{newsId}/content") {
+        context("유효한 요청이 전달되면") {
+            val newsId = UUID.randomUUID()
+            val request = newsUpdateRequest()
+            justRun { newsCommandService.updateContent(any(), any()) }
+
+            it("200 응답이 반환된다.") {
+                mockMvc.docPost("/api/v1/news/{newsId}/content", newsId) {
+                    contentType = MediaType.APPLICATION_JSON
+                    content = objectMapper.writeValueAsString(request)
+                }.andExpect {
+                    status { isOk() }
+                }.andDocument("news/update-content") {
+                    pathParameters(
+                        "newsId" pathMeans "뉴스 식별자" constraint "UUID"
+                    )
+                    requestBody(
+                        "language" type ENUM(Language::class) means "뉴스 언어",
+                        "title" type STRING means "뉴스 제목" isOptional true,
+                        "excerpt" type STRING means "뉴스 발췌" isOptional true,
+                        "content" type STRING means "뉴스 내용" isOptional true
+                    )
+                }
+            }
+        }
+    }
 })
+
+private fun newsUpdateRequest() = NewsUpdateRequest(
+    language = Language.ENGLISH,
+    title = "Star Citizen Live",
+    excerpt = "You asked. We're answering! Join us today for a live Q&A show with the Vehicle Gameplay team.",
+    content = "blah blah"
+)
 
 private fun newsCreateRequest() = NewsCreateRequest(
     newsType = NewsType.NEWS,
