@@ -28,6 +28,10 @@ class DiscordOAuth2ClientTest : DescribeSpec({
         timeoutDuration = Duration.ofSeconds(10)
     )
 
+    afterEach {
+        mockWebServer.shutdown()
+    }
+
     describe("getAccessToken") {
         val response = DiscordAccessTokenResponse(
             accessToken = "123123",
@@ -100,7 +104,7 @@ class DiscordOAuth2ClientTest : DescribeSpec({
             mockWebServer.enqueue {
                 statusCode(200)
                 body(response)
-                delay(10, TimeUnit.SECONDS)
+                delay(200, TimeUnit.MILLISECONDS)
             }
 
             it("InternalServerError 예외를 던진다.") {
@@ -176,7 +180,7 @@ class DiscordOAuth2ClientTest : DescribeSpec({
             mockWebServer.enqueue {
                 statusCode(200)
                 body(response)
-                delay(10, TimeUnit.SECONDS)
+                delay(200, TimeUnit.MILLISECONDS)
             }
 
             it("InternalServerError 예외를 던진다.") {
