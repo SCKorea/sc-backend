@@ -33,7 +33,17 @@ configurations.create(asciidoctorExt) {
 
 val snippetsDir = file("build/generated-snippets")
 
+val ulidCreatorVersion = "5.2.2"
+val kotlinLoggingVersion = "5.1.1"
+val jsoupVersion = "1.17.1"
+val jjwtVersion = "0.12.3"
+val mockkVersion = "1.13.4"
+val springMockkVersion = "4.0.2"
+val kotestVersion = "5.7.2"
+val kotestExtensionSpring = "1.1.3"
+
 dependencies {
+    // Spring
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
@@ -44,33 +54,48 @@ dependencies {
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-mysql")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    runtimeOnly("com.h2database:h2")
-    runtimeOnly("com.mysql:mysql-connector-j")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
-    testImplementation("io.mockk:mockk:1.13.4")
-    testImplementation("io.mockk:mockk-jvm:1.13.4")
-    testImplementation("com.ninja-squad:springmockk:4.0.2")
-    testImplementation("io.kotest:kotest-runner-junit5:5.7.2")
-    testImplementation("io.kotest:kotest-assertions-core:5.7.2")
-    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.3")
 
     // https://mvnrepository.com/artifact/com.github.f4b6a3/ulid-creator
-    implementation("com.github.f4b6a3:ulid-creator:5.2.2")
-    asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
+    // ULID Creator
+    implementation("com.github.f4b6a3:ulid-creator:$ulidCreatorVersion")
 
-    implementation("io.github.oshai:kotlin-logging-jvm:5.1.1")
+    // Kotlin logging
+    implementation("io.github.oshai:kotlin-logging-jvm:$kotlinLoggingVersion")
 
     // Jsoup
-    implementation("org.jsoup:jsoup:1.17.1")
+    implementation("org.jsoup:jsoup:$jsoupVersion")
+
+    // JWT
+    implementation("io.jsonwebtoken:jjwt-api:$jjwtVersion")
+
+    // DB Connectors
+    runtimeOnly("com.h2database:h2")
+    runtimeOnly("com.mysql:mysql-connector-j")
+
+    // JWT
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:$jjwtVersion")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:$jjwtVersion")
+
+    // Spring
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+
+    // Mockk
+    testImplementation("io.mockk:mockk:$mockkVersion")
+    testImplementation("io.mockk:mockk-jvm:$mockkVersion")
+
+    // Spring Mockk
+    testImplementation("com.ninja-squad:springmockk:$springMockkVersion")
+
+    // Kotest
+    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+    testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
+    testImplementation("io.kotest.extensions:kotest-extensions-spring:$kotestExtensionSpring")
 
     // Mock Web Server
     testImplementation("com.squareup.okhttp3:mockwebserver")
 
-    // JWT
-    implementation("io.jsonwebtoken:jjwt-api:0.12.3")
-    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.3")
-    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.3")
+    asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
 }
 
 tasks.withType<KotlinCompile> {
@@ -93,6 +118,8 @@ tasks.asciidoctor {
 }
 
 val copyDocument = tasks.register<Copy>("copyDocument") {
+    description = "생성된 Asciidoc 문서를 resource/static 폴더로 이동"
+    group = JavaBasePlugin.DOCUMENTATION_GROUP
     dependsOn(tasks.asciidoctor)
     doFirst {
         delete(file("src/main/resources/static/docs"))
