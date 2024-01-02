@@ -11,7 +11,7 @@ class MockWebServerDsl {
 
     private var statusCode: Int? = null
     private var body: String? = null
-    private var mediaType: String? = null
+    private var mediaType: MediaType? = null
     private var delay: Long? = null
     private var timeUnit: TimeUnit? = null
 
@@ -24,7 +24,7 @@ class MockWebServerDsl {
     }
 
     fun mediaType(mediaType: MediaType) {
-        this.mediaType = mediaType.toString()
+        this.mediaType = mediaType
     }
 
     fun delay(delay: Long, timeUnit: TimeUnit) {
@@ -35,12 +35,13 @@ class MockWebServerDsl {
     internal fun perform(mockWebServer: MockWebServer) {
         val response = MockResponse()
         statusCode?.also { response.setResponseCode(it) }
-        body?.also { response.setBody(it) }
+        body?.also {
+            response.setBody(it)
+            response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
+        }
         delay?.also { response.setBodyDelay(it, timeUnit!!) }
-        if (mediaType != null) {
-            response.addHeader(HttpHeaders.CONTENT_TYPE, mediaType!!)
-        } else {
-            response.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
+        mediaType?.also {
+            response.setHeader(HttpHeaders.CONTENT_TYPE, it)
         }
         mockWebServer.enqueue(response)
     }
