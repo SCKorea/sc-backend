@@ -5,7 +5,9 @@ on:
     branches:
       - dev
       - main
-    paths: 'src/**'
+      - 'feat/**'
+    paths:
+      - 'src/**'
 
 jobs:
   build:
