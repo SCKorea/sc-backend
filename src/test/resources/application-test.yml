@@ -1,6 +1,7 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:test;MODE=MYSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:tc:mysql:8://test_db
   jpa:
     hibernate:
       ddl-auto: create
