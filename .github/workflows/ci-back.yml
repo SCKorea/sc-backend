@@ -6,7 +6,8 @@ on:
       - dev
       - main
       - 'feat/**'
-    paths: 'src/**'
+    paths:
+      - 'src/**'
 
 jobs:
   build:

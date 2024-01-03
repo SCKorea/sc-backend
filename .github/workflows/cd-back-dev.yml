@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - dev
-    paths: 'src/**'
+    paths:
+      - 'src/**'
   workflow_dispatch:
 
 concurrency:
