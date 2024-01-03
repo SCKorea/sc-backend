@@ -29,6 +29,10 @@ class DeepLTranslatorClientTest : DescribeSpec({
         timeoutDuration = Duration.ofSeconds(10)
     )
 
+    afterEach {
+        mockWebServer.shutdown()
+    }
+
     describe("requestTranslate") {
         val response = DeepLResponse(
             listOf(
@@ -124,7 +128,7 @@ class DeepLTranslatorClientTest : DescribeSpec({
             mockWebServer.enqueue {
                 statusCode(200)
                 body(response)
-                delay(1, TimeUnit.SECONDS)
+                delay(200, TimeUnit.MILLISECONDS)
             }
 
             val expect = delayClient.requestTranslate(ContentFixture.create(), Language.KOREAN)
