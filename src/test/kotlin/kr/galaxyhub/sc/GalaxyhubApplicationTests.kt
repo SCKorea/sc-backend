@@ -1,12 +1,9 @@
 package kr.galaxyhub.sc
 
-import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
+import kr.galaxyhub.sc.config.spec.IntegrationSpec
 
-@SpringBootTest
-class GalaxyhubApplicationTests {
+class GalaxyhubApplicationTests : IntegrationSpec({
+    describe("contextLoads") {
 
-    @Test
-    fun contextLoads() {
     }
-}
+})
