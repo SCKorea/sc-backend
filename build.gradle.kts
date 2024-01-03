@@ -40,7 +40,6 @@ val jjwtVersion = "0.12.3"
 val mockkVersion = "1.13.4"
 val springMockkVersion = "4.0.2"
 val testcontainersVersion = "1.19.3"
-val testcontainersMysqlVersion = "1.19.3"
 val kotestVersion = "5.7.2"
 val kotestExtensionTestcontainers = "2.0.2"
 val kotestExtensionSpring = "1.1.3"
@@ -92,7 +91,6 @@ dependencies {
 
     // Testcontainers
     testImplementation("org.testcontainers:testcontainers:$testcontainersVersion")
-    testImplementation("org.testcontainers:mysql:$testcontainersMysqlVersion")
 
     // Kotest
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")

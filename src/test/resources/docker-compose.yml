@@ -1,0 +1,21 @@
+version: "3.3"
+volumes:
+  mysql_data: { }
+services:
+  test_mysql:
+    image: mysql:8.0.33
+    ports:
+      - "13306:3306"
+    environment:
+      TZ: Asia/Seoul
+      MYSQL_USER: test
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: test
+    volumes:
+      - mysql_data:/var/lib/mysql/
+      - ./sql:/docker-entrypoint-initdb.d
+    command:
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+      - "--skip-character-set-client-handshake"
