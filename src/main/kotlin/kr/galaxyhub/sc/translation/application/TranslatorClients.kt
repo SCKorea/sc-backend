@@ -1,7 +1,8 @@
-package kr.galaxyhub.sc.translation.domain
+package kr.galaxyhub.sc.translation.application
 
 import java.util.EnumMap
 import kr.galaxyhub.sc.common.exception.BadRequestException
+import kr.galaxyhub.sc.translation.domain.TranslatorProvider
 
 class TranslatorClients(
     private val translatorClients: Map<TranslatorProvider, TranslatorClient>,

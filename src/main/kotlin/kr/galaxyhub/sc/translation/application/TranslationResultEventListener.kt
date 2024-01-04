@@ -1,8 +1,7 @@
 package kr.galaxyhub.sc.translation.application
 
 import io.github.oshai.kotlinlogging.KotlinLogging
-import kr.galaxyhub.sc.news.application.dto.NewsAppendContentEvent
-import kr.galaxyhub.sc.translation.application.dto.TranslatorFailureEvent
+import java.util.UUID
 import kr.galaxyhub.sc.translation.domain.TranslationProgressionRepository
 import kr.galaxyhub.sc.translation.domain.getOrThrow
 import org.springframework.context.event.EventListener
@@ -19,12 +18,12 @@ private val log = KotlinLogging.logger {}
  */
 @Component
 @Transactional
-class TranslationAppendContentEventListener(
+class TranslationResultEventListener(
     private val translationProgressionRepository: TranslationProgressionRepository
 ) {
 
     @EventListener
-    fun changeTranslationProgressionComplete(event: NewsAppendContentEvent) {
+    fun translatorSuccessEventHandler(event: TranslationSuccessEvent) {
         runCatching {
             translationProgressionRepository.getOrThrow(event.translateProgressionId)
         }.onSuccess {
@@ -35,7 +34,7 @@ class TranslationAppendContentEventListener(
     }
 
     @EventListener
-    fun changeTranslationProgressionFailure(event: TranslatorFailureEvent) {
+    fun translatorFailureEventHandler(event: TranslationFailureEvent) {
         runCatching {
             translationProgressionRepository.getOrThrow(event.translateProgressionId)
         }.onSuccess {
@@ -45,4 +44,13 @@ class TranslationAppendContentEventListener(
         }
     }
 }
+
+data class TranslationSuccessEvent(
+    val translateProgressionId: UUID,
+)
+
+data class TranslationFailureEvent(
+    val translateProgressionId: UUID,
+    val message: String?
+)
 

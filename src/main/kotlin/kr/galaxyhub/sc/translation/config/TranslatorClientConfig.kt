@@ -1,8 +1,8 @@
 package kr.galaxyhub.sc.translation.config
 
 import java.time.Duration
-import kr.galaxyhub.sc.translation.domain.TranslatorClient
-import kr.galaxyhub.sc.translation.domain.TranslatorClients
+import kr.galaxyhub.sc.translation.application.TranslatorClient
+import kr.galaxyhub.sc.translation.application.TranslatorClients
 import kr.galaxyhub.sc.translation.infra.DeepLTranslatorClient
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean

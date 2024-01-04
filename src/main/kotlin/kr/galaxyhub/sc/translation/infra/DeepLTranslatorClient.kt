@@ -4,14 +4,14 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 import io.github.oshai.kotlinlogging.KotlinLogging
 import java.time.Duration
-import java.util.UUID
 import kr.galaxyhub.sc.common.exception.BadRequestException
 import kr.galaxyhub.sc.common.exception.InternalServerError
 import kr.galaxyhub.sc.common.support.handleConnectError
-import kr.galaxyhub.sc.news.domain.Content
 import kr.galaxyhub.sc.news.domain.Language
 import kr.galaxyhub.sc.news.domain.NewsInformation
-import kr.galaxyhub.sc.translation.domain.TranslatorClient
+import kr.galaxyhub.sc.translation.application.TranslatorClient
+import kr.galaxyhub.sc.translation.application.TranslatorClientRequest
+import kr.galaxyhub.sc.translation.application.TranslatorClientResponse
 import kr.galaxyhub.sc.translation.domain.TranslatorProvider
 import org.springframework.http.HttpStatus
 import org.springframework.web.reactive.function.client.ClientResponse
@@ -26,10 +26,17 @@ class DeepLTranslatorClient(
     private val timeoutDuration: Duration,
 ) : TranslatorClient {
 
-    override fun requestTranslate(content: Content, targetLanguage: Language): Mono<Content> {
+    override fun requestTranslate(request: TranslatorClientRequest): Mono<TranslatorClientResponse> {
+        val (newsInformation, content, sourceLanguage, targetLanguage) = request
         return webClient.post()
             .uri("/v2/translate")
-            .bodyValue(DeepLRequest(content.language.shortName, targetLanguage.shortName, content.toText()))
+            .bodyValue(
+                DeepLRequest(
+                    sourceLang = sourceLanguage.shortName,
+                    targetLang = targetLanguage.shortName,
+                    text = toText(newsInformation, content)
+                )
+            )
             .retrieve()
             .onStatus({ it.isError }) {
                 log.info { "DeepL ErrorResponse=${it.bodyToMono<String>().block()}" } // 에러 응답 확인용. 추후 불필요하면 삭제
@@ -41,7 +48,7 @@ class DeepLTranslatorClient(
                 log.info { "DeepL 서버의 응답 시간이 초과되었습니다." }
                 InternalServerError("DeepL 서버의 응답 시간이 초과되었습니다.")
             })
-            .map { it.toContent(content.newsId, targetLanguage) }
+            .map { it.toResponse(targetLanguage) }
     }
 
     /**
@@ -70,7 +77,7 @@ class DeepLTranslatorClient(
         return TranslatorProvider.DEEPL
     }
 
-    private fun Content.toText(): List<String> {
+    private fun toText(newsInformation: NewsInformation, content: String): List<String> {
         val text = mutableListOf<String>()
         text.add(newsInformation.title)
         text.add(newsInformation.excerpt ?: "")
@@ -90,13 +97,11 @@ internal data class DeepLResponse(
     val translations: List<DeepLSentenceResponse>,
 ) {
 
-    fun toContent(newsId: UUID, language: Language): Content {
-        val newsInformation = toNewsInformation()
-        return Content(
-            newsId = newsId,
-            newsInformation = newsInformation,
-            language = language,
-            content = toContentString()
+    fun toResponse(language: Language): TranslatorClientResponse {
+        return TranslatorClientResponse(
+            newsInformation = toNewsInformation(),
+            content = toContent(),
+            language = language
         )
     }
 
@@ -105,7 +110,7 @@ internal data class DeepLResponse(
             .let { NewsInformation(it[0].text, it[1].text) }
     }
 
-    private fun toContentString(): String {
+    private fun toContent(): String {
         return translations.subList(2, translations.size)
             .joinToString(System.lineSeparator()) { it.text }
     }

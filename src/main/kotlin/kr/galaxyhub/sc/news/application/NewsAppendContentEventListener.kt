@@ -2,6 +2,7 @@ package kr.galaxyhub.sc.news.application
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kr.galaxyhub.sc.news.application.dto.NewsAppendContentEvent
+import kr.galaxyhub.sc.news.domain.Content
 import kr.galaxyhub.sc.news.domain.NewsRepository
 import kr.galaxyhub.sc.news.domain.getOrThrow
 import org.springframework.context.event.EventListener
@@ -21,14 +22,14 @@ class NewsAppendContentEventListener(
 ) {
 
     @EventListener
-    fun appendContent(event: NewsAppendContentEvent) {
+    fun newsAppendContentEventHandler(event: NewsAppendContentEvent) {
+        val (newsId, newsInformation, content, language) = event
         runCatching {
-            newsRepository.getOrThrow(event.newsId)
+            newsRepository.getOrThrow(newsId)
         }.onSuccess {
-            it.addContent(event.content)
+            it.addContent(Content(newsId, newsInformation, language, content))
         }.onFailure {
             log.error { "뉴스에 컨텐츠를 추가하는 중 예외가 발생했습니다. ${it.message}" }
         }
     }
 }
-
