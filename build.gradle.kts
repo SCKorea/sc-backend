@@ -39,7 +39,9 @@ val jsoupVersion = "1.17.1"
 val jjwtVersion = "0.12.3"
 val mockkVersion = "1.13.4"
 val springMockkVersion = "4.0.2"
+val testcontainersVersion = "1.19.3"
 val kotestVersion = "5.7.2"
+val kotestExtensionTestcontainers = "2.0.2"
 val kotestExtensionSpring = "1.1.3"
 
 dependencies {
@@ -87,9 +89,13 @@ dependencies {
     // Spring Mockk
     testImplementation("com.ninja-squad:springmockk:$springMockkVersion")
 
+    // Testcontainers
+    testImplementation("org.testcontainers:testcontainers:$testcontainersVersion")
+
     // Kotest
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
+    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:$kotestExtensionTestcontainers")
     testImplementation("io.kotest.extensions:kotest-extensions-spring:$kotestExtensionSpring")
 
     // Mock Web Server
