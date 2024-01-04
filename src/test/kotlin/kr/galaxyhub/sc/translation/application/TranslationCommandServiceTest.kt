@@ -10,13 +10,13 @@ import io.mockk.mockk
 import io.mockk.verify
 import kr.galaxyhub.sc.common.exception.BadRequestException
 import kr.galaxyhub.sc.common.exception.NotFoundException
-import kr.galaxyhub.sc.news.application.dto.NewsAppendContentEvent
+import kr.galaxyhub.sc.news.application.NewsAppendContentEvent
 import kr.galaxyhub.sc.news.domain.Language
 import kr.galaxyhub.sc.news.domain.MemoryNewsRepository
 import kr.galaxyhub.sc.news.domain.NewsInformation
 import kr.galaxyhub.sc.news.fixture.ContentFixture
 import kr.galaxyhub.sc.news.fixture.NewsFixture
-import kr.galaxyhub.sc.translation.domain.MemoryTranslationProgressionRepository
+import kr.galaxyhub.sc.translation.domain.MemoryTranslateProgressionRepository
 import kr.galaxyhub.sc.translation.domain.TranslatorProvider
 import kr.galaxyhub.sc.translation.domain.getOrThrow
 import org.springframework.context.ApplicationEventPublisher
@@ -24,12 +24,12 @@ import reactor.core.publisher.Mono
 
 class TranslationCommandServiceTest : DescribeSpec({
 
-    val translationProgressionRepository = MemoryTranslationProgressionRepository()
+    val translationProgressionRepository = MemoryTranslateProgressionRepository()
     val newsRepository = MemoryNewsRepository()
     val translatorClient = mockk<TranslatorClient>()
     val eventPublisher = mockk<ApplicationEventPublisher>()
     val translationCommandService = TranslationCommandService(
-        translationProgressionRepository = translationProgressionRepository,
+        translateProgressionRepository = translationProgressionRepository,
         newsRepository = newsRepository,
         translatorClients = TranslatorClients(mapOf(TranslatorProvider.LOCAL to translatorClient)),
         eventPublisher = eventPublisher,
@@ -78,7 +78,7 @@ class TranslationCommandServiceTest : DescribeSpec({
             every { translatorClient.requestTranslate(any()) } returns Mono.fromSupplier {
                 throw IllegalArgumentException()
             }
-            every { eventPublisher.publishEvent(ofType<TranslationFailureEvent>()) } returns Unit
+            every { eventPublisher.publishEvent(ofType<TranslateFailureEvent>()) } returns Unit
 
             val translateProgressionId = translationCommandService.translate(command)
 
@@ -89,7 +89,7 @@ class TranslationCommandServiceTest : DescribeSpec({
             }
 
             it("TranslatorFailureEvent 이벤트가 발행된다.") {
-                verify { eventPublisher.publishEvent(ofType<TranslationFailureEvent>()) }
+                verify { eventPublisher.publishEvent(ofType<TranslateFailureEvent>()) }
             }
 
             it("NewsAppendContentEvent 이벤트는 발행되지 않는다.") {
@@ -97,7 +97,7 @@ class TranslationCommandServiceTest : DescribeSpec({
             }
 
             it("TranslationSuccessEvent 이벤트는 발행되지 않는다.") {
-                verify(exactly = 0) { eventPublisher.publishEvent(ofType<TranslationSuccessEvent>()) }
+                verify(exactly = 0) { eventPublisher.publishEvent(ofType<TranslateSuccessEvent>()) }
             }
         }
 
@@ -109,7 +109,7 @@ class TranslationCommandServiceTest : DescribeSpec({
             val translatorClientResponse = TranslatorClientResponse(NewsInformation("제목", "발췌"), "내용", Language.KOREAN)
             every { translatorClient.requestTranslate(any()) } returns Mono.just(translatorClientResponse)
             every { eventPublisher.publishEvent(ofType<NewsAppendContentEvent>()) } returns Unit
-            every { eventPublisher.publishEvent(ofType<TranslationSuccessEvent>()) } returns Unit
+            every { eventPublisher.publishEvent(ofType<TranslateSuccessEvent>()) } returns Unit
 
             val translateProgressionId = translationCommandService.translate(command)
 
@@ -124,11 +124,11 @@ class TranslationCommandServiceTest : DescribeSpec({
             }
 
             it("TranslationSuccessEvent 이벤트가 발행된다.") {
-                verify { eventPublisher.publishEvent(ofType<TranslationSuccessEvent>()) }
+                verify { eventPublisher.publishEvent(ofType<TranslateSuccessEvent>()) }
             }
 
             it("TranslatorFailureEvent 이벤트는 발행되지 않는다.") {
-                verify(exactly = 0) { eventPublisher.publishEvent(ofType<TranslationFailureEvent>()) }
+                verify(exactly = 0) { eventPublisher.publishEvent(ofType<TranslateFailureEvent>()) }
             }
         }
     }
