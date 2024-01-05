@@ -9,6 +9,7 @@ import kr.galaxyhub.sc.news.domain.NewsInformation
 import kr.galaxyhub.sc.news.domain.NewsRepository
 import kr.galaxyhub.sc.news.domain.NewsType
 import kr.galaxyhub.sc.news.domain.getFetchByIdAndLanguage
+import kr.galaxyhub.sc.news.domain.getOrThrow
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -46,6 +47,11 @@ class NewsCommandService(
             contentByLanguage.updateContent(it)
         }
     }
+
+    fun appendContent(command: NewsAppendContentCommand) {
+        val news = newsRepository.getOrThrow(command.newsId)
+        news.addContent(command.toContent())
+    }
 }
 
 data class NewsCreateCommand(
@@ -72,3 +78,18 @@ data class NewsUpdateCommand(
     val newsInformation: NewsInformation?,
     val content: String?,
 )
+
+data class NewsAppendContentCommand(
+    val newsId: UUID,
+    val newsInformation: NewsInformation,
+    val content: String,
+    val language: Language,
+) {
+
+    fun toContent() = Content(
+        newsId = newsId,
+        newsInformation = newsInformation,
+        language = language,
+        content = content
+    )
+}

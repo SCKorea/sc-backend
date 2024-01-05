@@ -13,7 +13,7 @@ import kr.galaxyhub.sc.common.exception.InternalServerError
 import kr.galaxyhub.sc.common.support.enqueue
 import kr.galaxyhub.sc.news.domain.Language
 import kr.galaxyhub.sc.news.domain.NewsInformation
-import kr.galaxyhub.sc.news.fixture.ContentFixture
+import kr.galaxyhub.sc.translation.application.TranslatorClientRequest
 import okhttp3.mockwebserver.MockWebServer
 import org.springframework.web.reactive.function.client.WebClient
 
@@ -57,7 +57,7 @@ class DeepLTranslatorClientTest : DescribeSpec({
                 body(response)
             }
 
-            val expect = deepLTranslatorClient.requestTranslate(ContentFixture.create(), Language.KOREAN).block()!!
+            val expect = deepLTranslatorClient.requestTranslate(translationRequest()).block()!!
 
             it("번역된 응답이 반환된다.") {
                 assertSoftly {
@@ -72,7 +72,7 @@ class DeepLTranslatorClientTest : DescribeSpec({
                 statusCode(429)
             }
 
-            val expect = deepLTranslatorClient.requestTranslate(ContentFixture.create(), Language.KOREAN)
+            val expect = deepLTranslatorClient.requestTranslate(translationRequest())
 
             it("BadRequestException 예외를 던진다.") {
                 val ex = shouldThrow<BadRequestException> { expect.block() }
@@ -85,7 +85,7 @@ class DeepLTranslatorClientTest : DescribeSpec({
                 statusCode(456)
             }
 
-            val expect = deepLTranslatorClient.requestTranslate(ContentFixture.create(), Language.KOREAN)
+            val expect = deepLTranslatorClient.requestTranslate(translationRequest())
 
             it("InternalServerError 예외를 던진다.") {
                 val ex = shouldThrow<InternalServerError> { expect.block() }
@@ -98,7 +98,7 @@ class DeepLTranslatorClientTest : DescribeSpec({
                 statusCode(500)
             }
 
-            val expect = deepLTranslatorClient.requestTranslate(ContentFixture.create(), Language.KOREAN)
+            val expect = deepLTranslatorClient.requestTranslate(translationRequest())
 
             it("InternalServerError 예외를 던진다.") {
                 val ex = shouldThrow<InternalServerError> { expect.block() }
@@ -109,7 +109,7 @@ class DeepLTranslatorClientTest : DescribeSpec({
         context("외부 서버에 연결할 수 없으면") {
             mockWebServer.shutdown()
 
-            val expect = deepLTranslatorClient.requestTranslate(ContentFixture.create(), Language.KOREAN)
+            val expect = deepLTranslatorClient.requestTranslate(translationRequest())
 
             it("InternalServerError 예외를 던진다.") {
                 val ex = shouldThrow<InternalServerError> { expect.block() }
@@ -131,7 +131,7 @@ class DeepLTranslatorClientTest : DescribeSpec({
                 delay(200, TimeUnit.MILLISECONDS)
             }
 
-            val expect = delayClient.requestTranslate(ContentFixture.create(), Language.KOREAN)
+            val expect = delayClient.requestTranslate(translationRequest())
 
             it("InternalServerError 예외를 던진다.") {
                 val ex = shouldThrow<InternalServerError> { expect.block() }
@@ -140,3 +140,10 @@ class DeepLTranslatorClientTest : DescribeSpec({
         }
     }
 })
+
+private fun translationRequest() = TranslatorClientRequest(
+    newsInformation = NewsInformation("title", "excerpt"),
+    targetLanguage = Language.KOREAN,
+    sourceLanguage = Language.ENGLISH,
+    content = "content"
+)

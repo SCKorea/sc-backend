@@ -2,9 +2,9 @@ package kr.galaxyhub.sc.translation.domain
 
 import java.util.UUID
 
-class MemoryTranslationProgressionRepository(
+class MemoryTranslateProgressionRepository(
     private val memory: MutableMap<UUID, TranslateProgression> = mutableMapOf(),
-) : TranslationProgressionRepository {
+) : TranslateProgressionRepository {
 
     fun clear() = memory.clear()
 

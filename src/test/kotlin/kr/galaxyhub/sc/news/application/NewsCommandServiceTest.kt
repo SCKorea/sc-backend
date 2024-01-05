@@ -9,6 +9,7 @@ import io.kotest.matchers.shouldNotBe
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
+import java.util.UUID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kr.galaxyhub.sc.news.domain.Language
@@ -104,6 +105,20 @@ class NewsCommandServiceTest(
             }
         }
     }
+
+    describe("appendContent") {
+        val news = newsRepository.save(NewsFixture.create())
+
+        context("유효한 인자로 메서드를 호출하면") {
+            newsCommandService.appendContent(newsAppendContentCommand(news.id))
+
+            it("News에 Content가 추가된다.") {
+                val content = news.getContentByLanguage(Language.ENGLISH)
+
+                content.content shouldBe "내용"
+            }
+        }
+    }
 })
 
 private fun newsCreateCommand(originId: Long) = NewsCreateCommand(
@@ -116,3 +131,11 @@ private fun newsCreateCommand(originId: Long) = NewsCreateCommand(
     language = Language.KOREAN,
     content = "내용"
 )
+
+private fun newsAppendContentCommand(newsId: UUID) =
+    NewsAppendContentCommand(
+        newsId = newsId,
+        newsInformation = NewsInformation("제목", "발췌"),
+        content = "내용",
+        language = Language.ENGLISH
+    )
