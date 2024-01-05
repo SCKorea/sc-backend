@@ -5,6 +5,7 @@ import java.util.UUID
 import kr.galaxyhub.sc.news.domain.Language
 import kr.galaxyhub.sc.news.domain.NewsInformation
 import org.springframework.context.event.EventListener
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
 
 private val log = KotlinLogging.logger {}
@@ -18,6 +19,7 @@ class NewsAppendContentEventListener(
     private val newsCommandService: NewsCommandService,
 ) {
 
+    @Async
     @EventListener
     fun newsAppendContentEventHandler(event: NewsAppendContentEvent) {
         val (newsId, newsInformation, content, language) = event

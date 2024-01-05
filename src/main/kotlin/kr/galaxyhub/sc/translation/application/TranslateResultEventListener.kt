@@ -3,6 +3,7 @@ package kr.galaxyhub.sc.translation.application
 import io.github.oshai.kotlinlogging.KotlinLogging
 import java.util.UUID
 import org.springframework.context.event.EventListener
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
 
 private val log = KotlinLogging.logger {}
@@ -18,6 +19,7 @@ class TranslateResultEventListener(
     private val translateProgressionStatusChangeService: TranslateProgressionStatusChangeService,
 ) {
 
+    @Async
     @EventListener
     fun translateSuccessEventHandler(event: TranslateSuccessEvent) {
         try {
@@ -27,6 +29,7 @@ class TranslateResultEventListener(
         }
     }
 
+    @Async
     @EventListener
     fun translateFailureEventHandler(event: TranslateFailureEvent) {
         try {
