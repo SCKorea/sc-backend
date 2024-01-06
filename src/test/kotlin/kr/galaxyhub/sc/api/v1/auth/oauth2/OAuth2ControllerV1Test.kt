@@ -1,7 +1,5 @@
 package kr.galaxyhub.sc.api.v1.auth.oauth2
 
-import com.ninjasquad.springmockk.MockkBean
-import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.every
 import kr.galaxyhub.sc.api.support.ENUM
 import kr.galaxyhub.sc.api.support.STRING
@@ -12,19 +10,15 @@ import kr.galaxyhub.sc.api.support.pathMeans
 import kr.galaxyhub.sc.api.support.type
 import kr.galaxyhub.sc.auth.application.OAuth2FacadeService
 import kr.galaxyhub.sc.auth.application.dto.LoginResponse
+import kr.galaxyhub.sc.config.spec.ControllerTestSpec
 import kr.galaxyhub.sc.member.domain.SocialType
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 
-@WebMvcTest(OAuth2ControllerV1::class)
-@AutoConfigureRestDocs
 class OAuth2ControllerV1Test(
     private val mockMvc: MockMvc,
-    @MockkBean
     private val oAuth2FacadeService: OAuth2FacadeService,
-) : DescribeSpec({
+) : ControllerTestSpec({
 
     describe("POST /api/v1/auth/oauth2/login") {
         context("유효한 요청이 전달되면") {

@@ -1,8 +1,6 @@
 package kr.galaxyhub.sc.api.v1.news
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.ninjasquad.springmockk.MockkBean
-import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.every
 import io.mockk.justRun
 import java.time.LocalDateTime
@@ -23,27 +21,22 @@ import kr.galaxyhub.sc.api.support.pathMeans
 import kr.galaxyhub.sc.api.support.type
 import kr.galaxyhub.sc.api.v1.news.dto.NewsCreateRequest
 import kr.galaxyhub.sc.api.v1.news.dto.NewsUpdateRequest
+import kr.galaxyhub.sc.config.spec.ControllerTestSpec
 import kr.galaxyhub.sc.news.application.NewsCommandService
 import kr.galaxyhub.sc.news.application.NewsQueryService
 import kr.galaxyhub.sc.news.application.dto.NewsDetailResponse
 import kr.galaxyhub.sc.news.application.dto.NewsResponse
 import kr.galaxyhub.sc.news.domain.Language
 import kr.galaxyhub.sc.news.domain.NewsType
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 
-@WebMvcTest(NewsControllerV1::class)
-@AutoConfigureRestDocs
 class NewsControllerV1Test(
     private val mockMvc: MockMvc,
     private val objectMapper: ObjectMapper,
-    @MockkBean
     private val newsQueryService: NewsQueryService,
-    @MockkBean
     private val newsCommandService: NewsCommandService,
-) : DescribeSpec({
+) : ControllerTestSpec({
 
     describe("GET /api/v1/news/{newsId}") {
         context("유효한 요청이 전달되면") {
