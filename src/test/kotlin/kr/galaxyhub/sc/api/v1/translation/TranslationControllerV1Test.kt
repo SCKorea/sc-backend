@@ -1,8 +1,6 @@
 package kr.galaxyhub.sc.api.v1.translation
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.ninjasquad.springmockk.MockkBean
-import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.every
 import java.util.UUID
 import kr.galaxyhub.sc.api.support.ENUM
@@ -13,27 +11,22 @@ import kr.galaxyhub.sc.api.support.docPost
 import kr.galaxyhub.sc.api.support.pathMeans
 import kr.galaxyhub.sc.api.support.type
 import kr.galaxyhub.sc.api.v1.translation.dto.TranslationRequest
+import kr.galaxyhub.sc.config.spec.ControllerTestSpec
 import kr.galaxyhub.sc.news.domain.Language
 import kr.galaxyhub.sc.translation.application.TranslationCommandService
 import kr.galaxyhub.sc.translation.application.TranslationQueryService
 import kr.galaxyhub.sc.translation.application.dto.TranslationResponse
 import kr.galaxyhub.sc.translation.domain.TranslationStatus
 import kr.galaxyhub.sc.translation.domain.TranslatorProvider
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 
-@WebMvcTest(TranslationControllerV1::class)
-@AutoConfigureRestDocs
 class TranslationControllerV1Test(
     private val mockMvc: MockMvc,
     private val objectMapper: ObjectMapper,
-    @MockkBean
     private val translationCommandService: TranslationCommandService,
-    @MockkBean
     private val translationQueryService: TranslationQueryService,
-) : DescribeSpec({
+) : ControllerTestSpec({
 
     describe("POST /api/v1/translation/{newsId}") {
         context("유효한 요청이 전달되면") {
