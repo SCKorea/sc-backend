@@ -14,7 +14,7 @@ import org.testcontainers.containers.wait.strategy.ShellStrategy
 @AutoScan
 class TestContainerExtension : ProjectExtension {
 
-    private var containers = mutableListOf<DockerComposeContainer<*>>()
+    private val containers = mutableListOf<DockerComposeContainer<*>>()
 
     override suspend fun interceptProject(context: ProjectContext, callback: suspend (ProjectContext) -> Unit) {
         if (isTestcontianersEnable(context)) {
