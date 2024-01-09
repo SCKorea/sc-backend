@@ -3,6 +3,7 @@ package kr.galaxyhub.sc.config.spec
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
+import io.kotest.extensions.spring.SpringExtension
 import io.mockk.clearAllMocks
 import io.mockk.mockkClass
 import org.junit.platform.commons.util.ClassFilter
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Service
 @WebMvcTest
 @AutoConfigureRestDocs
 abstract class ControllerTestSpec(body: DescribeSpec.() -> Unit = {}) : DescribeSpec(body) {
+
+    override fun extensions() = listOf(SpringExtension)
 
     override suspend fun afterEach(testCase: TestCase, result: TestResult) {
         clearAllMocks()
