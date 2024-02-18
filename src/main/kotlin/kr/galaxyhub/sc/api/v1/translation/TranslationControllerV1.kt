@@ -30,7 +30,7 @@ class TranslationControllerV1(
         val command = request.toCommand(newsId)
         val translateProgressionId = translationCommandService.translate(command)
         return ResponseEntity.created("/api/v1/translation/${translateProgressionId}".toUri())
-            .body(ApiResponse.success(translateProgressionId))
+            .body(ApiResponse.created(translateProgressionId))
     }
 
     @GetMapping("/{translateProgressionId}")
@@ -39,6 +39,6 @@ class TranslationControllerV1(
     ): ResponseEntity<ApiResponse<TranslationResponse>> {
         val response = translationQueryService.findById(translateProgressionId)
         return ResponseEntity.ok()
-            .body(ApiResponse.success(response))
+            .body(ApiResponse.ok(response))
     }
 }

@@ -26,6 +26,6 @@ class CrawlerControllerV1(
     ): ResponseEntity<ApiResponse<UUID>> {
         val newsId = crawlerCommandService.crawling(request.url)
         return ResponseEntity.created("/api/v1/news/${newsId}".toUri())
-            .body(ApiResponse.success(newsId))
+            .body(ApiResponse.created(newsId))
     }
 }

@@ -25,8 +25,9 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
         status: HttpStatusCode,
         request: WebRequest,
     ): ResponseEntity<Any> {
+        // 누락된 쿼리 파라미터 값 때문에 기본 생성자 사용
         return ResponseEntity(
-            ApiResponse("쿼리 파라미터에 누락된 값이 있습니다.", ex.missingParameters()),
+            ApiResponse(400, "쿼리 파라미터에 누락된 값이 있습니다.", ex.missingParameters()),
             HttpStatus.BAD_REQUEST
         )
     }
@@ -42,7 +43,7 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
         request: WebRequest,
     ): ResponseEntity<Any> {
         return ResponseEntity(
-            ApiResponse("${ex.propertyName}에 잘못된 값이 입력 되었습니다.", "${ex.propertyName},${ex.value}"),
+            ApiResponse(400, "${ex.propertyName}에 잘못된 값이 입력 되었습니다.", "${ex.propertyName},${ex.value}"),
             HttpStatus.BAD_REQUEST
         )
     }
@@ -53,7 +54,7 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
         request: HttpServletRequest,
     ): ResponseEntity<ApiResponse<Unit>> {
         log.debug(e) { "[🟢DEBUG] - (${request.method} ${request.requestURI})" }
-        return ResponseEntity(ApiResponse.error(e.message!!), e.httpStatus)
+        return ResponseEntity(ApiResponse.error(e.httpStatus.value(), e.message!!), e.httpStatus)
     }
 
     @ExceptionHandler(Exception::class)
@@ -64,7 +65,7 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
 
     companion object {
 
-        private val DEFAULT_ERROR = ApiResponse.error("서버 내부에 알 수 없는 문제가 발생했습니다.")
+        private val DEFAULT_ERROR = ApiResponse.error(500, "서버 내부에 알 수 없는 문제가 발생했습니다.")
     }
 }
 

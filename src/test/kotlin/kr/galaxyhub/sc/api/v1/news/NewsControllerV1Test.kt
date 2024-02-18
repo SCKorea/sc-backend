@@ -57,7 +57,7 @@ class NewsControllerV1Test(
                     queryParameters(
                         "language" pathMeans "뉴스 언어" formattedAs ENUM(Language::class)
                     )
-                    responseBody(
+                    responseBodyWithStatus(
                         "data" type OBJECT means "뉴스 상세 정보",
                         "data.id" type STRING means "뉴스 식별자",
                         "data.newsType" type ENUM(NewsType::class) means "뉴스 타입",
@@ -86,7 +86,7 @@ class NewsControllerV1Test(
                 }.andExpect {
                     status { isOk() }
                 }.andDocument("news/find-all") {
-                    responseBody(
+                    responseBodyWithStatus(
                         "data" type ARRAY means "뉴스 목록",
                         "data[0].id" type STRING means "뉴스 식별자",
                         "data[0].newsType" type ENUM(NewsType::class) means "뉴스 타입",
@@ -124,7 +124,7 @@ class NewsControllerV1Test(
                         "language" type ENUM(Language::class) means "뉴스 언어",
                         "content" type STRING means "뉴스 내용"
                     )
-                    responseBody(
+                    responseBodyWithStatus(
                         "data" type STRING means "생성한 뉴스의 식별자"
                     )
                 }

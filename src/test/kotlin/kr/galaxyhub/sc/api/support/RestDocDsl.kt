@@ -34,6 +34,12 @@ class RestDocDsl {
         responseFieldsSnippet = PayloadDocumentation.responseFields(fields.map { it.descriptor })
     }
 
+    fun responseBodyWithStatus(vararg fields: DocField) {
+        val docField = "status" type NUMBER means "HTTP 상태 코드"
+        responseFieldsSnippet =
+            PayloadDocumentation.responseFields(docField.descriptor).and(fields.map { it.descriptor })
+    }
+
     fun queryParameters(vararg params: DocParam) {
         queryParametersSnippet = RequestDocumentation.queryParameters(params.map { it.descriptor })
     }

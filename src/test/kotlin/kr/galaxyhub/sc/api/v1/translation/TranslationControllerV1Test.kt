@@ -21,7 +21,7 @@ import kr.galaxyhub.sc.translation.domain.TranslatorProvider
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 
-class TranslationControllerV1Test(
+class  TranslationControllerV1Test(
     private val mockMvc: MockMvc,
     private val objectMapper: ObjectMapper,
     private val translationCommandService: TranslationCommandService,
@@ -50,7 +50,7 @@ class TranslationControllerV1Test(
                         "translatorProvider" type ENUM(TranslatorProvider.entries
                             .filter { it != TranslatorProvider.LOCAL }) means "번역 서비스 제공자"
                     )
-                    responseBody(
+                    responseBodyWithStatus(
                         "data" type STRING means "번역 진행 상황의 식별자"
                     )
                 }
@@ -73,7 +73,7 @@ class TranslationControllerV1Test(
                     pathParameters(
                         "translateProgressionId" pathMeans "번역 진행 상황의 식별자"
                     )
-                    responseBody(
+                    responseBodyWithStatus(
                         "data.translateProgressionId" type STRING means "번역 진행 상황의 식별자",
                         "data.targetNewsId" type STRING means "번역할 뉴스의 식별자",
                         "data.translationStatus" type ENUM(TranslationStatus::class) means "번역 상태",

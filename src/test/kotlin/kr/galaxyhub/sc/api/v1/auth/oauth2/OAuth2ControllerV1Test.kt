@@ -37,7 +37,7 @@ class OAuth2ControllerV1Test(
                         "code" pathMeans "Authorization 코드",
                         "socialType" pathMeans "OAuth2 소셜 타입" formattedAs ENUM(SocialType.entries.filter { it != SocialType.LOCAL }),
                     )
-                    responseBody(
+                    responseBodyWithStatus(
                         "data.accessToken" type STRING means "Bearer JWT Access Token",
                         "data.nickname" type STRING means "사용자의 닉네임",
                         "data.imageUrl" type STRING means "사용자의 프로필 사진 링크" isOptional true,
