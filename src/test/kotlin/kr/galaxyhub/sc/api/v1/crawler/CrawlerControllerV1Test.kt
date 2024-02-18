@@ -35,7 +35,7 @@ class CrawlerControllerV1Test(
                     requestBody(
                         "url" type STRING means "크롤링할 뉴스의 URL",
                     )
-                    responseBody(
+                    responseBodyWithStatus(
                         "data" type STRING means "크롤링되서 생성된 뉴스의 식별자"
                     )
                 }

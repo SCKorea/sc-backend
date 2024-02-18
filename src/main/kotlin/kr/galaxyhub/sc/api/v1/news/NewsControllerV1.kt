@@ -30,7 +30,7 @@ class NewsControllerV1(
     fun findAll(): ResponseEntity<ApiResponse<List<NewsResponse>>> {
         val response = newsQueryService.findAll()
         return ResponseEntity.ok()
-            .body(ApiResponse.success(response))
+            .body(ApiResponse.ok(response))
     }
 
     @GetMapping("/{newsId}")
@@ -40,7 +40,7 @@ class NewsControllerV1(
     ): ResponseEntity<ApiResponse<NewsDetailResponse>> {
         val response = newsQueryService.getDetailByIdAndLanguage(newsId, language)
         return ResponseEntity.ok()
-            .body(ApiResponse.success(response))
+            .body(ApiResponse.ok(response))
     }
 
     @PostMapping
@@ -49,7 +49,7 @@ class NewsControllerV1(
     ): ResponseEntity<ApiResponse<UUID>> {
         val newsId = newsCommandService.create(request.toCommand())
         return ResponseEntity.created("/api/v1/news/${newsId}".toUri())
-            .body(ApiResponse.success(newsId))
+            .body(ApiResponse.created(newsId))
     }
 
     @PostMapping("/{newsId}/content")
@@ -59,6 +59,6 @@ class NewsControllerV1(
     ): ResponseEntity<ApiResponse<Unit>> {
         newsCommandService.updateContent(newsId, request.toCommand())
         return ResponseEntity.ok()
-            .body(ApiResponse.success(Unit))
+            .body(ApiResponse.ok(Unit))
     }
 }

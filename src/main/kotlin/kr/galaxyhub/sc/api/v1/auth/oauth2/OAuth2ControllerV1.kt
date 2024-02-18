@@ -23,6 +23,6 @@ class OAuth2ControllerV1(
     ): ResponseEntity<ApiResponse<LoginResponse>> {
         val response = oAuth2FacadeService.login(code, socialType)
         return ResponseEntity.ok()
-            .body(ApiResponse.success(response))
+            .body(ApiResponse.ok(response))
     }
 }
